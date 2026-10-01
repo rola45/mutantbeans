@@ -78,6 +78,15 @@
 @keyframes sater-guitar-rock{0%,100%{transform:translateX(0) scale(1)}50%{transform:translateX(-1px) scale(1.014)}}
 @keyframes kbto-bass-groove{0%,100%{transform:translateX(0) scale(1)}50%{transform:translateX(1px) scale(1.012)}}
 @media(prefers-reduced-motion:reduce){.member-photo img.member-photo-rest,.member-photo img.member-photo-action{animation:none!important;transform:none!important}.member-photo img.member-photo-rest{opacity:1!important}.member-photo img.member-photo-action{display:none!important}}
+
+.member:nth-child(1) .member-photo img.member-photo-rest{animation:silver-open 10s ease-in-out infinite}
+.member:nth-child(1) .member-photo img.silver-frame-first{animation:silver-first 10s ease-in-out infinite}
+.member:nth-child(1) .member-photo img.silver-frame-second{animation:silver-second 10s ease-in-out infinite}
+.member:nth-child(1) .member-photo img.silver-frame-final{animation:silver-final 10s ease-in-out infinite}
+@keyframes silver-open{0%,10%,100%{opacity:1}20%,90%{opacity:0}}
+@keyframes silver-first{0%,10%,40%,80%,100%{opacity:0}20%,30%,90%{opacity:1}}
+@keyframes silver-second{0%,30%,60%,70%,90%,100%{opacity:0}40%,50%,80%{opacity:1}}
+@keyframes silver-final{0%,50%,80%,100%{opacity:0}60%,70%{opacity:1}}
 </style>
 </head>
 <body>
@@ -93,7 +102,7 @@
       <div class="hero-image"><div class="logo-card"><img src="images/mutant-beans-tv.jpg" alt="Logotipo de Mutant Beans en una televisión verde, de la publicación oficial del 20 de enero de 2026"></div><img class="hero-mascot" src="images/mascota-compartida.png" alt="Mascota de Mutant Beans, sentada y jugando con la portada"></div>
     </section>
     <section class="section" id="integrantes"><div class="wrap"><div class="section-head"><h2>La alineación<span> mutante</span></h2><p>4 piezas, un mismo ruido.</p></div><div class="members">
-      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/silver.jpg" alt="Silver, baterista de Mutant Beans"><img class="member-photo-action" src="images/silver-arms.png" alt="" aria-hidden="true"></div><div><h3>Silver</h3><p>Batería</p></div><a class="member-link" href="https://www.instagram.com/heyslvr/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Silver"></a></article>
+      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/silver.jpg" alt="Silver, baterista de Mutant Beans"><img class="member-photo-action silver-frame-first" src="images/silver-arms-start.png" alt="" aria-hidden="true"><img class="member-photo-action silver-frame-second" src="images/silver-arms-mid.png" alt="" aria-hidden="true"><img class="member-photo-action silver-frame-final" src="images/silver-arms.png" alt="" aria-hidden="true"></div><div><h3>Silver</h3><p>Batería</p></div><a class="member-link" href="https://www.instagram.com/heyslvr/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Silver"></a></article>
       <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/irving.jpg" alt="Irving, vocalista de Mutant Beans"><img class="member-photo-action" src="images/irving-vocal.png" alt="" aria-hidden="true"></div><div><h3>Irving</h3><p>Voz</p></div><a class="member-link" href="https://www.instagram.com/noriegairving/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Irving"></a></article>
       <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/sater.jpg" alt="Sater, guitarrista de Mutant Beans"><img class="member-photo-action" src="images/sater-guitar.png" alt="" aria-hidden="true"></div><div><h3>Sater</h3><p>Guitarra</p></div><a class="member-link" href="https://www.instagram.com/saterunholy/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Sater"></a></article>
       <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/kbeto.jpg" alt="KBTO, bajista de Mutant Beans"><img class="member-photo-action" src="images/kbto-bass.png" alt="" aria-hidden="true"></div><div><h3>KBTO</h3><p>Bajo</p></div><a class="member-link" href="https://www.instagram.com/kbtothemutant/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de KBTO"></a></article>
