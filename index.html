@@ -64,19 +64,19 @@
   </style>
 
 <style id="lineup-motion">
-.member{--pose-delay:0s;--motion-duration:2.8s;--member-motion:silver-arm-lockup}
-.member:nth-child(2){--pose-delay:1.3s;--motion-duration:2.2s;--member-motion:irving-vocal-bounce}
-.member:nth-child(3){--pose-delay:2.6s;--motion-duration:1.8s;--member-motion:sater-guitar-rock}
-.member:nth-child(4){--pose-delay:3.9s;--motion-duration:2.4s;--member-motion:kbto-bass-groove}
+.member{--pose-delay:0s;--motion-duration:4.8s;--member-motion:silver-arm-lockup}
+.member:nth-child(2){--pose-delay:1.8s;--motion-duration:4.4s;--member-motion:irving-vocal-bounce}
+.member:nth-child(3){--pose-delay:3.6s;--motion-duration:3.8s;--member-motion:sater-guitar-rock}
+.member:nth-child(4){--pose-delay:5.4s;--motion-duration:4.6s;--member-motion:kbto-bass-groove}
 .member-photo{position:relative}
-.member-photo img.member-photo-rest,.member-photo img.member-photo-action{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.7);will-change:opacity,transform;animation:member-rest-frame 8.4s ease-in-out infinite var(--pose-delay),var(--member-motion) var(--motion-duration) ease-in-out infinite alternate}
+.member-photo img.member-photo-rest,.member-photo img.member-photo-action{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.7);will-change:opacity,transform;animation:member-rest-frame 12s ease-in-out infinite var(--pose-delay),var(--member-motion) var(--motion-duration) ease-in-out infinite alternate}
 .member-photo img.member-photo-action{animation-name:member-action-frame,var(--member-motion);opacity:0}
-@keyframes member-rest-frame{0%,39%,100%{opacity:1}47%,92%{opacity:0}}
-@keyframes member-action-frame{0%,39%,100%{opacity:0}47%,92%{opacity:1}}
-@keyframes silver-arm-lockup{0%,100%{transform:translateY(0) scale(1) rotate(0)}50%{transform:translateY(-1px) scale(1.018) rotate(-.16deg)}}
-@keyframes irving-vocal-bounce{0%,100%{transform:translateY(0) scale(1) rotate(0)}50%{transform:translateY(-2px) scale(1.025) rotate(.18deg)}}
-@keyframes sater-guitar-rock{0%,100%{transform:translateX(0) scale(1) rotate(-.2deg)}50%{transform:translateX(-1px) scale(1.025) rotate(.35deg)}}
-@keyframes kbto-bass-groove{0%,100%{transform:translateX(0) scale(1) rotate(.18deg)}50%{transform:translateX(1px) scale(1.02) rotate(-.3deg)}}
+@keyframes member-rest-frame{0%,44%,100%{opacity:1}50%,94%{opacity:0}}
+@keyframes member-action-frame{0%,44%,100%{opacity:0}50%,94%{opacity:1}}
+@keyframes silver-arm-lockup{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.012)}}
+@keyframes irving-vocal-bounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1.5px) scale(1.016)}}
+@keyframes sater-guitar-rock{0%,100%{transform:translateX(0) scale(1)}50%{transform:translateX(-1px) scale(1.014)}}
+@keyframes kbto-bass-groove{0%,100%{transform:translateX(0) scale(1)}50%{transform:translateX(1px) scale(1.012)}}
 @media(prefers-reduced-motion:reduce){.member-photo img.member-photo-rest,.member-photo img.member-photo-action{animation:none!important;transform:none!important}.member-photo img.member-photo-rest{opacity:1!important}.member-photo img.member-photo-action{display:none!important}}
 </style>
 </head>
