@@ -250,6 +250,7 @@
       let currentTrack = 0;
       let soundActivated = false;
       let autoplayBlocked = false;
+      let userPausedPlayback = false;
       const syncAudioControl = () => {
         const playing = !audio.paused;
         audioToggle.dataset.playing = String(playing);
@@ -303,10 +304,21 @@
       };
       audio.volume = Number(audioVolume.value);
       audioToggle.addEventListener('click', async () => {
-        if (audio.paused) await playCurrentTrack();
-        else audio.pause();
+        if (audio.paused) {
+          userPausedPlayback = false;
+          await playCurrentTrack();
+        } else {
+          userPausedPlayback = true;
+          audio.pause();
+        }
         syncAudioControl();
       });
+      const resumeBlockedAutoplayFromGesture = (event) => {
+        if (!autoplayBlocked || userPausedPlayback || !audio.paused || audioDock.contains(event.target)) return;
+        playCurrentTrack();
+      };
+      document.addEventListener('pointerdown', resumeBlockedAutoplayFromGesture, { capture: true });
+      document.addEventListener('keydown', resumeBlockedAutoplayFromGesture, { capture: true });
       audioPrev.addEventListener('click', () => changeTrack(-1));
       audioNext.addEventListener('click', () => changeTrack(1));
       audioVolume.addEventListener('input', () => {
