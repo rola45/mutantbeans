@@ -38,7 +38,7 @@
   
   .tour-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}.tour-actions .tour-map{margin-top:0}.tour-contact-link{display:inline-flex;align-items:center;width:max-content;color:var(--paper);font:500 9px var(--mono);letter-spacing:.04em;text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(237,245,223,.45);padding-bottom:2px}.tour-contact-link:hover{color:var(--acid);border-color:var(--acid)}
   .next-show-contact{padding:9px 10px;font-size:9px;white-space:nowrap}@media(max-width:520px){.next-show-contact{padding:8px;font-size:8px}}
-  .language-toggle{background:transparent;font:700 9px var(--mono);cursor:pointer}
+  .language-toggle{background:var(--acid);color:var(--ink);border-color:var(--acid);font:700 9px var(--mono);cursor:pointer;box-shadow:0 0 0 2px rgba(103,245,66,.16)}.language-toggle:hover{background:var(--acid);color:var(--ink);border-color:var(--acid)}
   </style>
 </head>
 <body>
@@ -178,8 +178,11 @@
           if (element.hasAttribute(name)) originalAttributes.push([element, name, element.getAttribute(name)]);
         }
       });
-      let interfaceLanguage = 'es';
-      try { interfaceLanguage = localStorage.getItem('mutant-beans-language') === 'en' ? 'en' : 'es'; } catch {}
+      let interfaceLanguage = 'en';
+      try {
+        const savedLanguage = localStorage.getItem('mutant-beans-language-v2');
+        interfaceLanguage = savedLanguage === 'es' ? 'es' : 'en';
+      } catch {}
       const uiText = (spanish, english) => interfaceLanguage === 'en' ? english : spanish;
       const translateValue = (value, language, node = null) => {
         const trimmed = value.trim();
@@ -215,7 +218,7 @@
         document.querySelector('[data-audio-next]').setAttribute('aria-label', uiText('Canción siguiente', 'Next track'));
         document.querySelector('[data-audio-prev]').title = uiText('Canción anterior', 'Previous track');
         document.querySelector('[data-audio-next]').title = uiText('Canción siguiente', 'Next track');
-        try { localStorage.setItem('mutant-beans-language', language); } catch {}
+        try { localStorage.setItem('mutant-beans-language-v2', language); } catch {}
       };
       languageToggle.addEventListener('click', () => applyLanguage(interfaceLanguage === 'es' ? 'en' : 'es'));
       applyLanguage(interfaceLanguage);
