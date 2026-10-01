@@ -62,6 +62,23 @@
   @media(max-width:370px){.career-highlight{gap:3px 8px;padding:10px}.career-stamp{width:36px;height:36px}.career-copy strong{font-size:20px}.career-copy>span:last-child{font-size:9px}}
   .language-toggle{background:var(--acid);color:var(--ink);border-color:var(--acid);font:700 9px var(--mono);cursor:pointer;box-shadow:0 0 0 2px rgba(103,245,66,.16)}.language-toggle:hover{background:var(--acid);color:var(--ink);border-color:var(--acid)}
   </style>
+
+<style id="lineup-motion">
+.member{--pose-delay:0s;--motion-duration:2.8s;--member-motion:silver-arm-lockup}
+.member:nth-child(2){--pose-delay:1.3s;--motion-duration:2.2s;--member-motion:irving-vocal-bounce}
+.member:nth-child(3){--pose-delay:2.6s;--motion-duration:1.8s;--member-motion:sater-guitar-rock}
+.member:nth-child(4){--pose-delay:3.9s;--motion-duration:2.4s;--member-motion:kbto-bass-groove}
+.member-photo{position:relative}
+.member-photo img.member-photo-rest,.member-photo img.member-photo-action{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.7);will-change:opacity,transform;animation:member-rest-frame 8.4s ease-in-out infinite var(--pose-delay),var(--member-motion) var(--motion-duration) ease-in-out infinite alternate}
+.member-photo img.member-photo-action{animation-name:member-action-frame,var(--member-motion);opacity:0}
+@keyframes member-rest-frame{0%,39%,100%{opacity:1}47%,92%{opacity:0}}
+@keyframes member-action-frame{0%,39%,100%{opacity:0}47%,92%{opacity:1}}
+@keyframes silver-arm-lockup{0%,100%{transform:translateY(0) scale(1) rotate(0)}50%{transform:translateY(-1px) scale(1.018) rotate(-.16deg)}}
+@keyframes irving-vocal-bounce{0%,100%{transform:translateY(0) scale(1) rotate(0)}50%{transform:translateY(-2px) scale(1.025) rotate(.18deg)}}
+@keyframes sater-guitar-rock{0%,100%{transform:translateX(0) scale(1) rotate(-.2deg)}50%{transform:translateX(-1px) scale(1.025) rotate(.35deg)}}
+@keyframes kbto-bass-groove{0%,100%{transform:translateX(0) scale(1) rotate(.18deg)}50%{transform:translateX(1px) scale(1.02) rotate(-.3deg)}}
+@media(prefers-reduced-motion:reduce){.member-photo img.member-photo-rest,.member-photo img.member-photo-action{animation:none!important;transform:none!important}.member-photo img.member-photo-rest{opacity:1!important}.member-photo img.member-photo-action{display:none!important}}
+</style>
 </head>
 <body>
   <div class="topline"><div class="wrap"><span>Ensenada, Baja California</span><span>Funking the system since 2014</span></div></div>
@@ -76,10 +93,10 @@
       <div class="hero-image"><div class="logo-card"><img src="images/mutant-beans-tv.jpg" alt="Logotipo de Mutant Beans en una televisión verde, de la publicación oficial del 20 de enero de 2026"></div><img class="hero-mascot" src="images/mascota-compartida.png" alt="Mascota de Mutant Beans, sentada y jugando con la portada"></div>
     </section>
     <section class="section" id="integrantes"><div class="wrap"><div class="section-head"><h2>La alineación<span> mutante</span></h2><p>4 piezas, un mismo ruido.</p></div><div class="members">
-      <article class="member"><div class="member-photo"><img src="images/silver.jpg" alt="Silver, baterista de Mutant Beans"></div><div><h3>Silver</h3><p>Batería</p></div><a class="member-link" href="https://www.instagram.com/heyslvr/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Silver"></a></article>
-      <article class="member"><div class="member-photo"><img src="images/irving.jpg" alt="Irving, vocalista de Mutant Beans"></div><div><h3>Irving</h3><p>Voz</p></div><a class="member-link" href="https://www.instagram.com/noriegairving/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Irving"></a></article>
-      <article class="member"><div class="member-photo"><img src="images/sater.jpg" alt="Sater, guitarrista de Mutant Beans"></div><div><h3>Sater</h3><p>Guitarra</p></div><a class="member-link" href="https://www.instagram.com/saterunholy/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Sater"></a></article>
-      <article class="member"><div class="member-photo"><img src="images/kbeto.jpg" alt="KBTO, bajista de Mutant Beans"></div><div><h3>KBTO</h3><p>Bajo</p></div><a class="member-link" href="https://www.instagram.com/kbtothemutant/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de KBTO"></a></article>
+      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/silver.jpg" alt="Silver, baterista de Mutant Beans"><img class="member-photo-action" src="images/silver-arms.png" alt="" aria-hidden="true"></div><div><h3>Silver</h3><p>Batería</p></div><a class="member-link" href="https://www.instagram.com/heyslvr/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Silver"></a></article>
+      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/irving.jpg" alt="Irving, vocalista de Mutant Beans"><img class="member-photo-action" src="images/irving-vocal.png" alt="" aria-hidden="true"></div><div><h3>Irving</h3><p>Voz</p></div><a class="member-link" href="https://www.instagram.com/noriegairving/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Irving"></a></article>
+      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/sater.jpg" alt="Sater, guitarrista de Mutant Beans"><img class="member-photo-action" src="images/sater-guitar.png" alt="" aria-hidden="true"></div><div><h3>Sater</h3><p>Guitarra</p></div><a class="member-link" href="https://www.instagram.com/saterunholy/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de Sater"></a></article>
+      <article class="member"><div class="member-photo"><img class="member-photo-rest" src="images/kbeto.jpg" alt="KBTO, bajista de Mutant Beans"><img class="member-photo-action" src="images/kbto-bass.png" alt="" aria-hidden="true"></div><div><h3>KBTO</h3><p>Bajo</p></div><a class="member-link" href="https://www.instagram.com/kbtothemutant/" target="_blank" rel="noopener" aria-label="Abrir el perfil de Instagram de KBTO"></a></article>
     <img class="module-mascot lineup-mascot" src="images/mascota-lineup.png" alt="" aria-hidden="true"></div></div></section>
     <section class="section" id="fechas"><div class="wrap"><div class="section-head"><h2>Octubre<span> en ruta</span></h2></div><div class="tour-layout"><a class="tour-poster" href="https://www.instagram.com/mutantbeans/" target="_blank" rel="noopener" aria-label="Abrir el Instagram oficial de Mutant Beans"><img src="images/october-tour.jpg" alt="Flyer de Mutant Beans con conciertos del 2 al 31 de octubre de 2026"></a><div><div class="tour-list">
       <article class="tour-date"><time datetime="2026-10-02">02 OCT</time><strong>Abel's Bar</strong><span>Ensenada, BC</span><div class="tour-actions"><a class="tour-map" href="https://www.google.com/maps/search/?api=1&amp;query=Abel%27s%20Bar%2C%20Ensenada%2C%20Baja%20California%2C%20Mexico" target="_blank" rel="noopener noreferrer" aria-label="Buscar Abel's Bar, Ensenada, Baja California, Mexico en Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.1 7 13 7 13s7-7.9 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Mapa ↗</a><a class="tour-contact-link" href="https://www.instagram.com/mutantbeans/" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Mutant Beans por Instagram acerca de esta fecha">Contactar ↗</a></div></article>
