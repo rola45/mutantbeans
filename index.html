@@ -210,14 +210,8 @@
         try { await audio.play(); }
         catch (error) {
           if (error.name === 'NotAllowedError') {
-            audio.muted = true;
-            try {
-              await audio.play();
-              audioStatus.textContent = 'Toca para activar el sonido';
-            } catch {
-              autoplayBlocked = true;
-              audioStatus.textContent = 'Toca para continuar';
-            }
+            autoplayBlocked = true;
+            audioStatus.textContent = 'Toca para continuar';
           } else audioStatus.textContent = 'No se pudo reproducir esta canción';
         }
         syncAudioControl();
@@ -240,7 +234,7 @@
       });
       const unlockFromGesture = (event) => {
         if (audioDock.contains(event.target)) return;
-        if (autoplayBlocked && audio.paused) {
+        if (audio.paused) {
           autoplayBlocked = false;
           playCurrentTrack();
         } else activateSound();
@@ -258,20 +252,15 @@
         syncAudioControl();
       });
       audio.play().then(() => {
+        autoplayBlocked = false;
         audioStatus.textContent = 'Autoplay · volumen 35%';
         syncAudioControl();
-      }).catch(async () => {
-        if (soundActivated) {
-          audio.muted = false;
-          audioStatus.textContent = 'Autoplay · volumen 35%';
-        } else {
-          audio.muted = true;
-          audioStatus.textContent = 'Toca o haz clic para activar el sonido';
-        }
-        try { await audio.play(); }
-        catch {
+      }).catch((error) => {
+        if (error?.name === 'NotAllowedError') {
           autoplayBlocked = true;
-          audioStatus.textContent = 'Toca o haz clic para reproducir';
+          audioStatus.textContent = 'Toca para reproducir';
+        } else {
+          audioStatus.textContent = 'No se pudo iniciar el audio';
         }
         syncAudioControl();
       });
