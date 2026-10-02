@@ -206,8 +206,10 @@
     <a class="preview-source" id="photo-preview-source" target="_blank" rel="noopener">Abrir publicación original ↗</a>
   </dialog>
 <footer><div class="wrap"><div class="foot-row"><span>© 2026 · MUTANT BEANS OFFICIAL PAGE</span></div><p class="disclaimer">Nombres, logotipo y fotografías pertenecen a sus respectivos titulares. Información y alineación sujetas a cambios.</p><p class="creator-credit">Creada por el fan mutante Rolando Victorio.</p></div></footer>
+  <script src="site-content.js"></script>
   <script>
-    (() => {
+    (async () => {
+      await window.mutantContentReady;
       const track = document.querySelector('[data-gallery-track]');
       const carousel = document.querySelector('[data-gallery-carousel]');
       const slides = [...track.querySelectorAll('.gallery-tile')];
@@ -346,6 +348,7 @@
         languageToggle.setAttribute('aria-label', language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés');
         languageToggle.title = language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés';
         try { localStorage.setItem('mutant-beans-language-v2', language); } catch {}
+        window.applyMutantContentLanguage?.(language);
         updateNextShow();
       };
       languageToggle.addEventListener('click', () => applyLanguage(interfaceLanguage === 'es' ? 'en' : 'es'));

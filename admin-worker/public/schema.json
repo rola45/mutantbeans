@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "fields": [
+    {
+      "id": "logo",
+      "label": "Logo principal",
+      "type": "image",
+      "selector": ".hero-wordmark",
+      "value": "images/mutant-beans-logo-white.png"
+    },
+    {
+      "id": "principal",
+      "label": "Imagen de inicio",
+      "type": "image",
+      "selector": ".hero-art",
+      "value": "images/principal.png"
+    },
+    {
+      "id": "story-mascot",
+      "label": "Mascota de historia",
+      "type": "image",
+      "selector": ".story-mark .module-mascot",
+      "value": "images/poutine-freddy.png"
+    },
+    {
+      "id": "flyer",
+      "label": "Flyer de fechas",
+      "type": "image",
+      "selector": ".tour-poster img",
+      "value": "images/october-tour.jpg"
+    },
+    {
+      "id": "gallery-1",
+      "label": "Galería · foto 1",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(1) img",
+      "value": "images/rear-stage-mascot.jpg"
+    },
+    {
+      "id": "gallery-caption-1",
+      "label": "Galería · descripción 1",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(1) .tile-label",
+      "es": "Desde el escenario · mascota",
+      "en": "From the stage · mascot"
+    },
+    {
+      "id": "gallery-2",
+      "label": "Galería · foto 2",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(2) img",
+      "value": "images/group-mascot-updated.png"
+    },
+    {
+      "id": "gallery-caption-2",
+      "label": "Galería · descripción 2",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(2) .tile-label",
+      "es": "Después del show",
+      "en": "After the show"
+    },
+    {
+      "id": "gallery-3",
+      "label": "Galería · foto 3",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(3) img",
+      "value": "images/live.jpg"
+    },
+    {
+      "id": "gallery-caption-3",
+      "label": "Galería · descripción 3",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(3) .tile-label",
+      "es": "En vivo · Warped Tour ↗",
+      "en": "Live · Warped Tour ↗"
+    },
+    {
+      "id": "gallery-4",
+      "label": "Galería · foto 4",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(4) img",
+      "value": "images/vans-skatepark.jpg"
+    },
+    {
+      "id": "gallery-caption-4",
+      "label": "Galería · descripción 4",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(4) .tile-label",
+      "es": "Entre ruedas y riffs",
+      "en": "Wheels and riffs"
+    },
+    {
+      "id": "gallery-5",
+      "label": "Galería · foto 5",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(5) img",
+      "value": "images/banda-y-publico.jpg"
+    },
+    {
+      "id": "gallery-caption-5",
+      "label": "Galería · descripción 5",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(5) .tile-label",
+      "es": "La banda y su público",
+      "en": "The band and its crowd"
+    },
+    {
+      "id": "gallery-6",
+      "label": "Galería · foto 6",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(6) img",
+      "value": "images/crowd-mascot.jpg"
+    },
+    {
+      "id": "gallery-caption-6",
+      "label": "Galería · descripción 6",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(6) .tile-label",
+      "es": "Mutant Beans · con el público",
+      "en": "Mutant Beans · with the crowd"
+    },
+    {
+      "id": "gallery-7",
+      "label": "Galería · foto 7",
+      "type": "image",
+      "selector": ".gallery-tile:nth-child(7) img",
+      "value": "images/beach-stage-mascot-v2.png"
+    },
+    {
+      "id": "gallery-caption-7",
+      "label": "Galería · descripción 7",
+      "type": "text",
+      "selector": ".gallery-tile:nth-child(7) .tile-label",
+      "es": "En vivo · mascota mutante",
+      "en": "Live · mutant mascot"
+    },
+    {
+      "id": "hero-copy",
+      "label": "Descripción de la banda",
+      "type": "text",
+      "selector": ".hero-copy",
+      "es": "Una banda Ensenadense que mezcla funk-rock, hip-hop, thrash, punk y hardcore en un sonido propio, ruidoso y hecho para el escenario",
+      "en": "An Ensenada band blending funk rock, hip-hop, thrash, punk, and hardcore into a loud sound of its own, made for the stage."
+    },
+    {
+      "id": "tour-title",
+      "label": "Título de la gira",
+      "type": "text",
+      "selector": "#fechas .section-head h2",
+      "es": "Octubre en ruta",
+      "en": "Octubre en ruta"
+    },
+    {
+      "id": "story-copy",
+      "label": "Historia · primer párrafo",
+      "type": "text",
+      "selector": ".story-text > p:first-of-type",
+      "es": "Formados en Ensenada en 2014, Mutant Beans cruzan el funk y el rock con hip-hop, thrash, punk y hardcore. Sus canciones miran de frente a la realidad social y política, con la energía de una banda independiente que hace las cosas a su manera.",
+      "en": "Formed in Ensenada in 2014, Mutant Beans blend funk and rock with hip-hop, thrash, punk, and hardcore. Their songs face social and political realities with the energy of an independent band doing things their own way."
+    }
+  ],
+  "shows": [
+    {
+      "date": "2026-10-02",
+      "venue": "Abel's Bar",
+      "city": "Ensenada, BC"
+    },
+    {
+      "date": "2026-10-05",
+      "venue": "Casa Verde",
+      "city": "Ensenada, BC"
+    },
+    {
+      "date": "2026-10-10",
+      "venue": "Offbeat Bar",
+      "city": "Los Angeles, CA"
+    },
+    {
+      "date": "2026-10-15",
+      "venue": "Barrio Chino",
+      "city": "Mexicali, BC"
+    },
+    {
+      "date": "2026-10-16",
+      "venue": "Hot Rods Bar",
+      "city": "Holtville, CA"
+    },
+    {
+      "date": "2026-10-17",
+      "venue": "Rolls & Bowls",
+      "city": "San Luis, AZ"
+    },
+    {
+      "date": "2026-10-18",
+      "venue": "Bandcamp Baja",
+      "city": "Rosarito, BC"
+    },
+    {
+      "date": "2026-10-24",
+      "venue": "Peyo Rock House",
+      "city": "Tijuana, BC"
+    },
+    {
+      "date": "2026-10-25",
+      "venue": "Black Dog Bar",
+      "city": "Ensenada, BC"
+    },
+    {
+      "date": "2026-10-30",
+      "venue": "Latin Rock Fest",
+      "city": "Seattle, WA"
+    },
+    {
+      "date": "2026-10-31",
+      "venue": "Latin Rock Fest",
+      "city": "Portland, OR"
+    }
+  ]
+}
