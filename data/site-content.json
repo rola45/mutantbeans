@@ -151,11 +151,11 @@
       "enabled": true
     }
   ],
-  "showsEnabled": false,
+  "showsEnabled": true,
   "shows": [
     {
       "date": "2026-10-02",
-      "venue": "Abel's Barrr",
+      "venue": "Abel's Bar",
       "city": "Ensenada, BC"
     },
     {
