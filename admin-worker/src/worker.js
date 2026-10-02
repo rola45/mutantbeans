@@ -11,7 +11,7 @@ const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/'))
 const random = () => b64(crypto.getRandomValues(new Uint8Array(32)));
 const cookie = (name, value, age) => `${name}=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`;
 const readCookie = (request, name) => request.headers.get('Cookie')?.split(';').map(v => v.trim()).find(v => v.startsWith(name + '='))?.slice(name.length + 1);
-const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { ...headers, 'Content-Type': 'application/json' } });
+const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { ...headers, 'Content-Type': 'application/json; charset=utf-8' } });
 async function key(env) {
   if (!env.SESSION_SECRET || env.SESSION_SECRET.length < 32) throw new Error('Falta configurar SESSION_SECRET (32 caracteres como mínimo).');
   return crypto.subtle.importKey('raw', await crypto.subtle.digest('SHA-256', encoder.encode(env.SESSION_SECRET)), 'AES-GCM', false, ['encrypt', 'decrypt']);
