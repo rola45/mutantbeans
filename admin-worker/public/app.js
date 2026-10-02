@@ -53,59 +53,90 @@ function showRow(show = { date: '', venue: '', city: '' }) {
   const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => row.remove(); row.append(remove);
   document.querySelector('#shows').append(row);
 }
-function render() {
-  const container = document.querySelector('#fields');
-  for (const spec of schema.fields) {
-    const field = content.fields.find(value => value.id === spec.id);
-    if (!field) continue;
-    const card = document.createElement('details'); card.className = 'card editor-section';
-    card.dataset.previewSelector = spec.selector || '';
-    card.dataset.previewLabel = spec.label;
-    card.dataset.previewId = spec.id;
+function renderField(spec, container, compact = false) {
+  const field = content.fields.find(value => value.id === spec.id);
+  if (!field) return;
+  const card = compact ? document.createElement('section') : document.createElement('details');
+  card.className = compact ? 'gallery-editor-field' : 'card editor-section';
+  card.dataset.previewSelector = spec.selector || '';
+  card.dataset.previewLabel = spec.label;
+  card.dataset.previewId = spec.id;
+  card.addEventListener('focusin', () => selectPreviewTarget(card.dataset.previewSelector, card.dataset.previewLabel, card.dataset.previewId));
+  if (compact) {
+    const heading = document.createElement('h3'); heading.textContent = spec.label.replace(/^Galería · /, ''); card.append(heading);
+  } else {
     card.addEventListener('toggle', () => { if (card.open) selectPreviewTarget(card.dataset.previewSelector, card.dataset.previewLabel, card.dataset.previewId); });
-    card.addEventListener('focusin', () => selectPreviewTarget(card.dataset.previewSelector, card.dataset.previewLabel, card.dataset.previewId));
     const summary = document.createElement('summary');
     const heading = document.createElement('h2'); heading.textContent = spec.label; summary.append(heading); card.append(summary);
-    const body = document.createElement('div'); body.className = 'editor-section-body';
-    const enabled = input('checkbox'); enabled.checked = field.enabled === true;
-    enabled.onchange = () => { field.enabled = enabled.checked; };
-    body.append(label('Usar esta edición ', enabled));
-    if (spec.type === 'text') {
-      const row = document.createElement('div'); row.className = 'row';
-      for (const [lang,title] of [['es','Español'],['en','English']]) {
-        const area = document.createElement('textarea'); area.value = field[lang]; area.maxLength = 5000;
-        area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; };
-        row.append(label(title, area));
-      }
-      body.append(row);
-    } else {
-      const preview = document.createElement('img'); preview.alt = spec.label; preview.src = 'https://mutantbeans.com/' + field.value;
-      const path = input('text', field.value); path.readOnly = true;
-      const upload = input('file'); upload.accept = 'image/png,image/jpeg,image/webp';
-      upload.onchange = async () => {
-        const file = upload.files[0]; if (!file) return;
-        if (busy) { report('Espera a que termine la operación actual.'); upload.value = ''; return; }
-        if (file.size > 6 * 1024 * 1024) { report('La imagen debe pesar menos de 6 MB.', true); return; }
-        busy = true; document.querySelector('#save').disabled = true; upload.disabled = true;
-        try {
-          report('Subiendo imagen…');
-          const data = await api('upload', { method:'POST', headers:{'Content-Type':file.type}, body:file });
-          field.value = path.value = data.path; field.enabled = enabled.checked = true;
-          const objectURL = URL.createObjectURL(file); preview.src = objectURL;
-          preview.onload = () => URL.revokeObjectURL(objectURL);
-          report('Imagen subida. Pulsa Guardar y publicar para colocarla en la página.');
-        } catch (error) { report(error.message, true); }
-        finally { busy = false; document.querySelector('#save').disabled = false; upload.disabled = false; }
-      };
-      const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
-      choose.onclick = () => openAssetPicker(asset => {
-        field.value = path.value = asset.path; field.enabled = enabled.checked = true;
-        preview.src = 'https://mutantbeans.com/' + asset.path;
-        report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
-      });
-      body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
+  }
+  const body = document.createElement('div'); body.className = compact ? 'gallery-editor-field-body' : 'editor-section-body';
+  const enabled = input('checkbox'); enabled.checked = field.enabled === true;
+  enabled.onchange = () => { field.enabled = enabled.checked; };
+  body.append(label('Usar esta edición ', enabled));
+  if (spec.type === 'text') {
+    const row = document.createElement('div'); row.className = 'row';
+    for (const [lang,title] of [['es','Español'],['en','English']]) {
+      const area = document.createElement('textarea'); area.value = field[lang]; area.maxLength = 5000;
+      area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; };
+      row.append(label(title, area));
     }
-    card.append(body); container.append(card);
+    body.append(row);
+  } else {
+    const preview = document.createElement('img'); preview.alt = spec.label; preview.src = 'https://mutantbeans.com/' + field.value;
+    const path = input('text', field.value); path.readOnly = true;
+    const upload = input('file'); upload.accept = 'image/png,image/jpeg,image/webp';
+    upload.onchange = async () => {
+      const file = upload.files[0]; if (!file) return;
+      if (busy) { report('Espera a que termine la operación actual.'); upload.value = ''; return; }
+      if (file.size > 6 * 1024 * 1024) { report('La imagen debe pesar menos de 6 MB.', true); return; }
+      busy = true; document.querySelector('#save').disabled = true; upload.disabled = true;
+      try {
+        report('Subiendo imagen…');
+        const data = await api('upload', { method:'POST', headers:{'Content-Type':file.type}, body:file });
+        field.value = path.value = data.path; field.enabled = enabled.checked = true;
+        const objectURL = URL.createObjectURL(file); preview.src = objectURL;
+        preview.onload = () => URL.revokeObjectURL(objectURL);
+        report('Imagen subida. Pulsa Guardar y publicar para colocarla en la página.');
+      } catch (error) { report(error.message, true); }
+      finally { busy = false; document.querySelector('#save').disabled = false; upload.disabled = false; }
+    };
+    const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
+    choose.onclick = () => openAssetPicker(asset => {
+      field.value = path.value = asset.path; field.enabled = enabled.checked = true;
+      preview.src = 'https://mutantbeans.com/' + asset.path;
+      report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
+    });
+    body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
+  }
+  card.append(body); container.append(card);
+}
+function renderGallery(container) {
+  const section = document.createElement('details'); section.className = 'card editor-section';
+  section.dataset.previewSelector = '.gallery-tile:nth-child(1) img'; section.dataset.previewLabel = 'Galería · foto 1';
+  section.addEventListener('toggle', () => { if (section.open) selectPreviewTarget(section.dataset.previewSelector, section.dataset.previewLabel); });
+  const summary = document.createElement('summary'); const title = document.createElement('h2');
+  title.textContent = 'Galería · 7 fotos'; summary.append(title); section.append(summary);
+  const body = document.createElement('div'); body.className = 'editor-section-body gallery-editor-grid';
+  const photos = schema.fields.filter(spec => /^gallery-\d+$/.test(spec.id));
+  for (const photo of photos) {
+    const number = photo.id.slice('gallery-'.length);
+    const item = document.createElement('section'); item.className = 'gallery-editor-card';
+    const caption = schema.fields.find(spec => spec.id === `gallery-caption-${number}`);
+    renderField(photo, item, true);
+    if (caption) renderField(caption, item, true);
+    body.append(item);
+  }
+  section.append(body); container.append(section);
+}
+function render() {
+  const container = document.querySelector('#fields');
+  let galleryRendered = false;
+  for (const spec of schema.fields) {
+    if (/^gallery-\d+$/.test(spec.id) || /^gallery-caption-\d+$/.test(spec.id)) {
+      if (!galleryRendered) { renderGallery(container); galleryRendered = true; }
+      continue;
+    }
+    renderField(spec, container);
   }
   document.querySelector('#shows-enabled').checked = content.showsEnabled === true;
   content.shows.forEach(showRow);
