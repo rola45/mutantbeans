@@ -2,11 +2,27 @@
   "name": "mutantbeans",
   "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
-  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
   "vars": {
-    "ADMIN_ORIGIN": "https://mutantbeans.rolandovictorio.workers.dev",
+    "ADMIN_ORIGIN": "https://mutantbeans.com",
     "GITHUB_REPO": "rola45/mutantbeans",
     "GITHUB_BRANCH": "main",
-    "ALLOWED_GITHUB_USERS": "rola45"
-  }
+    "ALLOWED_GITHUB_USERS": "rola45",
+    "ADMIN_BASE_PATH": "/admin"
+  },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "mutantbeans.com/admin",
+      "zone_name": "mutantbeans.com"
+    },
+    {
+      "pattern": "mutantbeans.com/admin/*",
+      "zone_name": "mutantbeans.com"
+    }
+  ]
 }

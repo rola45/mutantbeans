@@ -2,7 +2,7 @@ let session, content, sha, schema, busy = false;
 const status = document.querySelector('#status');
 function report(message, error = false) { status.textContent = message; status.classList.toggle('error', error); }
 async function api(path, options = {}) {
-  const response = await fetch('/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
+  const response = await fetch('/admin/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || 'No se pudo guardar.');
   return data;
@@ -80,7 +80,7 @@ document.querySelector('#form').onsubmit = async event => {
   try {
     session = await api('session');
     const result = await api('content'); content = result.content; sha = result.sha;
-    schema = await (await fetch('/schema.json')).json(); render();
+    schema = await (await fetch('/admin/schema.json')).json(); render();
     document.querySelector('#account').textContent = 'Conectado como @' + session.login;
     document.querySelector('#login').hidden = true; document.querySelector('#editor').hidden = false;
   } catch(error) { report(error.message); }

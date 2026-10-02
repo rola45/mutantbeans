@@ -76,7 +76,13 @@ async function handler(request, env) {
   const url = new URL(request.url);
   const origin = env.ADMIN_ORIGIN;
   if (url.origin !== origin) return json({ error: 'Dominio del administrador no configurado.' }, 403);
-  const callback = `${origin}/auth/callback`;
+  const base = env.ADMIN_BASE_PATH || '/admin';
+  if (url.pathname === base) return new Response(null, { status: 302, headers: { ...headers, Location: base + '/' } });
+  if (!url.pathname.startsWith(base + '/')) return json({ error: 'Ruta no encontrada.' }, 404);
+  const assetURL = new URL(request.url);
+  assetURL.pathname = url.pathname.slice(base.length);
+  url.pathname = assetURL.pathname;
+  const callback = `${origin}${base}/auth/callback`;
   if (url.pathname === '/auth/login' && request.method === 'GET') {
     if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) return json({ error: 'Configura la aplicación OAuth de GitHub siguiendo admin-worker/README.md.' }, 503);
     const state = random(), verifier = random();
@@ -96,7 +102,7 @@ async function handler(request, env) {
     const repo = await github(`/repos/${env.GITHUB_REPO}`, tokenData.access_token);
     if (!allowed(user.login, env) || !repo?.permissions?.push) return json({ error: 'Esta cuenta no está autorizada para administrar Mutant Beans.' }, 403);
     const session = await seal({ login: user.login, id: user.id, token: tokenData.access_token, csrf: random(), exp: Date.now() + 14400000 }, env);
-    const responseHeaders = new Headers({ ...headers, Location: '/' });
+    const responseHeaders = new Headers({ ...headers, Location: base + '/' });
     responseHeaders.append('Set-Cookie', cookie(cookieName, session, 14400));
     responseHeaders.append('Set-Cookie', cookie(flowName, '', 0));
     return new Response(null, { status: 302, headers: responseHeaders });
@@ -142,7 +148,7 @@ async function handler(request, env) {
     return json({ error: 'Ruta no encontrada.' }, 404);
   }
   if (request.method !== 'GET' && request.method !== 'HEAD') return json({ error: 'Método no permitido.' }, 405);
-  const asset = await env.ASSETS.fetch(request);
+  const asset = await env.ASSETS.fetch(new Request(assetURL, request));
   const response = new Response(asset.body, asset);
   for (const [name, value] of Object.entries(headers)) response.headers.set(name, value);
   return response;

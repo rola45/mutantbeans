@@ -1,15 +1,36 @@
 # Administrador de Mutant Beans
 
-Panel separado para el Worker `mutantbeans.rolandovictorio.workers.dev`.
+Panel separado para el Worker `mutantbeans.com/admin`.
 La página pública continúa en GitHub Pages. No requiere Cloudflare Zero Trust.
 
-## 1. Registrar el acceso con GitHub
+## 1. Activar el dominio en Cloudflare
+
+En Cloudflare, agrega `mutantbeans.com` como dominio en el plan Free.
+Importa y compara los registros DNS con GoDaddy: conserva los registros de
+GitHub Pages, el TXT de verificación y cualquier registro de correo.
+Después cambia en GoDaddy los nameservers por el par exacto asignado por
+Cloudflare. El registro del dominio sigue en GoDaddy.
+
+Espera a que la zona esté Active y el certificado de Cloudflare esté activo.
+Activa Proxied (nube naranja) en los registros A/AAAA del dominio raíz.
+En SSL/TLS, utiliza Full (strict); GitHub Pages ya sirve HTTPS válido.
+Los registros siguen apuntando a GitHub Pages para la página pública.
+
+El wrangler.jsonc configura dos rutas del Worker:
+- `mutantbeans.com/admin`
+- `mutantbeans.com/admin/*`
+
+No configures el dominio completo como Custom Domain del Worker. Las rutas
+se encargan únicamente del administrador y sus recursos/API/OAuth.
+`/admin` redirige a `/admin/`. El acceso por workers.dev queda desactivado.
+
+## 2. Registrar el acceso con GitHub
 
 Abre https://github.com/settings/applications/new e introduce:
 
 - Application name: `Mutant Beans Admin`
-- Homepage URL: `https://mutantbeans.rolandovictorio.workers.dev`
-- Authorization callback URL: `https://mutantbeans.rolandovictorio.workers.dev/auth/callback`
+- Homepage URL: `https://mutantbeans.com/admin`
+- Authorization callback URL: `https://mutantbeans.com/admin/auth/callback`
 
 Registra la aplicación y genera un Client Secret. Guarda estos datos directamente
 como secretos del Worker, nunca en el repositorio ni en un mensaje de chat:
@@ -26,7 +47,7 @@ La app solicita `public_repo` para guardar cambios en el repositorio público.
 GitHub concede ese alcance sobre los repositorios públicos accesibles de la cuenta;
 el servidor de este panel limita las operaciones a `rola45/mutantbeans`.
 
-## 2. Publicar el Worker
+## 3. Publicar el Worker
 
 Desde la carpeta `admin-worker`, con Node.js instalado:
 
@@ -47,14 +68,14 @@ npx wrangler secret put SESSION_SECRET
 
 Introduce cada valor cuando el comando lo solicite. No lo escribas como argumento.
 
-## 3. Usuarios autorizados
+## 4. Usuarios autorizados
 
 Inicialmente únicamente `rola45`. Edita `ALLOWED_GITHUB_USERS` en
 `wrangler.jsonc` para añadir otros nombres, separados por comas, y vuelve a
 publicar. Cada usuario necesita además permiso de escritura en el repositorio.
 No basta con conocer la URL o tener una cuenta de GitHub.
 
-## 4. Uso del panel
+## 5. Uso del panel
 
 1. Abre la dirección del Worker y entra con GitHub.
 2. Edita los campos deseados; textos en español y en inglés.
@@ -90,11 +111,13 @@ usa GitHub → Settings → Applications → Authorized OAuth Apps.
 Los archivos están preparados. El login y la escritura reales necesitan los
 secretos y el despliegue; no se han probado contra una OAuth App configurada.
 
-Si se cambia posteriormente a `admin.mutantbeans.com`, actualizar ADMIN_ORIGIN y
-las dos URLs de la OAuth App. Los Custom Domains de Workers necesitan una zona
-activa de Cloudflare; un CNAME en GoDaddy a workers.dev no sustituye ese requisito.
+Esta configuración usa `ADMIN_ORIGIN=https://mutantbeans.com` y
+`ADMIN_BASE_PATH=/admin`. Si se cambia la dirección, deben adaptarse también
+las rutas, los recursos del panel y las URLs de la OAuth App.
 
 Documentación:
 - https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
 - https://developers.cloudflare.com/workers/static-assets/
 - https://developers.cloudflare.com/workers/configuration/secrets/
+- https://developers.cloudflare.com/workers/configuration/routing/routes/
+- https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
