@@ -23,11 +23,13 @@ function render() {
   for (const spec of schema.fields) {
     const field = content.fields.find(value => value.id === spec.id);
     if (!field) continue;
-    const card = document.createElement('section'); card.className = 'card';
-    const heading = document.createElement('h2'); heading.textContent = spec.label; card.append(heading);
+    const card = document.createElement('details'); card.className = 'card editor-section';
+    const summary = document.createElement('summary');
+    const heading = document.createElement('h2'); heading.textContent = spec.label; summary.append(heading); card.append(summary);
+    const body = document.createElement('div'); body.className = 'editor-section-body';
     const enabled = input('checkbox'); enabled.checked = field.enabled === true;
     enabled.onchange = () => { field.enabled = enabled.checked; };
-    card.append(label('Usar esta edición ', enabled));
+    body.append(label('Usar esta edición ', enabled));
     if (spec.type === 'text') {
       const row = document.createElement('div'); row.className = 'row';
       for (const [lang,title] of [['es','Español'],['en','English']]) {
@@ -35,7 +37,7 @@ function render() {
         area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; };
         row.append(label(title, area));
       }
-      card.append(row);
+      body.append(row);
     } else {
       const preview = document.createElement('img'); preview.alt = spec.label; preview.src = 'https://mutantbeans.com/' + field.value;
       const path = input('text', field.value); path.readOnly = true;
@@ -61,9 +63,9 @@ function render() {
         preview.src = 'https://mutantbeans.com/' + asset.path;
         report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
       });
-      card.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
+      body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
     }
-    container.append(card);
+    card.append(body); container.append(card);
   }
   document.querySelector('#shows-enabled').checked = content.showsEnabled === true;
   content.shows.forEach(showRow);
