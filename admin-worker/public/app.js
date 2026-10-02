@@ -1,6 +1,41 @@
-let session, content, sha, schema, busy = false;
+let session, content, sha, schema, busy = false, previewSelection = null;
 const status = document.querySelector('#status');
+const previewDialog = document.querySelector('#preview-dialog');
+const previewFrame = document.querySelector('#site-preview');
+const previewTarget = document.querySelector('#preview-target');
 function report(message, error = false) { status.textContent = message; status.classList.toggle('error', error); }
+function selectPreviewTarget(selector, label, id = '') {
+  previewSelection = { selector, label, id };
+  previewTarget.textContent = `Se resaltará: ${label}`;
+  if (previewDialog.open) highlightPreviewTarget();
+}
+function highlightPreviewTarget() {
+  try {
+    const doc = previewFrame.contentDocument;
+    if (!doc || !previewSelection) return;
+    doc.querySelectorAll('.admin-preview-highlight').forEach(element => element.classList.remove('admin-preview-highlight'));
+    if (previewSelection.id === 'favicon' || previewSelection.id === 'page-title') {
+      previewTarget.textContent = `${previewSelection.label}: se muestra en la pestaña del navegador, no dentro del contenido de la página.`;
+      return;
+    }
+    let style = doc.querySelector('#admin-preview-highlight-style');
+    if (!style) {
+      style = doc.createElement('style'); style.id = 'admin-preview-highlight-style';
+      style.textContent = '.admin-preview-highlight{outline:4px solid #67f542!important;outline-offset:5px!important;box-shadow:0 0 0 8px #67f54266!important;position:relative!important;z-index:20!important;animation:adminPreviewPulse 1.1s ease-in-out infinite alternate!important}@keyframes adminPreviewPulse{from{outline-color:#67f542;box-shadow:0 0 0 4px #67f54233}to{outline-color:#efffe9;box-shadow:0 0 0 9px #67f54288}}';
+      doc.head.append(style);
+    }
+    const element = doc.querySelector(previewSelection.selector);
+    if (!element) { previewTarget.textContent = `No se encontró «${previewSelection.label}» en la página actual.`; return; }
+    element.classList.add('admin-preview-highlight');
+    element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    previewTarget.textContent = `Resaltado: ${previewSelection.label}`;
+  } catch {
+    previewTarget.textContent = 'No se pudo cargar la vista previa. Usa “Ver página” para abrirla aparte.';
+  }
+}
+document.querySelector('#preview-open').onclick = () => { previewDialog.showModal(); requestAnimationFrame(highlightPreviewTarget); };
+document.querySelector('#preview-close').onclick = () => previewDialog.close();
+previewFrame.addEventListener('load', highlightPreviewTarget);
 async function api(path, options = {}) {
   const response = await fetch('/admin/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
   const data = await response.json();
@@ -24,6 +59,11 @@ function render() {
     const field = content.fields.find(value => value.id === spec.id);
     if (!field) continue;
     const card = document.createElement('details'); card.className = 'card editor-section';
+    card.dataset.previewSelector = spec.selector || '';
+    card.dataset.previewLabel = spec.label;
+    card.dataset.previewId = spec.id;
+    card.addEventListener('toggle', () => { if (card.open) selectPreviewTarget(card.dataset.previewSelector, card.dataset.previewLabel, card.dataset.previewId); });
+    card.addEventListener('focusin', () => selectPreviewTarget(card.dataset.previewSelector, card.dataset.previewLabel, card.dataset.previewId));
     const summary = document.createElement('summary');
     const heading = document.createElement('h2'); heading.textContent = spec.label; summary.append(heading); card.append(summary);
     const body = document.createElement('div'); body.className = 'editor-section-body';
@@ -69,6 +109,13 @@ function render() {
   }
   document.querySelector('#shows-enabled').checked = content.showsEnabled === true;
   content.shows.forEach(showRow);
+  const showsSection = document.querySelector('#shows-section');
+  showsSection.addEventListener('toggle', () => { if (showsSection.open) selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'); });
+  showsSection.addEventListener('focusin', () => selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'));
+  if (schema.fields.length) {
+    const first = schema.fields[0];
+    selectPreviewTarget(first.selector || '', first.label, first.id);
+  }
 }
 document.querySelector('#add-show').onclick = () => { showRow(); document.querySelector('#shows-enabled').checked = true; };
 document.querySelector('#logout').onclick = async () => { try { await api('logout', {method:'POST'}); location.reload(); } catch(error) { report(error.message,true); } };
