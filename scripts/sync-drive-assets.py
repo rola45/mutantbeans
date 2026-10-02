@@ -37,7 +37,8 @@ def download(job):
     if not (signature.startswith(b'\x89PNG\r\n\x1a\n') or signature.startswith(b'\xff\xd8\xff') or (signature[:4]==b'RIFF' and signature[8:12]==b'WEBP')):
         temp.unlink(); raise RuntimeError(f'Drive no entregó una imagen para {name}.')
     temp.replace(path)
-    return dict(id=identifier,name=name,group=group,path=path.relative_to(ROOT).as_posix(),source=f'https://drive.google.com/file/d/{identifier}/view',sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    role = ('Fondo · capa base' if name.lower() == 'don veneno fondo.png' else 'Personaje · capa transparente' if name.lower() == 'donveneno freddy.png' else 'Primer plano · capa transparente' if name.lower() == 'donveneno tabla.png' else 'Logotipo' if 'logo' in name.lower() else 'Imagen')
+    return dict(id=identifier,name=name,group=group,role=role,path=path.relative_to(ROOT).as_posix(),source=f'https://drive.google.com/file/d/{identifier}/view',sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool: assets=list(pool.map(download,jobs))
 assets.sort(key=lambda a:(a['group'],a['name'].lower()))
 manifest=dict(folder=f'https://drive.google.com/drive/folders/{FOLDER}',assets=assets)

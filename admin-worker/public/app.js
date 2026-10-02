@@ -116,7 +116,13 @@ async function renderLibrary() {
       const image = document.createElement('img'); image.src = 'https://mutantbeans.com/' + asset.path; image.alt = ''; image.loading = 'lazy';
       const title = document.createElement('strong'); title.textContent = asset.name;
       const group = document.createElement('span'); group.textContent = asset.group;
-      button.append(image,title,group); button.onclick = () => { if (busy) { assetState.textContent = 'Espera a que termine la operación actual.'; return; } selectAsset(asset); assetDialog.close(); }; assetGrid.append(button);
+      const role = document.createElement('span'); role.className = asset.role?.includes('capa') ? 'asset-role layer' : 'asset-role'; role.textContent = asset.role || 'Imagen';
+      image.onerror = () => { image.hidden = true; const unavailable = document.createElement('span'); unavailable.className = 'asset-unavailable'; unavailable.textContent = 'Vista previa no disponible'; image.after(unavailable); };
+      button.append(image,title,group,role); button.onclick = () => {
+        if (busy) { assetState.textContent = 'Espera a que termine la operación actual.'; return; }
+        if (asset.role?.includes('capa') && !window.confirm(`${asset.name} es una capa suelta (${asset.role}). Al elegirla, la página mostrará solo esa pieza. ¿Quieres usarla?`)) return;
+        selectAsset(asset); assetDialog.close();
+      }; assetGrid.append(button);
     }
   } catch(error) { assetState.textContent = error.message; }
 }

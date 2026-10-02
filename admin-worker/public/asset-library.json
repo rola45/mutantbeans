@@ -5,6 +5,7 @@
       "id": "199fUm23sfWqH1SfuBgFEP_Xyd1nLk1Vn",
       "name": "don veneno fondo.png",
       "group": "DON VENENO ASSETS",
+      "role": "Fondo · capa base",
       "path": "images/drive-assets/don-veneno-fondo-199fUm23sfWqH1SfuBgFEP_Xyd1nLk1Vn.png",
       "source": "https://drive.google.com/file/d/199fUm23sfWqH1SfuBgFEP_Xyd1nLk1Vn/view",
       "sha256": "064806ef9140bb93153ed1350703c3170d52c3eae06294d70d86db29152e10f2"
@@ -13,6 +14,7 @@
       "id": "1y7dwOr2aOqSOjAVxLztlsdQ8Pzo4QUSS",
       "name": "donveneno freddy.png",
       "group": "DON VENENO ASSETS",
+      "role": "Personaje · capa transparente",
       "path": "images/drive-assets/donveneno-freddy-1y7dwOr2aOqSOjAVxLztlsdQ8Pzo4QUSS.png",
       "source": "https://drive.google.com/file/d/1y7dwOr2aOqSOjAVxLztlsdQ8Pzo4QUSS/view",
       "sha256": "a71c0125ed6c512ea33737ba96530cb8d47ab0874ec25738e5e6750add963013"
@@ -21,6 +23,7 @@
       "id": "126iOxQMvX6KwRxjeg7eXKC6eTndZxqhM",
       "name": "donveneno tabla.png",
       "group": "DON VENENO ASSETS",
+      "role": "Primer plano · capa transparente",
       "path": "images/drive-assets/donveneno-tabla-126iOxQMvX6KwRxjeg7eXKC6eTndZxqhM.png",
       "source": "https://drive.google.com/file/d/126iOxQMvX6KwRxjeg7eXKC6eTndZxqhM/view",
       "sha256": "561b2b2c0815c0a98bf5284d2cddebbf1d3016d2ce8fbeab6afc7719c22abef9"
@@ -29,6 +32,7 @@
       "id": "17ESismnnNWmgubu8m2R14C-UO1gPrPmZ",
       "name": "donvenenologo.png",
       "group": "DON VENENO ASSETS",
+      "role": "Logotipo",
       "path": "images/drive-assets/donvenenologo-17ESismnnNWmgubu8m2R14C-UO1gPrPmZ.png",
       "source": "https://drive.google.com/file/d/17ESismnnNWmgubu8m2R14C-UO1gPrPmZ/view",
       "sha256": "a8622537395987d350800c8ed27003f0f1abd8f37f86d44c7907e43d6e8139da"
@@ -37,6 +41,7 @@
       "id": "1-Dw8wQEvdxR9NDZQCow1D0zqaighqHjw",
       "name": "bean-01 (2).png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/bean-01-2-1-Dw8wQEvdxR9NDZQCow1D0zqaighqHjw.png",
       "source": "https://drive.google.com/file/d/1-Dw8wQEvdxR9NDZQCow1D0zqaighqHjw/view",
       "sha256": "4541e6468fda71c57b5868e21b3ee24179613c244a5d16325bd735236ba71a75"
@@ -45,6 +50,7 @@
       "id": "1VvQ1sitUP5sX2nOxwNH5XVP6klEPJ7gf",
       "name": "IMG_1016.PNG",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/img-1016-1VvQ1sitUP5sX2nOxwNH5XVP6klEPJ7gf.png",
       "source": "https://drive.google.com/file/d/1VvQ1sitUP5sX2nOxwNH5XVP6klEPJ7gf/view",
       "sha256": "235f63b45cfea8fbd751c25f06211ce31baa8fe5eab967c4c96ff2838fdbc796"
@@ -53,6 +59,7 @@
       "id": "1-fngMe2LrHtpOxh2Fr-pjSWHiB0HXHMX",
       "name": "Logo don veneno.png",
       "group": "WEB ASSETS",
+      "role": "Logotipo",
       "path": "images/drive-assets/logo-don-veneno-1-fngMe2LrHtpOxh2Fr-pjSWHiB0HXHMX.png",
       "source": "https://drive.google.com/file/d/1-fngMe2LrHtpOxh2Fr-pjSWHiB0HXHMX/view",
       "sha256": "5e9f7ad0beb568f26e27cd5a8170595c7b0acfed47eb5f4bb87a45919f272e47"
@@ -61,6 +68,7 @@
       "id": "18cX02_WTpB1Rj0553pgCUwpDtfKEhFIU",
       "name": "montreal groove_edit.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/montreal-groove-edit-18cX02_WTpB1Rj0553pgCUwpDtfKEhFIU.png",
       "source": "https://drive.google.com/file/d/18cX02_WTpB1Rj0553pgCUwpDtfKEhFIU/view",
       "sha256": "0191acc039c85ae493333dc581c1ec273d31662c5769329245a61350b10135ea"
@@ -69,6 +77,7 @@
       "id": "121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg",
       "name": "mutant skate.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/mutant-skate-121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg.png",
       "source": "https://drive.google.com/file/d/121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg/view",
       "sha256": "abae666b1531fe3cdde193ad6e3e11fe6c97107ecaf2e3261495543e8c693589"
@@ -77,6 +86,7 @@
       "id": "1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5",
       "name": "mutant warped.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/mutant-warped-1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5.png",
       "source": "https://drive.google.com/file/d/1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5/view",
       "sha256": "d34800d3eccec3876bc8de98ddec0e44f25455af6a20303ba9c02ac5611787ec"
@@ -85,6 +95,7 @@
       "id": "1TjDmzcAK_-5TbjUwEazXo0LE9h2okt-z",
       "name": "poutine freddy.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/poutine-freddy-1TjDmzcAK_-5TbjUwEazXo0LE9h2okt-z.png",
       "source": "https://drive.google.com/file/d/1TjDmzcAK_-5TbjUwEazXo0LE9h2okt-z/view",
       "sha256": "65f82b06c5037f64eadd414dbcc9d28b57af7dfe0da93111692b08a947708b25"
@@ -93,6 +104,7 @@
       "id": "1ZFRvUCayEejmUZZkIwmxP7VlGfyNo7JQ",
       "name": "TRAZO NEGRO.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/trazo-negro-1ZFRvUCayEejmUZZkIwmxP7VlGfyNo7JQ.png",
       "source": "https://drive.google.com/file/d/1ZFRvUCayEejmUZZkIwmxP7VlGfyNo7JQ/view",
       "sha256": "facfe9cd8210a75359f302cc7be1587018bce8d9f1b9640cb26b6c7f837a0cfc"
@@ -101,6 +113,7 @@
       "id": "11hAQywTlLRDuRnE8y9zbm_LmMC0pgJ_D",
       "name": "vaso mutant.png",
       "group": "WEB ASSETS",
+      "role": "Imagen",
       "path": "images/drive-assets/vaso-mutant-11hAQywTlLRDuRnE8y9zbm_LmMC0pgJ_D.png",
       "source": "https://drive.google.com/file/d/11hAQywTlLRDuRnE8y9zbm_LmMC0pgJ_D/view",
       "sha256": "16db9743a8cdcf1ee88c01fc263e55215cd4a39da9bb5ff16964d4e2012db1ed"
