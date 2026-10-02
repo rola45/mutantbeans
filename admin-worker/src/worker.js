@@ -74,8 +74,17 @@ function validateContent(data, schema) {
 }
 async function handler(request, env) {
   const url = new URL(request.url);
-  const origin = env.ADMIN_ORIGIN;
-  if (url.origin !== origin) return json({ error: 'Dominio del administrador no configurado.' }, 403);
+  let origin;
+  try { origin = new URL(env.ADMIN_ORIGIN).origin; }
+  catch { return json({ error: 'Configura ADMIN_ORIGIN con el dominio HTTPS del sitio.' }, 503); }
+  if (url.origin !== origin) {
+    const configuredHost = new URL(origin).hostname.replace(/^www\./i, '').toLowerCase();
+    const requestHost = url.hostname.replace(/^www\./i, '').toLowerCase();
+    if (requestHost === configuredHost) {
+      return new Response(null, { status: 308, headers: { ...headers, Location: `${origin}${url.pathname}${url.search}` } });
+    }
+    return json({ error: 'Dominio del administrador no configurado.', recibido: url.origin, esperado: origin }, 403);
+  }
   const base = env.ADMIN_BASE_PATH || '/admin';
   if (url.pathname === base) return new Response(null, { status: 302, headers: { ...headers, Location: base + '/' } });
   if (!url.pathname.startsWith(base + '/')) return json({ error: 'Ruta no encontrada.' }, 404);
