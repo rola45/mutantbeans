@@ -1,26 +1,72 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#11100e">
-  <meta name="description" content="Fan page no oficial de Mutant Beans: banda independiente de Ensenada, Baja California. Música, integrantes y archivo mutante.">
-  <title>Mutant Beans — archivo mutante</title>
-  <link rel="canonical" href="https://mutant-beans-fanpage.rolandovictorio.chatgpt.site/">
+  <meta name="description" content="Unofficial fan page for Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and photos.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Mutant Beans Fan Page">
+  <title>Mutant Beans | Funk Rock from Ensenada, Mexico</title>
+  <link rel="canonical" href="https://mutantbeans.com/">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mutant-beans-fanpage.rolandovictorio.chatgpt.site/">
-  <meta property="og:title" content="Mutant Beans — Funk rock desde Ensenada">
-  <meta property="og:description" content="Funk rock, skate punk y rapcore desde Ensenada, Baja California. Música, shows y archivo visual de Mutant Beans.">
-  <meta property="og:image" content="https://mutant-beans-fanpage.rolandovictorio.chatgpt.site/images/crowd-mascot.jpg">
-  <meta property="og:image:secure_url" content="https://mutant-beans-fanpage.rolandovictorio.chatgpt.site/images/crowd-mascot.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1536">
-  <meta property="og:image:height" content="1024">
-  <meta property="og:image:alt" content="Mutant Beans junto a su mascota frente al público">
+  <meta property="og:site_name" content="Mutant Beans Fan Page">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="og:url" content="https://mutantbeans.com/">
+  <meta property="og:title" content="Mutant Beans | Funk Rock from Ensenada">
+  <meta property="og:description" content="Funk rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Meet the band, discover their music and follow upcoming shows.">
+  <meta property="og:image" content="https://mutantbeans.com/og.png">
+  <meta property="og:image:secure_url" content="https://mutantbeans.com/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1730">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="Mutant Beans logo and green mutant mascot on a black and acid-green punk flyer background">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mutant Beans — Funk rock desde Ensenada">
-  <meta name="twitter:description" content="Funk rock, skate punk y rapcore desde Ensenada, Baja California. Música, shows y archivo visual de Mutant Beans.">
-  <meta name="twitter:image" content="https://mutant-beans-fanpage.rolandovictorio.chatgpt.site/images/crowd-mascot.jpg">
+  <meta name="twitter:title" content="Mutant Beans | Funk Rock from Ensenada">
+  <meta name="twitter:description" content="Funk rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Meet the band, discover their music and follow upcoming shows.">
+  <meta name="twitter:image" content="https://mutantbeans.com/og.png">
+  <meta name="twitter:image:alt" content="Mutant Beans logo and green mutant mascot on a black and acid-green punk flyer background">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://mutantbeans.com/#website",
+          "url": "https://mutantbeans.com/",
+          "name": "Mutant Beans Fan Page",
+          "inLanguage": ["en", "es-MX"],
+          "about": {"@id": "https://mutantbeans.com/#band"}
+        },
+        {
+          "@type": "MusicGroup",
+          "@id": "https://mutantbeans.com/#band",
+          "name": "Mutant Beans",
+          "foundingDate": "2014",
+          "foundingLocation": {
+            "@type": "Place",
+            "name": "Ensenada, Baja California, Mexico"
+          },
+          "genre": ["Funk rock", "Hip-hop", "Thrash", "Punk rock", "Hardcore"],
+          "member": [
+            {"@type": "Person", "name": "Silver"},
+            {"@type": "Person", "name": "Irving"},
+            {"@type": "Person", "name": "Sater"},
+            {"@type": "Person", "name": "KBTO"}
+          ],
+          "sameAs": [
+            "https://www.instagram.com/mutantbeans/",
+            "https://www.facebook.com/mutantbeans",
+            "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+            "https://mutantbeans.bandcamp.com/",
+            "https://youtu.be/WmQ3-AxAZo0"
+          ]
+        }
+      ]
+    }
+  </script>
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23cbff38'/%3E%3Cpath d='M14 47V18h8v4q4-6 9-5 5 0 7 5 4-6 10-5 8 0 8 11v19h-9V30q0-5-4-5t-4 6v16h-9V30q0-5-4-5t-4 6v16z' fill='%2311100e'/%3E%3C/svg%3E">
   <style>
@@ -246,7 +292,10 @@
       const applyLanguage = (language) => {
         interfaceLanguage = language;
         document.documentElement.lang = language;
-        document.title = language === 'en' ? translations['Mutant Beans — archivo mutante'] : 'Mutant Beans — archivo mutante';
+        document.title = language === 'en' ? 'Mutant Beans | Funk Rock from Ensenada, Mexico' : 'Mutant Beans — banda de funk rock de Ensenada';
+        document.querySelector('meta[name="description"]').content = language === 'en'
+          ? 'Unofficial fan page for Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and photos.'
+          : 'Página fanmade de Mutant Beans, banda independiente de Ensenada, Baja California. Explora su música, integrantes, fechas y archivo visual.';
         originalTextNodes.forEach(([node, original]) => { node.nodeValue = translateValue(original, language, node); });
         originalAttributes.forEach(([element, name, original]) => { element.setAttribute(name, translateValue(original, language)); });
         const previewCaption = document.querySelector('#photo-preview-caption');
