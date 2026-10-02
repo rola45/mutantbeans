@@ -1,4 +1,5 @@
 let session, content, sha, schema, busy = false, previewSelection = null;
+const previewOriginals = new WeakMap();
 const status = document.querySelector('#status');
 const previewDialog = document.querySelector('#preview-dialog');
 const previewFrame = document.querySelector('#site-preview');
@@ -7,7 +8,67 @@ function report(message, error = false) { status.textContent = message; status.c
 function selectPreviewTarget(selector, label, id = '') {
   previewSelection = { selector, label, id };
   previewTarget.textContent = `Se resaltará: ${label}`;
-  if (previewDialog.open) highlightPreviewTarget();
+  if (previewDialog.open) refreshPreviewDraft().then(highlightPreviewTarget);
+}
+function rememberPreviewOriginal(element, read, restore) {
+  if (!previewOriginals.has(element)) previewOriginals.set(element, { value: read(), restore });
+  return previewOriginals.get(element);
+}
+function getDraftShows() {
+  return [...document.querySelectorAll('.show-row')].map(row => Object.fromEntries(
+    [...row.querySelectorAll('input')].map(field => [field.dataset.showField, field.value.trim()])
+  ));
+}
+async function refreshPreviewDraft() {
+  if (!previewDialog.open) return;
+  try {
+    const win = previewFrame.contentWindow, doc = previewFrame.contentDocument;
+    if (!win || !doc) return;
+    await win.mutantContentReady;
+    const language = doc.documentElement.lang === 'es' ? 'es' : 'en';
+    for (const spec of schema.fields) {
+      const field = content.fields.find(value => value.id === spec.id);
+      if (!field) continue;
+      const element = doc.querySelector(spec.selector);
+      if (!element) continue;
+      if (field.type === 'text') {
+        const original = rememberPreviewOriginal(element, () => element.textContent, value => { element.textContent = value; });
+        element.textContent = field.enabled ? field[language] : original.value;
+      } else if (element.tagName === 'LINK' && element.id === 'site-favicon') {
+        const original = rememberPreviewOriginal(element, () => ({ href: element.getAttribute('href'), type: element.getAttribute('type') }), value => { element.setAttribute('href', value.href); if (value.type) element.setAttribute('type', value.type); });
+        const path = field.enabled ? field.value : original.value.href;
+        element.setAttribute('href', path);
+        element.setAttribute('type', path.toLowerCase().endsWith('.svg') ? 'image/svg+xml' : path.toLowerCase().endsWith('.webp') ? 'image/webp' : path.toLowerCase().endsWith('.jpg') || path.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png');
+      } else {
+        const link = element.closest('.gallery-tile, .tour-poster');
+        const original = rememberPreviewOriginal(element, () => ({ src: element.getAttribute('src'), link, href: link?.getAttribute('href') }), value => { if (value.src) element.setAttribute('src', value.src); if (value.link && value.href) value.link.setAttribute('href', value.href); });
+        const path = field.enabled ? field.value : original.value.src;
+        if (path) element.setAttribute('src', /^https?:|^blob:/.test(path) ? path : `https://mutantbeans.com/${path}`);
+        if (field.enabled && link) link.setAttribute('href', `https://mutantbeans.com/${field.value}`);
+        else if (link && original.value.href) link.setAttribute('href', original.value.href);
+      }
+    }
+    const showsList = doc.querySelector('.tour-list');
+    if (showsList) {
+      const original = rememberPreviewOriginal(showsList, () => showsList.innerHTML, value => { showsList.innerHTML = value; });
+      const useDraft = document.querySelector('#shows-enabled').checked;
+      if (!useDraft) original.restore(original.value);
+      else {
+        showsList.replaceChildren();
+        for (const show of getDraftShows().filter(value => value.date && value.venue && value.city).sort((a, b) => a.date.localeCompare(b.date))) {
+          const article = doc.createElement('article'); article.className = 'tour-date';
+          const time = doc.createElement('time'); time.dateTime = show.date;
+          time.textContent = new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'es-MX', { day: '2-digit', month: 'short' }).format(new Date(show.date + 'T12:00:00')).toUpperCase();
+          const venue = doc.createElement('strong'); venue.textContent = show.venue;
+          const city = doc.createElement('span'); city.textContent = show.city;
+          const actions = doc.createElement('div'); actions.className = 'tour-actions';
+          const map = doc.createElement('a'); map.className = 'tour-map'; map.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(show.venue + ', ' + show.city); map.textContent = language === 'en' ? 'Open map ↗' : 'Abrir mapa ↗'; map.target = '_blank'; map.rel = 'noopener noreferrer';
+          const contact = doc.createElement('a'); contact.className = 'tour-contact-link'; contact.href = 'https://www.instagram.com/mutantbeans/'; contact.textContent = language === 'en' ? 'Contact ↗' : 'Contactar ↗'; contact.target = '_blank'; contact.rel = 'noopener noreferrer';
+          actions.append(map, contact); article.append(time, venue, city, actions); showsList.append(article);
+        }
+      }
+    }
+  } catch { previewTarget.textContent = 'No se pudieron aplicar los cambios del borrador a la vista previa.'; }
 }
 function highlightPreviewTarget() {
   try {
@@ -33,9 +94,9 @@ function highlightPreviewTarget() {
     previewTarget.textContent = 'No se pudo cargar la vista previa. Usa “Ver página” para abrirla aparte.';
   }
 }
-document.querySelector('#preview-open').onclick = () => { previewDialog.showModal(); requestAnimationFrame(highlightPreviewTarget); };
+document.querySelector('#preview-open').onclick = () => { previewDialog.showModal(); requestAnimationFrame(() => refreshPreviewDraft().then(highlightPreviewTarget)); };
 document.querySelector('#preview-close').onclick = () => previewDialog.close();
-previewFrame.addEventListener('load', highlightPreviewTarget);
+previewFrame.addEventListener('load', () => refreshPreviewDraft().then(highlightPreviewTarget));
 async function api(path, options = {}) {
   const response = await fetch('/admin/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
   const data = await response.json();
@@ -48,6 +109,7 @@ function showRow(show = { date: '', venue: '', city: '' }) {
   const row = document.createElement('div'); row.className = 'show-row';
   for (const [name, title, type] of [['date','Fecha','date'],['venue','Lugar','text'],['city','Ciudad','text']]) {
     const field = input(type, show[name]); field.dataset.showField = name; field.required = true;
+    field.addEventListener('input', () => refreshPreviewDraft());
     row.append(label(title, field));
   }
   const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => row.remove(); row.append(remove);
@@ -71,13 +133,13 @@ function renderField(spec, container, compact = false) {
   }
   const body = document.createElement('div'); body.className = compact ? 'gallery-editor-field-body' : 'editor-section-body';
   const enabled = input('checkbox'); enabled.checked = field.enabled === true;
-  enabled.onchange = () => { field.enabled = enabled.checked; };
+    enabled.onchange = () => { field.enabled = enabled.checked; refreshPreviewDraft(); };
   body.append(label('Usar esta edición ', enabled));
   if (spec.type === 'text') {
     const row = document.createElement('div'); row.className = 'row';
     for (const [lang,title] of [['es','Español'],['en','English']]) {
       const area = document.createElement('textarea'); area.value = field[lang]; area.maxLength = 5000;
-      area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; };
+        area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; refreshPreviewDraft(); };
       row.append(label(title, area));
     }
     body.append(row);
@@ -94,6 +156,7 @@ function renderField(spec, container, compact = false) {
         report('Subiendo imagen…');
         const data = await api('upload', { method:'POST', headers:{'Content-Type':file.type}, body:file });
         field.value = path.value = data.path; field.enabled = enabled.checked = true;
+        refreshPreviewDraft();
         const objectURL = URL.createObjectURL(file); preview.src = objectURL;
         preview.onload = () => URL.revokeObjectURL(objectURL);
         report('Imagen subida. Pulsa Guardar y publicar para colocarla en la página.');
@@ -104,6 +167,7 @@ function renderField(spec, container, compact = false) {
     choose.onclick = () => openAssetPicker(asset => {
       field.value = path.value = asset.path; field.enabled = enabled.checked = true;
       preview.src = 'https://mutantbeans.com/' + asset.path;
+      refreshPreviewDraft();
       report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
     });
     body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));

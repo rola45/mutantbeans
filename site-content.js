@@ -1,5 +1,6 @@
 const mutantContentSelectors = {"logo": ".hero-wordmark", "principal": ".hero-art", "story-mascot": ".story-mark .module-mascot", "flyer": ".tour-poster img", "gallery-1": ".gallery-tile:nth-child(1) img", "gallery-caption-1": ".gallery-tile:nth-child(1) .tile-label", "gallery-2": ".gallery-tile:nth-child(2) img", "gallery-caption-2": ".gallery-tile:nth-child(2) .tile-label", "gallery-3": ".gallery-tile:nth-child(3) img", "gallery-caption-3": ".gallery-tile:nth-child(3) .tile-label", "gallery-4": ".gallery-tile:nth-child(4) img", "gallery-caption-4": ".gallery-tile:nth-child(4) .tile-label", "gallery-5": ".gallery-tile:nth-child(5) img", "gallery-caption-5": ".gallery-tile:nth-child(5) .tile-label", "gallery-6": ".gallery-tile:nth-child(6) img", "gallery-caption-6": ".gallery-tile:nth-child(6) .tile-label", "gallery-7": ".gallery-tile:nth-child(7) img", "gallery-caption-7": ".gallery-tile:nth-child(7) .tile-label", "hero-copy": ".hero-copy", "tour-title": "#fechas .section-head h2", "story-copy": ".story-text > p:first-of-type", "page-title": "title", "favicon": "#site-favicon"};
 window.mutantContentReady = (async () => {
+  if (new URLSearchParams(window.location.search).has('admin-preview')) return;
   try {
     const response = await fetch('data/site-content.json', { cache: 'no-cache', signal: AbortSignal.timeout(3500) });
     if (!response.ok) return;
