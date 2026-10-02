@@ -289,6 +289,48 @@
         if (language === 'en' && node?.parentElement?.matches('.navlinks a[href=\"#archivo\"]')) translated = 'Gallery';
         return value.replace(trimmed, translated);
       };
+      const nextShowCard = document.querySelector('.next-show');
+      const nextShowDate = nextShowCard?.querySelector('.next-show-date strong');
+      const nextShowVenue = nextShowCard?.querySelector('.next-show-info b');
+      const nextShowCity = nextShowCard?.querySelector('.next-show-info span');
+      const nextShowMap = nextShowCard?.querySelector('.next-show-map');
+      const nextShowContact = nextShowCard?.querySelector('.next-show-contact');
+      let lastNextShowDay = '';
+      const localDateKey = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      const updateNextShow = () => {
+        if (!nextShowCard) return;
+        const todayKey = localDateKey(new Date());
+        lastNextShowDay = todayKey;
+        const upcomingShow = [...document.querySelectorAll('.tour-date')].find((show) => {
+          const date = show.querySelector('time[datetime]')?.getAttribute('datetime');
+          return date && date >= todayKey;
+        });
+        if (!upcomingShow) {
+          nextShowCard.querySelector('.next-show-date .eyebrow').textContent = uiText('Próximo show', 'Next show');
+          nextShowDate.textContent = 'TBA';
+          nextShowVenue.textContent = uiText('Sin fechas anunciadas', 'No dates announced');
+          nextShowCity.textContent = '';
+          nextShowMap.hidden = true;
+          nextShowContact.hidden = true;
+          return;
+        }
+        const time = upcomingShow.querySelector('time[datetime]');
+        const [year, month, day] = time.dateTime.split('-').map(Number);
+        const eventDate = new Date(year, month - 1, day, 12);
+        const monthName = new Intl.DateTimeFormat(interfaceLanguage === 'en' ? 'en-US' : 'es-MX', { month: 'short' }).format(eventDate).replace(/\./g, '').toUpperCase();
+        nextShowDate.textContent = `${String(day).padStart(2, '0')} ${monthName}`;
+        nextShowVenue.textContent = upcomingShow.querySelector('strong').textContent;
+        nextShowCity.textContent = upcomingShow.querySelector(':scope > span').textContent;
+        const showMap = upcomingShow.querySelector('.tour-map');
+        nextShowMap.href = showMap.href;
+        nextShowMap.setAttribute('aria-label', showMap.getAttribute('aria-label') || '');
+        nextShowMap.hidden = false;
+        nextShowContact.hidden = false;
+      };
+      window.setInterval(() => {
+        if (localDateKey(new Date()) !== lastNextShowDay) updateNextShow();
+      }, 60000);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) updateNextShow(); });
       const applyLanguage = (language) => {
         interfaceLanguage = language;
         document.documentElement.lang = language;
@@ -304,6 +346,7 @@
         languageToggle.setAttribute('aria-label', language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés');
         languageToggle.title = language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés';
         try { localStorage.setItem('mutant-beans-language-v2', language); } catch {}
+        updateNextShow();
       };
       languageToggle.addEventListener('click', () => applyLanguage(interfaceLanguage === 'es' ? 'en' : 'es'));
       applyLanguage(interfaceLanguage);
