@@ -109,10 +109,21 @@ function showRow(show = { date: '', venue: '', city: '' }) {
   const row = document.createElement('div'); row.className = 'show-row';
   for (const [name, title, type] of [['date','Fecha','date'],['venue','Lugar','text'],['city','Ciudad','text']]) {
     const field = input(type, show[name]); field.dataset.showField = name; field.required = true;
-    field.addEventListener('input', () => refreshPreviewDraft());
+    field.addEventListener('input', () => {
+      const useShows = document.querySelector('#shows-enabled');
+      useShows.checked = true;
+      content.showsEnabled = true;
+      refreshPreviewDraft();
+    });
     row.append(label(title, field));
   }
-  const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => row.remove(); row.append(remove);
+  const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => {
+    row.remove();
+    const useShows = document.querySelector('#shows-enabled');
+    useShows.checked = true;
+    content.showsEnabled = true;
+    refreshPreviewDraft();
+  }; row.append(remove);
   document.querySelector('#shows').append(row);
 }
 function renderField(spec, container, compact = false) {
