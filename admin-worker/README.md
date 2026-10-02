@@ -121,3 +121,22 @@ Documentación:
 - https://developers.cloudflare.com/workers/configuration/secrets/
 - https://developers.cloudflare.com/workers/configuration/routing/routes/
 - https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/
+
+## Biblioteca de Drive
+
+«Elegir de la biblioteca de Drive» muestra miniaturas, búsqueda y filtro por carpeta.
+Las imágenes públicas de WEB ASSETS y sus subcarpetas (incluido DON VENENO ASSETS)
+se importan a `images/drive-assets/`. Elegir una imagen cambia el campo; guardar
+publica esa selección. No cambia los permisos de Drive ni altera los originales.
+
+Es una biblioteca importada, no una conexión OAuth en vivo. Para actualizarla con
+archivos nuevos o cambios en Drive, desde la raíz del repositorio:
+
+```sh
+python3 scripts/sync-drive-assets.py
+```
+
+Después haz commit/push de la biblioteca y publica el Worker. El script usa el
+listado público de Drive; si Google cambia su formato o una carpeta deja de ser
+pública, detiene la importación. Admite PNG/JPG/WebP y conserva archivos antiguos.
+No hace falta un secreto de Google para esta biblioteca pública.

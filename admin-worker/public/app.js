@@ -55,7 +55,13 @@ function render() {
         } catch (error) { report(error.message, true); }
         finally { busy = false; document.querySelector('#save').disabled = false; upload.disabled = false; }
       };
-      card.append(preview, label('Archivo actual', path), label('Reemplazar imagen · máximo 6 MB', upload));
+      const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
+      choose.onclick = () => openAssetPicker(asset => {
+        field.value = path.value = asset.path; field.enabled = enabled.checked = true;
+        preview.src = 'https://mutantbeans.com/' + asset.path;
+        report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
+      });
+      card.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
     }
     container.append(card);
   }
@@ -85,3 +91,45 @@ document.querySelector('#form').onsubmit = async event => {
     document.querySelector('#login').hidden = true; document.querySelector('#editor').hidden = false;
   } catch(error) { report(error.message); }
 })();
+
+let libraryPromise, selectAsset;
+const assetDialog = document.querySelector('#asset-picker');
+const assetSearch = document.querySelector('#asset-search');
+const assetGroup = document.querySelector('#asset-group');
+const assetGrid = document.querySelector('#asset-grid');
+const assetState = document.querySelector('#asset-state');
+async function getLibrary() {
+  if (!libraryPromise) libraryPromise = fetch('/admin/asset-library.json', { cache: 'no-cache' }).then(async response => {
+    if (!response.ok) throw new Error('No se pudo cargar la biblioteca.');
+    const data = await response.json(); return data.assets;
+  }).catch(error => { libraryPromise = null; throw error; });
+  return libraryPromise;
+}
+async function renderLibrary() {
+  try {
+    const assets = await getLibrary();
+    const term = assetSearch.value.trim().toLocaleLowerCase();
+    const matches = assets.filter(asset => (!assetGroup.value || asset.group === assetGroup.value) && asset.name.toLocaleLowerCase().includes(term));
+    assetGrid.replaceChildren(); assetState.textContent = `${matches.length} imágenes disponibles`;
+    for (const asset of matches) {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'asset-option';
+      const image = document.createElement('img'); image.src = 'https://mutantbeans.com/' + asset.path; image.alt = ''; image.loading = 'lazy';
+      const title = document.createElement('strong'); title.textContent = asset.name;
+      const group = document.createElement('span'); group.textContent = asset.group;
+      button.append(image,title,group); button.onclick = () => { if (busy) { assetState.textContent = 'Espera a que termine la operación actual.'; return; } selectAsset(asset); assetDialog.close(); }; assetGrid.append(button);
+    }
+  } catch(error) { assetState.textContent = error.message; }
+}
+async function openAssetPicker(onSelect) {
+  if (busy) { report('Espera a que termine la operación actual.'); return; }
+  selectAsset = onSelect; assetDialog.showModal(); assetState.textContent = 'Cargando imágenes…';
+  try {
+    const assets = await getLibrary();
+    if (assetGroup.options.length === 1) for (const name of [...new Set(assets.map(asset => asset.group))]) {
+      const option = document.createElement('option'); option.value = option.textContent = name; assetGroup.append(option);
+    }
+    assetSearch.value = ''; await renderLibrary(); assetSearch.focus();
+  } catch(error) { assetState.textContent = error.message; }
+}
+document.querySelector('#asset-close').onclick = () => assetDialog.close();
+assetSearch.oninput = renderLibrary; assetGroup.onchange = renderLibrary;
