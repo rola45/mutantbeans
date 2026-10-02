@@ -11,7 +11,7 @@
     "ADMIN_ORIGIN": "https://mutantbeans.com",
     "GITHUB_REPO": "rola45/mutantbeans",
     "GITHUB_BRANCH": "main",
-    "ALLOWED_GITHUB_USERS": "rola45",
+    "ALLOWED_GITHUB_USERS": "rola45,satermutant",
     "ADMIN_BASE_PATH": "/admin"
   },
   "workers_dev": false,
