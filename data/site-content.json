@@ -147,10 +147,11 @@
     {
       "id": "favicon",
       "type": "image",
-      "value": "images/site-favicon.svg",
-      "enabled": false
+      "value": "images/drive-assets/bean-01-2-1-Dw8wQEvdxR9NDZQCow1D0zqaighqHjw.png",
+      "enabled": true
     }
   ],
+  "showsEnabled": false,
   "shows": [
     {
       "date": "2026-10-02",
@@ -207,6 +208,5 @@
       "venue": "Latin Rock Fest",
       "city": "Portland, OR"
     }
-  ],
-  "showsEnabled": false
+  ]
 }
