@@ -136,6 +136,19 @@
       "es": "Formados en Ensenada en 2014, Mutant Beans cruzan el funk y el rock con hip-hop, thrash, punk y hardcore. Sus canciones miran de frente a la realidad social y política, con la energía de una banda independiente que hace las cosas a su manera.",
       "en": "Formed in Ensenada in 2014, Mutant Beans blend funk and rock with hip-hop, thrash, punk, and hardcore. Their songs face social and political realities with the energy of an independent band doing things their own way.",
       "enabled": false
+    },
+    {
+      "id": "page-title",
+      "type": "text",
+      "es": "Mutant Beans — banda de funk rock de Ensenada",
+      "en": "Mutant Beans | Funk Rock from Ensenada, Mexico",
+      "enabled": false
+    },
+    {
+      "id": "favicon",
+      "type": "image",
+      "value": "images/site-favicon.svg",
+      "enabled": false
     }
   ],
   "shows": [

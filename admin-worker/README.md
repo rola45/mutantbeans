@@ -94,7 +94,8 @@ convierte en la fuente de las fechas y del próximo show; cualquier automatizaci
 que actualice shows deberá editar este JSON, no las fechas del HTML.
 
 El panel permite reemplazar las siete fotos existentes del carrusel, el logo,
-la imagen de inicio, la mascota de historia, el flyer y algunos textos principales.
+la imagen de inicio, la mascota de historia, el flyer, el favicon de la pestaña
+y el título que aparece en el navegador (en español e inglés), además de algunos textos principales.
 Agregar nuevas posiciones al carrusel o editar poses animadas requiere ampliar el
 esquema. No se implementó un editor de HTML libre.
 

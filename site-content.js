@@ -1,4 +1,4 @@
-const mutantContentSelectors = {"logo": ".hero-wordmark", "principal": ".hero-art", "story-mascot": ".story-mark .module-mascot", "flyer": ".tour-poster img", "gallery-1": ".gallery-tile:nth-child(1) img", "gallery-caption-1": ".gallery-tile:nth-child(1) .tile-label", "gallery-2": ".gallery-tile:nth-child(2) img", "gallery-caption-2": ".gallery-tile:nth-child(2) .tile-label", "gallery-3": ".gallery-tile:nth-child(3) img", "gallery-caption-3": ".gallery-tile:nth-child(3) .tile-label", "gallery-4": ".gallery-tile:nth-child(4) img", "gallery-caption-4": ".gallery-tile:nth-child(4) .tile-label", "gallery-5": ".gallery-tile:nth-child(5) img", "gallery-caption-5": ".gallery-tile:nth-child(5) .tile-label", "gallery-6": ".gallery-tile:nth-child(6) img", "gallery-caption-6": ".gallery-tile:nth-child(6) .tile-label", "gallery-7": ".gallery-tile:nth-child(7) img", "gallery-caption-7": ".gallery-tile:nth-child(7) .tile-label", "hero-copy": ".hero-copy", "tour-title": "#fechas .section-head h2", "story-copy": ".story-text > p:first-of-type"};
+const mutantContentSelectors = {"logo": ".hero-wordmark", "principal": ".hero-art", "story-mascot": ".story-mark .module-mascot", "flyer": ".tour-poster img", "gallery-1": ".gallery-tile:nth-child(1) img", "gallery-caption-1": ".gallery-tile:nth-child(1) .tile-label", "gallery-2": ".gallery-tile:nth-child(2) img", "gallery-caption-2": ".gallery-tile:nth-child(2) .tile-label", "gallery-3": ".gallery-tile:nth-child(3) img", "gallery-caption-3": ".gallery-tile:nth-child(3) .tile-label", "gallery-4": ".gallery-tile:nth-child(4) img", "gallery-caption-4": ".gallery-tile:nth-child(4) .tile-label", "gallery-5": ".gallery-tile:nth-child(5) img", "gallery-caption-5": ".gallery-tile:nth-child(5) .tile-label", "gallery-6": ".gallery-tile:nth-child(6) img", "gallery-caption-6": ".gallery-tile:nth-child(6) .tile-label", "gallery-7": ".gallery-tile:nth-child(7) img", "gallery-caption-7": ".gallery-tile:nth-child(7) .tile-label", "hero-copy": ".hero-copy", "tour-title": "#fechas .section-head h2", "story-copy": ".story-text > p:first-of-type", "page-title": "title", "favicon": "#site-favicon"};
 window.mutantContentReady = (async () => {
   try {
     const response = await fetch('data/site-content.json', { cache: 'no-cache', signal: AbortSignal.timeout(3500) });
@@ -10,6 +10,10 @@ window.mutantContentReady = (async () => {
       if (!/^(images|imagenes)\//.test(field.value) || field.value.includes('..')) continue;
       const image = document.querySelector(mutantContentSelectors[field.id]);
       if (!image) continue;
+      if (image.tagName === 'LINK' && image.id === 'site-favicon') {
+        image.href = field.value; image.type = field.value.toLowerCase().endsWith('.svg') ? 'image/svg+xml' : field.value.toLowerCase().endsWith('.webp') ? 'image/webp' : field.value.toLowerCase().endsWith('.jpg') || field.value.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
+        continue;
+      }
       image.src = field.value;
       const link = image.closest('.gallery-tile, .tour-poster');
       if (link) { link.href = field.value; link.removeAttribute('target'); }
@@ -38,7 +42,11 @@ window.mutantContentReady = (async () => {
     window.applyMutantContentLanguage = language => {
       for (const field of active.filter(field => field.type === 'text')) {
         const element = document.querySelector(mutantContentSelectors[field.id]);
-        if (element) element.textContent = language === 'en' ? field.en : field.es;
+        if (element) {
+          const value = language === 'en' ? field.en : field.es;
+          if (element.tagName === 'TITLE') element.textContent = value;
+          else element.textContent = value;
+        }
       }
       if (content.showsEnabled) document.querySelectorAll('.tour-date time').forEach(time => {
         time.textContent = new Intl.DateTimeFormat(language === 'en' ? 'en-US' : 'es-MX', {day:'2-digit',month:'short'}).format(new Date(time.dateTime + 'T12:00:00')).toUpperCase();

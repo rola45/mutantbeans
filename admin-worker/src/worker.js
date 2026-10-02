@@ -60,7 +60,7 @@ function validateContent(data, schema) {
     if (!spec || used.has(field.id) || field.type !== spec.type) throw new Error('Campo no permitido.');
     used.add(field.id);
     if (spec.type === 'image') {
-      if (typeof field.value !== 'string' || !/^(images|imagenes)\/[\w .()\/-]+\.(png|jpg|jpeg|webp)$/i.test(field.value) || field.value.includes('..')) throw new Error('Ruta de imagen inválida.');
+      if (typeof field.value !== 'string' || !/^(images|imagenes)\/[\w .()\/-]+\.(png|jpg|jpeg|webp|svg)$/i.test(field.value) || field.value.includes('..')) throw new Error('Ruta de imagen inválida.');
     } else if (typeof field.es !== 'string' || typeof field.en !== 'string' || Math.max(field.es.length, field.en.length) > 5000) throw new Error('Texto inválido.');
   }
   if (!Array.isArray(data.shows) || data.shows.length > 100) throw new Error('Lista de shows inválida.');
