@@ -10,14 +10,14 @@
     {
       "id": "principal",
       "type": "image",
-      "value": "images/principal.png",
-      "enabled": false
+      "value": "images/drive-assets/mutant-skate-121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg.png",
+      "enabled": true
     },
     {
       "id": "story-mascot",
       "type": "image",
-      "value": "images/poutine-freddy.png",
-      "enabled": false
+      "value": "images/drive-assets/mutant-warped-1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5.png",
+      "enabled": true
     },
     {
       "id": "flyer",
