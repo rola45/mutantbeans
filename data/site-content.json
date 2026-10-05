@@ -22,8 +22,8 @@
     {
       "id": "flyer",
       "type": "image",
-      "value": "images/october-tour.jpg",
-      "enabled": false
+      "value": "images/uploads/f0fa9359-a175-42b5-94ff-227e9151a75f.jpg",
+      "enabled": true
     },
     {
       "id": "gallery-1",
@@ -187,6 +187,11 @@
       "date": "2026-10-18",
       "venue": "Bandcamp Baja",
       "city": "Rosarito, BC"
+    },
+    {
+      "date": "2026-10-23",
+      "venue": "Abel's Bar",
+      "city": "Ensenada, BC"
     },
     {
       "date": "2026-10-24",
