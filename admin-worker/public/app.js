@@ -86,6 +86,10 @@ function installVisualEditTargets() {
   doc.addEventListener('click', event => {
     const target = event.target?.nodeType === 1 ? event.target : event.target?.parentElement;
     if (!target) return;
+    if (target.closest('[data-language-toggle]')) {
+      queueMicrotask(() => refreshPreviewDraft());
+      return;
+    }
     const spec = nearestEditableSpec(target);
     const showTarget = target.closest('.tour-date, .tour-list, .next-show');
     if (!spec && !showTarget) return;
