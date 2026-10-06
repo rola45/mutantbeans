@@ -149,6 +149,902 @@
       "type": "image",
       "value": "images/drive-assets/bean-01-2-1-Dw8wQEvdxR9NDZQCow1D0zqaighqHjw.png",
       "enabled": true
+    },
+    {
+      "id": "topline-location",
+      "type": "text",
+      "es": "Ensenada, Baja California",
+      "en": "Ensenada, Baja California",
+      "enabled": false
+    },
+    {
+      "id": "topline-tagline",
+      "type": "text",
+      "es": "Funking the system desde 2014",
+      "en": "Funking the system since 2014",
+      "enabled": false
+    },
+    {
+      "id": "brand-prefix",
+      "type": "text",
+      "es": "#FEEL",
+      "en": "#FEEL",
+      "enabled": false
+    },
+    {
+      "id": "brand-name",
+      "type": "text",
+      "es": "MUTANT",
+      "en": "MUTANT",
+      "enabled": false
+    },
+    {
+      "id": "brand-destination",
+      "type": "link",
+      "value": "#inicio",
+      "enabled": false
+    },
+    {
+      "id": "nav-1",
+      "type": "anchor",
+      "value": "#integrantes",
+      "es": "Integrantes",
+      "en": "Band members",
+      "enabled": false
+    },
+    {
+      "id": "nav-2",
+      "type": "anchor",
+      "value": "#fechas",
+      "es": "Fechas",
+      "en": "Tour dates",
+      "enabled": false
+    },
+    {
+      "id": "nav-3",
+      "type": "anchor",
+      "value": "#historia",
+      "es": "Historia",
+      "en": "Story",
+      "enabled": false
+    },
+    {
+      "id": "nav-4",
+      "type": "anchor",
+      "value": "#musica",
+      "es": "Música",
+      "en": "Music",
+      "enabled": false
+    },
+    {
+      "id": "nav-5",
+      "type": "anchor",
+      "value": "#archivo",
+      "es": "test",
+      "en": "Archive",
+      "enabled": true
+    },
+    {
+      "id": "header-instagram",
+      "type": "link",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "enabled": false
+    },
+    {
+      "id": "header-facebook",
+      "type": "link",
+      "value": "https://www.facebook.com/mutantbeans",
+      "enabled": false
+    },
+    {
+      "id": "header-spotify",
+      "type": "link",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "enabled": false
+    },
+    {
+      "id": "header-youtube",
+      "type": "link",
+      "value": "https://youtu.be/WmQ3-AxAZo0",
+      "enabled": false
+    },
+    {
+      "id": "header-links",
+      "type": "link",
+      "value": "https://lnk.bio/mutantbeans",
+      "enabled": false
+    },
+    {
+      "id": "cierre-instagram",
+      "type": "link",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "enabled": false
+    },
+    {
+      "id": "cierre-facebook",
+      "type": "link",
+      "value": "https://www.facebook.com/mutantbeans",
+      "enabled": false
+    },
+    {
+      "id": "cierre-spotify",
+      "type": "link",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "enabled": false
+    },
+    {
+      "id": "cierre-youtube",
+      "type": "link",
+      "value": "https://youtu.be/WmQ3-AxAZo0",
+      "enabled": false
+    },
+    {
+      "id": "cierre-bandcamp",
+      "type": "link",
+      "value": "https://mutantbeans.bandcamp.com/",
+      "enabled": false
+    },
+    {
+      "id": "cierre-links",
+      "type": "link",
+      "value": "https://lnk.bio/mutantbeans",
+      "enabled": false
+    },
+    {
+      "id": "hero-kicker",
+      "type": "text",
+      "es": "Escena independiente · Ensenada, MX",
+      "en": "Independent scene · Ensenada, MX",
+      "enabled": false
+    },
+    {
+      "id": "career-eyebrow",
+      "type": "text",
+      "es": "Ganadores · Ernie Ball Battle of the Bands · 2026",
+      "en": "Winners · Ernie Ball Battle of the Bands · 2026",
+      "enabled": false
+    },
+    {
+      "id": "career-title",
+      "type": "text",
+      "es": "Vans Warped Tour · Long Beach, CA",
+      "en": "Vans Warped Tour · Long Beach, CA",
+      "enabled": false
+    },
+    {
+      "id": "career-description",
+      "type": "text",
+      "es": "Su victoria les dio el pase al Warped Tour.",
+      "en": "Their win earned them a spot at Warped Tour.",
+      "enabled": false
+    },
+    {
+      "id": "career-press",
+      "type": "anchor",
+      "value": "https://www.battleofthebands.com/campaign/ernieballvanswarpedtour2026",
+      "es": "Ver ganadores oficiales ↗",
+      "en": "See official winners ↗",
+      "enabled": false
+    },
+    {
+      "id": "next-show-label",
+      "type": "text",
+      "es": "Próximo show",
+      "en": "Next show",
+      "enabled": false
+    },
+    {
+      "id": "next-show-map-label",
+      "type": "text",
+      "es": "Abrir mapa ↗",
+      "en": "Open map ↗",
+      "enabled": false
+    },
+    {
+      "id": "next-show-contact",
+      "type": "anchor",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "es": "Contactar ↗",
+      "en": "Contact ↗",
+      "enabled": false
+    },
+    {
+      "id": "next-show-tour",
+      "type": "anchor",
+      "value": "#fechas",
+      "es": "Ver ruta ↗",
+      "en": "See tour ↗",
+      "enabled": false
+    },
+    {
+      "id": "hero-tag-1",
+      "type": "text",
+      "es": "Funk rock",
+      "en": "Funk rock",
+      "enabled": false
+    },
+    {
+      "id": "hero-tag-2",
+      "type": "text",
+      "es": "Skate punk",
+      "en": "Skate punk",
+      "enabled": false
+    },
+    {
+      "id": "hero-tag-3",
+      "type": "text",
+      "es": "Rapcore",
+      "en": "Rapcore",
+      "enabled": false
+    },
+    {
+      "id": "hero-tag-4",
+      "type": "text",
+      "es": "Baja California",
+      "en": "Baja California",
+      "enabled": false
+    },
+    {
+      "id": "lineup-title",
+      "type": "text",
+      "es": "La alineación mutante",
+      "en": "The mutant lineup",
+      "enabled": false
+    },
+    {
+      "id": "lineup-subtitle",
+      "type": "text",
+      "es": "4 piezas, un mismo ruido.",
+      "en": "Four members. One noise.",
+      "enabled": false
+    },
+    {
+      "id": "member-1-name",
+      "type": "text",
+      "es": "Silver",
+      "en": "Silver",
+      "enabled": false
+    },
+    {
+      "id": "member-1-role",
+      "type": "text",
+      "es": "Batería",
+      "en": "Drums",
+      "enabled": false
+    },
+    {
+      "id": "member-1-profile",
+      "type": "link",
+      "value": "https://www.instagram.com/heyslvr/",
+      "enabled": false
+    },
+    {
+      "id": "member-1-photo",
+      "type": "image",
+      "value": "images/silver.jpg",
+      "enabled": false
+    },
+    {
+      "id": "member-1-frame-1",
+      "type": "image",
+      "value": "images/silver-arms-start-haram.png",
+      "enabled": false
+    },
+    {
+      "id": "member-1-frame-2",
+      "type": "image",
+      "value": "images/silver-arms-mid-haram.png",
+      "enabled": false
+    },
+    {
+      "id": "member-1-frame-3",
+      "type": "image",
+      "value": "images/silver-arms-haram.png",
+      "enabled": false
+    },
+    {
+      "id": "member-2-name",
+      "type": "text",
+      "es": "Irving",
+      "en": "Irving",
+      "enabled": false
+    },
+    {
+      "id": "member-2-role",
+      "type": "text",
+      "es": "Voz",
+      "en": "Vocals",
+      "enabled": false
+    },
+    {
+      "id": "member-2-profile",
+      "type": "link",
+      "value": "https://www.instagram.com/noriegairving/",
+      "enabled": false
+    },
+    {
+      "id": "member-2-photo",
+      "type": "image",
+      "value": "images/irving.jpg",
+      "enabled": false
+    },
+    {
+      "id": "member-2-frame-1",
+      "type": "image",
+      "value": "images/irving-vocal-mic.png",
+      "enabled": false
+    },
+    {
+      "id": "member-2-frame-2",
+      "type": "image",
+      "value": "images/irving-vocal-2-mic.png",
+      "enabled": false
+    },
+    {
+      "id": "member-3-name",
+      "type": "text",
+      "es": "Sater",
+      "en": "Sater",
+      "enabled": false
+    },
+    {
+      "id": "member-3-role",
+      "type": "text",
+      "es": "Guitarra",
+      "en": "Guitar",
+      "enabled": false
+    },
+    {
+      "id": "member-3-profile",
+      "type": "link",
+      "value": "https://www.instagram.com/saterunholy/",
+      "enabled": false
+    },
+    {
+      "id": "member-3-photo",
+      "type": "image",
+      "value": "images/sater.jpg",
+      "enabled": false
+    },
+    {
+      "id": "member-3-frame-1",
+      "type": "image",
+      "value": "images/sater-guitar.png",
+      "enabled": false
+    },
+    {
+      "id": "member-3-frame-2",
+      "type": "image",
+      "value": "images/sater-guitar-2.png",
+      "enabled": false
+    },
+    {
+      "id": "member-4-name",
+      "type": "text",
+      "es": "KBTO",
+      "en": "KBTO",
+      "enabled": false
+    },
+    {
+      "id": "member-4-role",
+      "type": "text",
+      "es": "Bajo",
+      "en": "Bass",
+      "enabled": false
+    },
+    {
+      "id": "member-4-profile",
+      "type": "link",
+      "value": "https://www.instagram.com/kbtothemutant/",
+      "enabled": false
+    },
+    {
+      "id": "member-4-photo",
+      "type": "image",
+      "value": "images/kbeto.jpg",
+      "enabled": false
+    },
+    {
+      "id": "member-4-frame-1",
+      "type": "image",
+      "value": "images/kbto-bass.png",
+      "enabled": false
+    },
+    {
+      "id": "member-4-frame-2",
+      "type": "image",
+      "value": "images/kbto-bass-2.png",
+      "enabled": false
+    },
+    {
+      "id": "lineup-mascot",
+      "type": "image",
+      "value": "images/mascota-lineup.png",
+      "enabled": false
+    },
+    {
+      "id": "tour-mascot",
+      "type": "image",
+      "value": "images/mascota-fechas.png",
+      "enabled": false
+    },
+    {
+      "id": "tour-poster-link",
+      "type": "link",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "enabled": false
+    },
+    {
+      "id": "story-quote",
+      "type": "text",
+      "es": "Desde Ensenada.\nContra corriente.\nCon volumen.",
+      "en": "From Ensenada.\nAgainst the current.\nTurn it up.",
+      "enabled": false
+    },
+    {
+      "id": "story-eyebrow",
+      "type": "text",
+      "es": "Una década mutando",
+      "en": "A decade of mutation",
+      "enabled": false
+    },
+    {
+      "id": "story-paragraph-2",
+      "type": "text",
+      "es": "En julio de 2026 llegaron al Vans Warped Tour en Long Beach, California tras ganar la Battle of the Bands de Ernie Ball. Esa victoria les dio su pase al festival.",
+      "en": "In July 2026, they made it to the Vans Warped Tour in Long Beach, California after winning Ernie Ball’s Battle of the Bands. That victory earned them a spot at the festival.",
+      "enabled": false
+    },
+    {
+      "id": "story-milestone-1",
+      "type": "text",
+      "es": "2026 / LONG BEACH — Vans Warped Tour",
+      "en": "2026 / LONG BEACH — Vans Warped Tour",
+      "enabled": false
+    },
+    {
+      "id": "story-milestone-2",
+      "type": "text",
+      "es": "2014 / ENSENADA — Nace Mutant Beans",
+      "en": "2014 / ENSENADA — Mutant Beans begins",
+      "enabled": false
+    },
+    {
+      "id": "story-press",
+      "type": "anchor",
+      "value": "https://revistaespejo.com/2026/08/09/mutant-beans-pone-a-sinaloa-en-el-escenario-principal-del-vans-warped-tour-2026-en-california/",
+      "es": "Leer la nota completa en Revista Espejo ↗",
+      "en": "Read the full story at Revista Espejo ↗",
+      "enabled": false
+    },
+    {
+      "id": "music-heading",
+      "type": "text",
+      "es": "Ruido para compartir",
+      "en": "Noise to share",
+      "enabled": false
+    },
+    {
+      "id": "music-description",
+      "type": "text",
+      "es": "Álbumes y sencillos disponibles en los canales oficiales de la banda.",
+      "en": "Albums and singles available on the band’s official channels.",
+      "enabled": false
+    },
+    {
+      "id": "album-eyebrow",
+      "type": "text",
+      "es": "Álbum · 2021",
+      "en": "Album · 2021",
+      "enabled": false
+    },
+    {
+      "id": "album-title",
+      "type": "text",
+      "es": "Feel\nMutant!",
+      "en": "Feel\nMutant!",
+      "enabled": false
+    },
+    {
+      "id": "album-description",
+      "type": "text",
+      "es": "Álbum de larga duración de la banda.",
+      "en": "The band’s full-length album.",
+      "enabled": false
+    },
+    {
+      "id": "album-spotify",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "album-bandcamp",
+      "type": "anchor",
+      "value": "https://mutantbeans.bandcamp.com/",
+      "es": "Bandcamp ↗",
+      "en": "Bandcamp ↗",
+      "enabled": false
+    },
+    {
+      "id": "music-mascot",
+      "type": "image",
+      "value": "images/mascota-musica.png",
+      "enabled": false
+    },
+    {
+      "id": "release-heading",
+      "type": "text",
+      "es": "Sencillos",
+      "en": "Singles",
+      "enabled": false
+    },
+    {
+      "id": "release-description",
+      "type": "text",
+      "es": "Lanzamientos publicados como sencillos en Spotify.",
+      "en": "Singles released on Spotify.",
+      "enabled": false
+    },
+    {
+      "id": "release-1-title",
+      "type": "text",
+      "es": "Montreal Groove",
+      "en": "Montreal Groove",
+      "enabled": false
+    },
+    {
+      "id": "release-1-meta",
+      "type": "text",
+      "es": "Último sencillo · 2026",
+      "en": "Latest single · 2026",
+      "enabled": false
+    },
+    {
+      "id": "release-1-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-2-title",
+      "type": "text",
+      "es": "Funk The System",
+      "en": "Funk The System",
+      "enabled": false
+    },
+    {
+      "id": "release-2-meta",
+      "type": "text",
+      "es": "Sencillo · 2026",
+      "en": "Single · 2026",
+      "enabled": false
+    },
+    {
+      "id": "release-2-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-3-title",
+      "type": "text",
+      "es": "Don Veneno",
+      "en": "Don Veneno",
+      "enabled": false
+    },
+    {
+      "id": "release-3-meta",
+      "type": "text",
+      "es": "Sencillo · 2026",
+      "en": "Single · 2026",
+      "enabled": false
+    },
+    {
+      "id": "release-3-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-4-title",
+      "type": "text",
+      "es": "Chaquetas In My Head",
+      "en": "Chaquetas In My Head",
+      "enabled": false
+    },
+    {
+      "id": "release-4-meta",
+      "type": "text",
+      "es": "Sencillo · 2021",
+      "en": "Single · 2021",
+      "enabled": false
+    },
+    {
+      "id": "release-4-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-5-title",
+      "type": "text",
+      "es": "¿Parezco Loco?",
+      "en": "¿Parezco Loco?",
+      "enabled": false
+    },
+    {
+      "id": "release-5-meta",
+      "type": "text",
+      "es": "Sencillo · 2021",
+      "en": "Single · 2021",
+      "enabled": false
+    },
+    {
+      "id": "release-5-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-6-title",
+      "type": "text",
+      "es": "Disco Revuelta",
+      "en": "Disco Revuelta",
+      "enabled": false
+    },
+    {
+      "id": "release-6-meta",
+      "type": "text",
+      "es": "Sencillo · 2018",
+      "en": "Single · 2018",
+      "enabled": false
+    },
+    {
+      "id": "release-6-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-7-title",
+      "type": "text",
+      "es": "Detonador Mental",
+      "en": "Detonador Mental",
+      "enabled": false
+    },
+    {
+      "id": "release-7-meta",
+      "type": "text",
+      "es": "Sencillo · 2017",
+      "en": "Single · 2017",
+      "enabled": false
+    },
+    {
+      "id": "release-7-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-8-title",
+      "type": "text",
+      "es": "Feel Mutant!",
+      "en": "Feel Mutant!",
+      "enabled": false
+    },
+    {
+      "id": "release-8-meta",
+      "type": "text",
+      "es": "Sencillo · 2016",
+      "en": "Single · 2016",
+      "enabled": false
+    },
+    {
+      "id": "release-8-link",
+      "type": "anchor",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗",
+      "enabled": false
+    },
+    {
+      "id": "gallery-title",
+      "type": "text",
+      "es": "Archivo visual",
+      "en": "Visual archive",
+      "enabled": false
+    },
+    {
+      "id": "gallery-description",
+      "type": "text",
+      "es": "Momentos en vivo, escenas de ruta y la energía que rodea a Mutant Beans.",
+      "en": "Live moments, scenes from the road, and the energy around Mutant Beans.",
+      "enabled": false
+    },
+    {
+      "id": "gallery-instructions",
+      "type": "text",
+      "es": "Desliza o usa las flechas para recorrer las fotos. Toca una imagen para verla en grande.",
+      "en": "Swipe or use the arrows to browse. Tap a photo to view it larger.",
+      "enabled": false
+    },
+    {
+      "id": "gallery-mascot",
+      "type": "image",
+      "value": "images/mascota-archivo.png",
+      "enabled": false
+    },
+    {
+      "id": "gallery-1-destination",
+      "type": "link",
+      "value": "images/rear-stage-mascot.jpg",
+      "enabled": false
+    },
+    {
+      "id": "gallery-2-destination",
+      "type": "link",
+      "value": "images/group-mascot-updated.png",
+      "enabled": false
+    },
+    {
+      "id": "gallery-3-destination",
+      "type": "link",
+      "value": "images/live.jpg",
+      "enabled": false
+    },
+    {
+      "id": "gallery-4-destination",
+      "type": "link",
+      "value": "images/vans-skatepark.jpg",
+      "enabled": false
+    },
+    {
+      "id": "gallery-5-destination",
+      "type": "link",
+      "value": "images/banda-y-publico.jpg",
+      "enabled": false
+    },
+    {
+      "id": "gallery-6-destination",
+      "type": "link",
+      "value": "images/crowd-mascot.jpg",
+      "enabled": false
+    },
+    {
+      "id": "gallery-7-destination",
+      "type": "link",
+      "value": "images/beach-stage-mascot-v2.png",
+      "enabled": false
+    },
+    {
+      "id": "final-cta-title",
+      "type": "text",
+      "es": "Stay weird.\nFeel mutant.",
+      "en": "Stay weird.\nFeel mutant.",
+      "enabled": false
+    },
+    {
+      "id": "final-cta-copy",
+      "type": "text",
+      "es": "Sigue las publicaciones, fechas y comunicados directamente en las redes de la banda.",
+      "en": "Follow the band’s posts, dates, and announcements on its social media.",
+      "enabled": false
+    },
+    {
+      "id": "footer-copyright",
+      "type": "text",
+      "es": "© 2026 · MUTANT BEANS OFFICIAL PAGE",
+      "en": "© 2026 · MUTANT BEANS OFFICIAL PAGE",
+      "enabled": false
+    },
+    {
+      "id": "footer-disclaimer",
+      "type": "text",
+      "es": "Nombres, logotipo y fotografías pertenecen a sus respectivos titulares. Información y alineación sujetas a cambios.",
+      "en": "Names, logo, and photos belong to their respective owners. Information and lineup may change.",
+      "enabled": false
+    },
+    {
+      "id": "footer-credit",
+      "type": "text",
+      "es": "Creada por el fan mutante Rolando Victorio.",
+      "en": "Created by mutant fan Rolando Victorio.",
+      "enabled": false
+    },
+    {
+      "id": "career-stamp",
+      "type": "text",
+      "es": "WT\n26",
+      "en": "WT\n26",
+      "enabled": false
+    },
+    {
+      "id": "tour-contact-label",
+      "type": "anchor",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "es": "Contactar ↗",
+      "en": "Contact ↗",
+      "enabled": false
+    },
+    {
+      "id": "tour-map-label",
+      "type": "text",
+      "es": "Mapa ↗",
+      "en": "Open map ↗",
+      "enabled": false
+    },
+    {
+      "id": "release-1-number",
+      "type": "text",
+      "es": "01",
+      "en": "01",
+      "enabled": false
+    },
+    {
+      "id": "release-2-number",
+      "type": "text",
+      "es": "03",
+      "en": "03",
+      "enabled": false
+    },
+    {
+      "id": "release-3-number",
+      "type": "text",
+      "es": "04",
+      "en": "04",
+      "enabled": false
+    },
+    {
+      "id": "release-4-number",
+      "type": "text",
+      "es": "05",
+      "en": "05",
+      "enabled": false
+    },
+    {
+      "id": "release-5-number",
+      "type": "text",
+      "es": "06",
+      "en": "06",
+      "enabled": false
+    },
+    {
+      "id": "release-6-number",
+      "type": "text",
+      "es": "07",
+      "en": "07",
+      "enabled": false
+    },
+    {
+      "id": "release-7-number",
+      "type": "text",
+      "es": "08",
+      "en": "08",
+      "enabled": false
+    },
+    {
+      "id": "release-8-number",
+      "type": "text",
+      "es": "09",
+      "en": "09",
+      "enabled": false
     }
   ],
   "showsEnabled": true,
