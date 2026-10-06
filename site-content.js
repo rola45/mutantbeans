@@ -1,4 +1,16 @@
 const mutantContentSelectors = {"logo": ".hero-wordmark", "principal": ".hero-art", "story-mascot": ".story-mark .module-mascot", "flyer": ".tour-poster img", "gallery-1": ".gallery-tile:nth-child(1) img", "gallery-caption-1": ".gallery-tile:nth-child(1) .tile-label", "gallery-2": ".gallery-tile:nth-child(2) img", "gallery-caption-2": ".gallery-tile:nth-child(2) .tile-label", "gallery-3": ".gallery-tile:nth-child(3) img", "gallery-caption-3": ".gallery-tile:nth-child(3) .tile-label", "gallery-4": ".gallery-tile:nth-child(4) img", "gallery-caption-4": ".gallery-tile:nth-child(4) .tile-label", "gallery-5": ".gallery-tile:nth-child(5) img", "gallery-caption-5": ".gallery-tile:nth-child(5) .tile-label", "gallery-6": ".gallery-tile:nth-child(6) img", "gallery-caption-6": ".gallery-tile:nth-child(6) .tile-label", "gallery-7": ".gallery-tile:nth-child(7) img", "gallery-caption-7": ".gallery-tile:nth-child(7) .tile-label", "hero-copy": ".hero-copy", "tour-title": "#fechas .section-head h2", "story-copy": ".story-text > p:first-of-type", "page-title": "title", "favicon": "#site-favicon"};
+function setEditableText(element, field, language) {
+  const value = language === 'en' ? field.en : field.es;
+  if (field.id !== 'tour-title') {
+    element.textContent = value;
+    return;
+  }
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  const accent = document.createElement('span');
+  accent.textContent = words.pop() || '';
+  element.replaceChildren(document.createTextNode(words.length ? `${words.join(' ')} ` : ''), accent);
+}
+
 window.mutantContentReady = (async () => {
   if (new URLSearchParams(window.location.search).has('admin-preview')) return;
   try {
@@ -44,9 +56,7 @@ window.mutantContentReady = (async () => {
       for (const field of active.filter(field => field.type === 'text')) {
         const element = document.querySelector(mutantContentSelectors[field.id]);
         if (element) {
-          const value = language === 'en' ? field.en : field.es;
-          if (element.tagName === 'TITLE') element.textContent = value;
-          else element.textContent = value;
+          setEditableText(element, field, language);
         }
       }
       if (content.showsEnabled) document.querySelectorAll('.tour-date time').forEach(time => {

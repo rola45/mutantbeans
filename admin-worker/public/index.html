@@ -19,23 +19,36 @@
     <section id="editor" hidden>
       <div class="toolbar"><h1>Contenido de la página</h1><button id="logout" type="button">Salir</button></div>
       <p id="account"></p>
-      <p>Activa «Usar esta edición» en los campos que quieras cambiar. Los textos tienen una versión en español y otra en inglés.</p>
+      <p>Haz clic en una imagen, texto o fecha del sitio para seleccionarla y editarla aquí. Los textos tienen versión en español y en inglés.</p>
       <form id="form">
-        <div id="fields"></div>
-        <details class="card editor-section" id="shows-section" data-preview-selector=".tour-list" data-preview-label="Próximos shows">
-          <summary><h2>Próximos shows</h2></summary>
-          <div class="editor-section-body">
-            <p class="shows-help">Editar, agregar o quitar una fecha activa esta lista para el sitio. Usa «Guardar y publicar» para aplicar los cambios.</p>
-            <label><input id="shows-enabled" type="checkbox"> Usar estas fechas en la página</label>
-            <div id="shows"></div>
-            <button id="add-show" type="button">Agregar fecha</button>
-          </div>
+        <div class="visual-workspace">
+          <section class="visual-canvas" aria-label="Vista interactiva de la página">
+            <div class="visual-canvas-toolbar"><div><h2>Vista de mutantbeans.com</h2><p id="preview-target" aria-live="polite">Haz clic en un elemento editable para empezar.</p></div><button id="preview-open" class="preview-button" type="button">Ampliar página</button></div>
+            <iframe id="site-preview" src="/?admin-preview=1" title="Vista interactiva de Mutant Beans"></iframe>
+          </section>
+          <aside class="visual-inspector" aria-label="Editor del elemento seleccionado">
+            <h2 id="selected-module">Selecciona un elemento</h2>
+            <p id="selected-hint">Las imágenes y textos editables se resaltan al pasar el cursor.</p>
+            <div id="visual-controls"></div>
+          </aside>
+        </div>
+        <details class="card editor-section" id="all-fields">
+          <summary><h2>Todos los módulos y ajustes no visibles en la página</h2></summary>
+          <div id="fields"></div>
+          <details class="card editor-section" id="shows-section" data-preview-selector=".tour-list" data-preview-label="Próximos shows">
+            <summary><h2>Próximos shows</h2></summary>
+            <div class="editor-section-body">
+              <p class="shows-help">Editar, agregar o quitar una fecha activa esta lista para el sitio. Usa «Guardar y publicar» para aplicar los cambios.</p>
+              <label><input id="shows-enabled" type="checkbox"> Usar estas fechas en la página</label>
+              <div id="shows"></div>
+              <button id="add-show" type="button">Agregar fecha</button>
+            </div>
+          </details>
         </details>
       </form>
       <div class="savebar">
-        <button id="preview-open" class="preview-button" type="button">Vista previa</button>
         <button id="save" form="form" type="submit">Guardar y publicar</button>
-        <span>Los cambios se guardan en GitHub. GitHub Pages tarda un poco en publicarlos.</span>
+        <span>Se guarda en GitHub y luego GitHub Pages actualiza la página pública.</span>
       </div>
     </section>
     <p id="status" role="status" aria-live="polite"></p>
@@ -49,13 +62,6 @@
     </div>
     <p id="asset-state" role="status"></p>
     <div id="asset-grid"></div>
-  </dialog>
-  <dialog id="preview-dialog" class="preview-dialog">
-    <div class="toolbar">
-      <div><h2>Vista previa del sitio</h2><p id="preview-target" aria-live="polite">Abre un apartado para resaltar su ubicación.</p></div>
-      <button id="preview-close" type="button">Cerrar</button>
-    </div>
-    <iframe id="site-preview" src="https://mutantbeans.com/?admin-preview=1" title="Vista previa de Mutant Beans" loading="lazy"></iframe>
   </dialog>
   <script src="/admin/app.js"></script>
 </body>

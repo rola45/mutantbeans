@@ -1,14 +1,81 @@
-let session, content, sha, schema, busy = false, previewSelection = null;
+let session, content, sha, schema, busy = false, previewSelection = null, activeEditorPlacement = null;
 const previewOriginals = new WeakMap();
+const visualDocs = new WeakSet();
+const draftImageURLs = new Map();
 const status = document.querySelector('#status');
-const previewDialog = document.querySelector('#preview-dialog');
 const previewFrame = document.querySelector('#site-preview');
 const previewTarget = document.querySelector('#preview-target');
+const visualControls = document.querySelector('#visual-controls');
 function report(message, error = false) { status.textContent = message; status.classList.toggle('error', error); }
 function selectPreviewTarget(selector, label, id = '') {
   previewSelection = { selector, label, id };
-  previewTarget.textContent = `Se resaltará: ${label}`;
-  if (previewDialog.open) refreshPreviewDraft().then(highlightPreviewTarget);
+  highlightPreviewTarget();
+}
+function restoreActiveEditor() {
+  if (!activeEditorPlacement) return;
+  const { node, parent, next } = activeEditorPlacement;
+  if (next?.parentNode === parent) parent.insertBefore(node, next);
+  else parent.append(node);
+  activeEditorPlacement = null;
+}
+function editorNodeFor(id) {
+  if (activeEditorPlacement?.id === id) return activeEditorPlacement.node;
+  if (id === 'shows') return document.querySelector('#shows-section');
+  const field = document.querySelector(`#fields [data-preview-id="${id}"]`);
+  return field?.closest('.gallery-editor-card') || field;
+}
+function selectVisualEditor(id) {
+  const label = id === 'shows' ? 'Próximos shows' : schema.fields.find(field => field.id === id)?.label;
+  const node = editorNodeFor(id);
+  if (!node || !label) return;
+  if (activeEditorPlacement?.node !== node) {
+    restoreActiveEditor();
+    activeEditorPlacement = { id, node, parent: node.parentNode, next: node.nextSibling };
+    visualControls.replaceChildren(node);
+  }
+  const details = node.matches('details') ? node : node.querySelector('details');
+  if (details) details.open = true;
+  document.querySelector('#selected-module').textContent = label;
+  document.querySelector('#selected-hint').textContent = id === 'shows'
+    ? 'Edita una fecha; el próximo show del inicio se calculará desde esta lista.'
+    : 'Los cambios aparecen en esta vista previa mientras editas. Pulsa “Guardar y publicar” para aplicarlos al sitio.';
+  const input = node.querySelector('textarea, input:not([type=checkbox]):not([type=file]), button');
+  if (input && input.tagName !== 'BUTTON') input.focus({ preventScroll: true });
+}
+function selectFromVisualPage(id) {
+  if (id === 'shows') {
+    selectPreviewTarget('.tour-list', 'Próximos shows', id);
+  } else {
+    const spec = schema.fields.find(field => field.id === id);
+    if (!spec) return;
+    selectPreviewTarget(spec.selector, spec.label, id);
+  }
+  selectVisualEditor(id);
+}
+function installVisualEditTargets() {
+  const doc = previewFrame.contentDocument;
+  if (!doc || !schema) return;
+  let style = doc.querySelector('#admin-visual-editor-style');
+  if (!style) {
+    style = doc.createElement('style'); style.id = 'admin-visual-editor-style';
+    style.textContent = '.admin-editable-target{cursor:crosshair!important;outline:2px dashed transparent!important;outline-offset:4px!important;transition:outline-color .15s,box-shadow .15s}.admin-editable-target:hover{outline-color:#67f542!important;box-shadow:0 0 0 4px #67f54255!important}.admin-preview-highlight{outline:4px solid #67f542!important;outline-offset:5px!important;box-shadow:0 0 0 8px #67f54266!important;position:relative!important;z-index:20!important;animation:adminPreviewPulse 1.1s ease-in-out infinite alternate!important}@keyframes adminPreviewPulse{from{outline-color:#67f542;box-shadow:0 0 0 4px #67f54233}to{outline-color:#efffe9;box-shadow:0 0 0 9px #67f54288}}';
+    doc.head.append(style);
+  }
+  for (const spec of schema.fields.filter(field => !['page-title', 'favicon'].includes(field.id))) {
+    doc.querySelectorAll(spec.selector).forEach(element => element.classList.add('admin-editable-target'));
+  }
+  doc.querySelectorAll('.tour-date, .next-show, .tour-list').forEach(element => element.classList.add('admin-editable-target'));
+  if (visualDocs.has(doc)) return;
+  visualDocs.add(doc);
+  doc.addEventListener('click', event => {
+    const target = event.target?.nodeType === 1 ? event.target : event.target?.parentElement;
+    if (!target) return;
+    const isShow = target.closest('.tour-date, .next-show, .tour-list');
+    const spec = isShow ? null : schema.fields.find(field => !['page-title', 'favicon'].includes(field.id) && target.closest(field.selector));
+    if (!isShow && !spec) return;
+    event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation();
+    selectFromVisualPage(isShow ? 'shows' : spec.id);
+  }, true);
 }
 function rememberPreviewOriginal(element, read, restore) {
   if (!previewOriginals.has(element)) previewOriginals.set(element, { value: read(), restore });
@@ -19,8 +86,11 @@ function getDraftShows() {
     [...row.querySelectorAll('input')].map(field => [field.dataset.showField, field.value.trim()])
   ));
 }
+function previewImageURL(path) {
+  if (/^https?:|^blob:/.test(path)) return path;
+  return draftImageURLs.get(path) || `https://raw.githubusercontent.com/rola45/mutantbeans/main/${path.split('/').map(encodeURIComponent).join('/')}`;
+}
 async function refreshPreviewDraft() {
-  if (!previewDialog.open) return;
   try {
     const win = previewFrame.contentWindow, doc = previewFrame.contentDocument;
     if (!win || !doc) return;
@@ -32,6 +102,15 @@ async function refreshPreviewDraft() {
       const element = doc.querySelector(spec.selector);
       if (!element) continue;
       if (field.type === 'text') {
+        if (spec.id === 'tour-title') {
+          const original = rememberPreviewOriginal(element, () => element.innerHTML, value => { element.innerHTML = value; });
+          if (field.enabled) {
+            const words = field[language].trim().split(/\s+/).filter(Boolean);
+            const accent = doc.createElement('span'); accent.textContent = words.pop() || '';
+            element.replaceChildren(doc.createTextNode(words.length ? `${words.join(' ')} ` : ''), accent);
+          } else original.restore(original.value);
+          continue;
+        }
         const original = rememberPreviewOriginal(element, () => element.textContent, value => { element.textContent = value; });
         element.textContent = field.enabled ? field[language] : original.value;
       } else if (element.tagName === 'LINK' && element.id === 'site-favicon') {
@@ -43,7 +122,7 @@ async function refreshPreviewDraft() {
         const link = element.closest('.gallery-tile, .tour-poster');
         const original = rememberPreviewOriginal(element, () => ({ src: element.getAttribute('src'), link, href: link?.getAttribute('href') }), value => { if (value.src) element.setAttribute('src', value.src); if (value.link && value.href) value.link.setAttribute('href', value.href); });
         const path = field.enabled ? field.value : original.value.src;
-        if (path) element.setAttribute('src', /^https?:|^blob:/.test(path) ? path : `https://mutantbeans.com/${path}`);
+        if (path) element.setAttribute('src', previewImageURL(path));
         if (field.enabled && link) link.setAttribute('href', `https://mutantbeans.com/${field.value}`);
         else if (link && original.value.href) link.setAttribute('href', original.value.href);
       }
@@ -68,6 +147,8 @@ async function refreshPreviewDraft() {
         }
       }
     }
+    installVisualEditTargets();
+    highlightPreviewTarget();
   } catch { previewTarget.textContent = 'No se pudieron aplicar los cambios del borrador a la vista previa.'; }
 }
 function highlightPreviewTarget() {
@@ -94,9 +175,17 @@ function highlightPreviewTarget() {
     previewTarget.textContent = 'No se pudo cargar la vista previa. Usa “Ver página” para abrirla aparte.';
   }
 }
-document.querySelector('#preview-open').onclick = () => { previewDialog.showModal(); requestAnimationFrame(() => refreshPreviewDraft().then(highlightPreviewTarget)); };
-document.querySelector('#preview-close').onclick = () => previewDialog.close();
-previewFrame.addEventListener('load', () => refreshPreviewDraft().then(highlightPreviewTarget));
+document.querySelector('#preview-open').onclick = async () => {
+  const canvas = document.querySelector('.visual-canvas');
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await canvas.requestFullscreen();
+  } catch { report('El navegador no pudo ampliar la vista.'); }
+};
+document.addEventListener('fullscreenchange', () => {
+  document.querySelector('#preview-open').textContent = document.fullscreenElement ? 'Salir de pantalla completa' : 'Ampliar página';
+});
+previewFrame.addEventListener('load', () => refreshPreviewDraft().then(installVisualEditTargets).then(highlightPreviewTarget));
 async function api(path, options = {}) {
   const response = await fetch('/admin/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
   const data = await response.json();
@@ -155,7 +244,7 @@ function renderField(spec, container, compact = false) {
     }
     body.append(row);
   } else {
-    const preview = document.createElement('img'); preview.alt = spec.label; preview.src = 'https://mutantbeans.com/' + field.value;
+    const preview = document.createElement('img'); preview.alt = spec.label; preview.src = previewImageURL(field.value);
     const path = input('text', field.value); path.readOnly = true;
     const upload = input('file'); upload.accept = 'image/png,image/jpeg,image/webp';
     upload.onchange = async () => {
@@ -167,9 +256,10 @@ function renderField(spec, container, compact = false) {
         report('Subiendo imagen…');
         const data = await api('upload', { method:'POST', headers:{'Content-Type':file.type}, body:file });
         field.value = path.value = data.path; field.enabled = enabled.checked = true;
+        const objectURL = URL.createObjectURL(file);
+        draftImageURLs.set(data.path, objectURL);
         refreshPreviewDraft();
-        const objectURL = URL.createObjectURL(file); preview.src = objectURL;
-        preview.onload = () => URL.revokeObjectURL(objectURL);
+        preview.src = objectURL;
         report('Imagen subida. Pulsa Guardar y publicar para colocarla en la página.');
       } catch (error) { report(error.message, true); }
       finally { busy = false; document.querySelector('#save').disabled = false; upload.disabled = false; }
@@ -177,7 +267,7 @@ function renderField(spec, container, compact = false) {
     const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
     choose.onclick = () => openAssetPicker(asset => {
       field.value = path.value = asset.path; field.enabled = enabled.checked = true;
-      preview.src = 'https://mutantbeans.com/' + asset.path;
+      preview.src = previewImageURL(asset.path);
       refreshPreviewDraft();
       report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
     });
@@ -218,10 +308,7 @@ function render() {
   const showsSection = document.querySelector('#shows-section');
   showsSection.addEventListener('toggle', () => { if (showsSection.open) selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'); });
   showsSection.addEventListener('focusin', () => selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'));
-  if (schema.fields.length) {
-    const first = schema.fields[0];
-    selectPreviewTarget(first.selector || '', first.label, first.id);
-  }
+  refreshPreviewDraft();
 }
 document.querySelector('#add-show').onclick = () => { showRow(); document.querySelector('#shows-enabled').checked = true; };
 document.querySelector('#logout').onclick = async () => { try { await api('logout', {method:'POST'}); location.reload(); } catch(error) { report(error.message,true); } };

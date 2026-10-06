@@ -358,6 +358,10 @@
       };
       languageToggle.addEventListener('click', () => applyLanguage(interfaceLanguage === 'es' ? 'en' : 'es'));
       applyLanguage(interfaceLanguage);
+      window.mutantContentReady?.then(() => {
+        window.applyMutantContentLanguage?.(interfaceLanguage);
+        updateNextShow();
+      });
     })();
   </script>
 
