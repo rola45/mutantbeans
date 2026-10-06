@@ -4,7 +4,7 @@ const flowName = '__Host-mutant-oauth';
 const headers = {
   'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'DENY',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://mutantbeans.com blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://mutantbeans.com https://raw.githubusercontent.com blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
 };
 const b64 = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
@@ -61,6 +61,9 @@ function validateContent(data, schema) {
     used.add(field.id);
     if (spec.type === 'image') {
       if (typeof field.value !== 'string' || !/^(images|imagenes)\/[\w .()\/-]+\.(png|jpg|jpeg|webp|svg)$/i.test(field.value) || field.value.includes('..')) throw new Error('Ruta de imagen inválida.');
+    } else if (spec.type === 'link' || spec.type === 'anchor') {
+      if (typeof field.value !== 'string' || field.value.length > 2048 || !(/^(https:\/\/[^\s]+|#[\w-]+|(?:images|imagenes)\/[\w .()\/-]+\.(?:png|jpg|jpeg|webp|svg))$/i.test(field.value)) || field.value.includes('..')) throw new Error('Enlace inválido. Usa HTTPS, un ancla o un archivo de imagen del sitio.');
+      if (spec.type === 'anchor' && (typeof field.es !== 'string' || typeof field.en !== 'string' || Math.max(field.es.length, field.en.length) > 5000)) throw new Error('Texto de enlace inválido.');
     } else if (typeof field.es !== 'string' || typeof field.en !== 'string' || Math.max(field.es.length, field.en.length) > 5000) throw new Error('Texto inválido.');
   }
   if (!Array.isArray(data.shows) || data.shows.length > 100) throw new Error('Lista de shows inválida.');
@@ -68,9 +71,11 @@ function validateContent(data, schema) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(show.date) || new Date(show.date + 'T12:00:00Z').toISOString().slice(0, 10) !== show.date) throw new Error('Fecha inválida.');
     for (const name of ['venue', 'city']) if (typeof show[name] !== 'string' || !show[name].trim() || show[name].length > 150) throw new Error('Completa lugar y ciudad.');
   }
-  return { version: 1, fields: data.fields.map(field => field.type === 'image'
+  return { version: 1, fields: data.fields.map(field => ['image', 'link'].includes(field.type)
     ? { id: field.id, type: field.type, value: field.value, enabled: field.enabled === true }
-    : { id: field.id, type: field.type, es: field.es, en: field.en, enabled: field.enabled === true }), showsEnabled: data.showsEnabled === true, shows: [...data.shows].sort((a, b) => a.date.localeCompare(b.date)) };
+    : field.type === 'anchor'
+      ? { id: field.id, type: field.type, value: field.value, es: field.es, en: field.en, enabled: field.enabled === true }
+      : { id: field.id, type: field.type, es: field.es, en: field.en, enabled: field.enabled === true }), showsEnabled: data.showsEnabled === true, shows: [...data.shows].sort((a, b) => a.date.localeCompare(b.date)) };
 }
 async function handler(request, env) {
   const url = new URL(request.url);

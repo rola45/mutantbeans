@@ -172,6 +172,1033 @@
       "type": "image",
       "selector": "#site-favicon",
       "value": "images/site-favicon.svg"
+    },
+    {
+      "id": "topline-location",
+      "label": "Franja superior · ubicación",
+      "type": "text",
+      "selector": ".topline .wrap > span:nth-child(1)",
+      "es": "Ensenada, Baja California",
+      "en": "Ensenada, Baja California"
+    },
+    {
+      "id": "topline-tagline",
+      "label": "Franja superior · lema",
+      "type": "text",
+      "selector": ".topline .wrap > span:nth-child(2)",
+      "es": "Funking the system desde 2014",
+      "en": "Funking the system since 2014"
+    },
+    {
+      "id": "brand-prefix",
+      "label": "Marca superior · prefijo",
+      "type": "text",
+      "selector": ".brand-prefix",
+      "es": "#FEEL",
+      "en": "#FEEL"
+    },
+    {
+      "id": "brand-name",
+      "label": "Marca superior · nombre",
+      "type": "text",
+      "selector": ".brand-mutant",
+      "es": "MUTANT",
+      "en": "MUTANT"
+    },
+    {
+      "id": "brand-destination",
+      "label": "Marca superior · destino",
+      "type": "link",
+      "selector": ".brand",
+      "value": "#inicio"
+    },
+    {
+      "id": "nav-1",
+      "label": "Navegación · Integrantes",
+      "type": "anchor",
+      "selector": ".navlinks a:nth-child(1)",
+      "value": "#integrantes",
+      "es": "Integrantes",
+      "en": "Band members"
+    },
+    {
+      "id": "nav-2",
+      "label": "Navegación · Fechas",
+      "type": "anchor",
+      "selector": ".navlinks a:nth-child(2)",
+      "value": "#fechas",
+      "es": "Fechas",
+      "en": "Tour dates"
+    },
+    {
+      "id": "nav-3",
+      "label": "Navegación · Historia",
+      "type": "anchor",
+      "selector": ".navlinks a:nth-child(3)",
+      "value": "#historia",
+      "es": "Historia",
+      "en": "Story"
+    },
+    {
+      "id": "nav-4",
+      "label": "Navegación · Música",
+      "type": "anchor",
+      "selector": ".navlinks a:nth-child(4)",
+      "value": "#musica",
+      "es": "Música",
+      "en": "Music"
+    },
+    {
+      "id": "nav-5",
+      "label": "Navegación · Archivo",
+      "type": "anchor",
+      "selector": ".navlinks a:nth-child(5)",
+      "value": "#archivo",
+      "es": "Archivo",
+      "en": "Archive"
+    },
+    {
+      "id": "header-instagram",
+      "label": "Redes · header · Instagram",
+      "type": "link",
+      "selector": ".nav > .nav-socials a[title=\"Instagram\"]",
+      "value": "https://www.instagram.com/mutantbeans/"
+    },
+    {
+      "id": "header-facebook",
+      "label": "Redes · header · Facebook",
+      "type": "link",
+      "selector": ".nav > .nav-socials a[title=\"Facebook\"]",
+      "value": "https://www.facebook.com/mutantbeans"
+    },
+    {
+      "id": "header-spotify",
+      "label": "Redes · header · Spotify",
+      "type": "link",
+      "selector": ".nav > .nav-socials a[title=\"Spotify\"]",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N"
+    },
+    {
+      "id": "header-youtube",
+      "label": "Redes · header · YouTube",
+      "type": "link",
+      "selector": ".nav > .nav-socials a[title=\"YouTube\"]",
+      "value": "https://youtu.be/WmQ3-AxAZo0"
+    },
+    {
+      "id": "header-links",
+      "label": "Redes · header · Todos los enlaces",
+      "type": "link",
+      "selector": ".nav > .nav-socials a[title=\"Todos los enlaces\"]",
+      "value": "https://lnk.bio/mutantbeans"
+    },
+    {
+      "id": "cierre-instagram",
+      "label": "Redes · cierre · Instagram",
+      "type": "link",
+      "selector": ".last-socials a[title=\"Instagram\"]",
+      "value": "https://www.instagram.com/mutantbeans/"
+    },
+    {
+      "id": "cierre-facebook",
+      "label": "Redes · cierre · Facebook",
+      "type": "link",
+      "selector": ".last-socials a[title=\"Facebook\"]",
+      "value": "https://www.facebook.com/mutantbeans"
+    },
+    {
+      "id": "cierre-spotify",
+      "label": "Redes · cierre · Spotify",
+      "type": "link",
+      "selector": ".last-socials a[title=\"Spotify\"]",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N"
+    },
+    {
+      "id": "cierre-youtube",
+      "label": "Redes · cierre · YouTube",
+      "type": "link",
+      "selector": ".last-socials a[title=\"YouTube\"]",
+      "value": "https://youtu.be/WmQ3-AxAZo0"
+    },
+    {
+      "id": "cierre-bandcamp",
+      "label": "Redes · cierre · Bandcamp",
+      "type": "link",
+      "selector": ".last-socials a[title=\"Bandcamp\"]",
+      "value": "https://mutantbeans.bandcamp.com/"
+    },
+    {
+      "id": "cierre-links",
+      "label": "Redes · cierre · Todos los enlaces",
+      "type": "link",
+      "selector": ".last-socials a[title=\"Todos los enlaces\"]",
+      "value": "https://lnk.bio/mutantbeans"
+    },
+    {
+      "id": "hero-kicker",
+      "label": "Inicio · etiqueta",
+      "type": "text",
+      "selector": ".hero .kicker",
+      "es": "Escena independiente · Ensenada, MX",
+      "en": "Independent scene · Ensenada, MX"
+    },
+    {
+      "id": "career-eyebrow",
+      "label": "Warped Tour · reconocimiento",
+      "type": "text",
+      "selector": ".career-copy .eyebrow",
+      "es": "Ganadores · Ernie Ball Battle of the Bands · 2026",
+      "en": "Winners · Ernie Ball Battle of the Bands · 2026"
+    },
+    {
+      "id": "career-title",
+      "label": "Warped Tour · título",
+      "type": "text",
+      "selector": ".career-copy strong",
+      "es": "Vans Warped Tour · Long Beach, CA",
+      "en": "Vans Warped Tour · Long Beach, CA"
+    },
+    {
+      "id": "career-description",
+      "label": "Warped Tour · descripción",
+      "type": "text",
+      "selector": ".career-copy > span:nth-of-type(2)",
+      "es": "Su victoria les dio el pase al Warped Tour.",
+      "en": "Their win earned them a spot at Warped Tour."
+    },
+    {
+      "id": "career-press",
+      "label": "Warped Tour · botón",
+      "type": "anchor",
+      "selector": ".career-press",
+      "value": "https://www.battleofthebands.com/campaign/ernieballvanswarpedtour2026",
+      "es": "Ver ganadores oficiales ↗",
+      "en": "See official winners ↗"
+    },
+    {
+      "id": "next-show-label",
+      "label": "Inicio · etiqueta del próximo show",
+      "type": "text",
+      "selector": ".next-show-date .eyebrow",
+      "es": "Próximo show",
+      "en": "Next show"
+    },
+    {
+      "id": "next-show-map-label",
+      "label": "Inicio · enlace al mapa",
+      "type": "text",
+      "selector": ".next-show-map",
+      "es": "Abrir mapa ↗",
+      "en": "Open map ↗"
+    },
+    {
+      "id": "next-show-contact",
+      "label": "Inicio · botón contactar",
+      "type": "anchor",
+      "selector": ".next-show-contact",
+      "value": "https://www.instagram.com/mutantbeans/",
+      "es": "Contactar ↗",
+      "en": "Contact ↗"
+    },
+    {
+      "id": "next-show-tour",
+      "label": "Inicio · botón ver ruta",
+      "type": "anchor",
+      "selector": ".next-show > a.button:not(.next-show-contact)",
+      "value": "#fechas",
+      "es": "Ver ruta ↗",
+      "en": "See tour ↗"
+    },
+    {
+      "id": "hero-tag-1",
+      "label": "Inicio · etiqueta 1",
+      "type": "text",
+      "selector": ".hero-meta .tag:nth-child(1)",
+      "es": "Funk rock",
+      "en": "Funk rock"
+    },
+    {
+      "id": "hero-tag-2",
+      "label": "Inicio · etiqueta 2",
+      "type": "text",
+      "selector": ".hero-meta .tag:nth-child(2)",
+      "es": "Skate punk",
+      "en": "Skate punk"
+    },
+    {
+      "id": "hero-tag-3",
+      "label": "Inicio · etiqueta 3",
+      "type": "text",
+      "selector": ".hero-meta .tag:nth-child(3)",
+      "es": "Rapcore",
+      "en": "Rapcore"
+    },
+    {
+      "id": "hero-tag-4",
+      "label": "Inicio · etiqueta 4",
+      "type": "text",
+      "selector": ".hero-meta .tag:nth-child(4)",
+      "es": "Baja California",
+      "en": "Baja California"
+    },
+    {
+      "id": "lineup-title",
+      "label": "Integrantes · título",
+      "type": "text",
+      "selector": "#integrantes .section-head h2",
+      "es": "La alineación mutante",
+      "en": "The mutant lineup"
+    },
+    {
+      "id": "lineup-subtitle",
+      "label": "Integrantes · bajada",
+      "type": "text",
+      "selector": "#integrantes .section-head p",
+      "es": "4 piezas, un mismo ruido.",
+      "en": "Four members. One noise."
+    },
+    {
+      "id": "member-1-name",
+      "label": "Silver · nombre",
+      "type": "text",
+      "selector": ".member:nth-child(1) h3",
+      "es": "Silver",
+      "en": "Silver"
+    },
+    {
+      "id": "member-1-role",
+      "label": "Silver · instrumento",
+      "type": "text",
+      "selector": ".member:nth-child(1) p",
+      "es": "Batería",
+      "en": "Drums"
+    },
+    {
+      "id": "member-1-profile",
+      "label": "Silver · perfil",
+      "type": "link",
+      "selector": ".member:nth-child(1)",
+      "value": "https://www.instagram.com/heyslvr/"
+    },
+    {
+      "id": "member-1-photo",
+      "label": "Silver · foto principal",
+      "type": "image",
+      "selector": ".member:nth-child(1) .member-photo-rest",
+      "value": "images/silver.jpg"
+    },
+    {
+      "id": "member-1-frame-1",
+      "label": "Silver · imagen animada 1",
+      "type": "image",
+      "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(2)",
+      "value": "images/silver-arms-start-haram.png"
+    },
+    {
+      "id": "member-1-frame-2",
+      "label": "Silver · imagen animada 2",
+      "type": "image",
+      "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(3)",
+      "value": "images/silver-arms-mid-haram.png"
+    },
+    {
+      "id": "member-1-frame-3",
+      "label": "Silver · imagen animada 3",
+      "type": "image",
+      "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(4)",
+      "value": "images/silver-arms-haram.png"
+    },
+    {
+      "id": "member-2-name",
+      "label": "Irving · nombre",
+      "type": "text",
+      "selector": ".member:nth-child(2) h3",
+      "es": "Irving",
+      "en": "Irving"
+    },
+    {
+      "id": "member-2-role",
+      "label": "Irving · instrumento",
+      "type": "text",
+      "selector": ".member:nth-child(2) p",
+      "es": "Voz",
+      "en": "Vocals"
+    },
+    {
+      "id": "member-2-profile",
+      "label": "Irving · perfil",
+      "type": "link",
+      "selector": ".member:nth-child(2)",
+      "value": "https://www.instagram.com/noriegairving/"
+    },
+    {
+      "id": "member-2-photo",
+      "label": "Irving · foto principal",
+      "type": "image",
+      "selector": ".member:nth-child(2) .member-photo-rest",
+      "value": "images/irving.jpg"
+    },
+    {
+      "id": "member-2-frame-1",
+      "label": "Irving · imagen animada 1",
+      "type": "image",
+      "selector": ".member:nth-child(2) .member-photo-action:nth-of-type(2)",
+      "value": "images/irving-vocal-mic.png"
+    },
+    {
+      "id": "member-2-frame-2",
+      "label": "Irving · imagen animada 2",
+      "type": "image",
+      "selector": ".member:nth-child(2) .member-photo-action:nth-of-type(3)",
+      "value": "images/irving-vocal-2-mic.png"
+    },
+    {
+      "id": "member-3-name",
+      "label": "Sater · nombre",
+      "type": "text",
+      "selector": ".member:nth-child(3) h3",
+      "es": "Sater",
+      "en": "Sater"
+    },
+    {
+      "id": "member-3-role",
+      "label": "Sater · instrumento",
+      "type": "text",
+      "selector": ".member:nth-child(3) p",
+      "es": "Guitarra",
+      "en": "Guitar"
+    },
+    {
+      "id": "member-3-profile",
+      "label": "Sater · perfil",
+      "type": "link",
+      "selector": ".member:nth-child(3)",
+      "value": "https://www.instagram.com/saterunholy/"
+    },
+    {
+      "id": "member-3-photo",
+      "label": "Sater · foto principal",
+      "type": "image",
+      "selector": ".member:nth-child(3) .member-photo-rest",
+      "value": "images/sater.jpg"
+    },
+    {
+      "id": "member-3-frame-1",
+      "label": "Sater · imagen animada 1",
+      "type": "image",
+      "selector": ".member:nth-child(3) .member-photo-action:nth-of-type(2)",
+      "value": "images/sater-guitar.png"
+    },
+    {
+      "id": "member-3-frame-2",
+      "label": "Sater · imagen animada 2",
+      "type": "image",
+      "selector": ".member:nth-child(3) .member-photo-action:nth-of-type(3)",
+      "value": "images/sater-guitar-2.png"
+    },
+    {
+      "id": "member-4-name",
+      "label": "KBTO · nombre",
+      "type": "text",
+      "selector": ".member:nth-child(4) h3",
+      "es": "KBTO",
+      "en": "KBTO"
+    },
+    {
+      "id": "member-4-role",
+      "label": "KBTO · instrumento",
+      "type": "text",
+      "selector": ".member:nth-child(4) p",
+      "es": "Bajo",
+      "en": "Bass"
+    },
+    {
+      "id": "member-4-profile",
+      "label": "KBTO · perfil",
+      "type": "link",
+      "selector": ".member:nth-child(4)",
+      "value": "https://www.instagram.com/kbtothemutant/"
+    },
+    {
+      "id": "member-4-photo",
+      "label": "KBTO · foto principal",
+      "type": "image",
+      "selector": ".member:nth-child(4) .member-photo-rest",
+      "value": "images/kbeto.jpg"
+    },
+    {
+      "id": "member-4-frame-1",
+      "label": "KBTO · imagen animada 1",
+      "type": "image",
+      "selector": ".member:nth-child(4) .member-photo-action:nth-of-type(2)",
+      "value": "images/kbto-bass.png"
+    },
+    {
+      "id": "member-4-frame-2",
+      "label": "KBTO · imagen animada 2",
+      "type": "image",
+      "selector": ".member:nth-child(4) .member-photo-action:nth-of-type(3)",
+      "value": "images/kbto-bass-2.png"
+    },
+    {
+      "id": "lineup-mascot",
+      "label": "Mascota de la alineación",
+      "type": "image",
+      "selector": ".lineup-mascot",
+      "value": "images/mascota-lineup.png"
+    },
+    {
+      "id": "tour-mascot",
+      "label": "Mascota de la gira",
+      "type": "image",
+      "selector": ".tour-mascot",
+      "value": "images/mascota-fechas.png"
+    },
+    {
+      "id": "tour-poster-link",
+      "label": "Flyer · destino del clic",
+      "type": "link",
+      "selector": ".tour-poster",
+      "value": "https://www.instagram.com/mutantbeans/"
+    },
+    {
+      "id": "story-quote",
+      "label": "Historia · frase destacada",
+      "type": "text",
+      "selector": ".story-mark blockquote",
+      "es": "Desde Ensenada.\nContra corriente.\nCon volumen.",
+      "en": "From Ensenada.\nAgainst the current.\nTurn it up."
+    },
+    {
+      "id": "story-eyebrow",
+      "label": "Historia · etiqueta",
+      "type": "text",
+      "selector": ".story-text .eyebrow",
+      "es": "Una década mutando",
+      "en": "A decade of mutation"
+    },
+    {
+      "id": "story-paragraph-2",
+      "label": "Historia · segundo párrafo",
+      "type": "text",
+      "selector": ".story-text > p:nth-of-type(2)",
+      "es": "En julio de 2026 llegaron al Vans Warped Tour en Long Beach, California tras ganar la Battle of the Bands de Ernie Ball. Esa victoria les dio su pase al festival.",
+      "en": "In July 2026, they made it to the Vans Warped Tour in Long Beach, California after winning Ernie Ball’s Battle of the Bands. That victory earned them a spot at the festival."
+    },
+    {
+      "id": "story-milestone-1",
+      "label": "Historia · hito 2026",
+      "type": "text",
+      "selector": ".story-text .milestone:nth-of-type(2)",
+      "es": "2026 / LONG BEACH — Vans Warped Tour",
+      "en": "2026 / LONG BEACH — Vans Warped Tour"
+    },
+    {
+      "id": "story-milestone-2",
+      "label": "Historia · hito 2014",
+      "type": "text",
+      "selector": ".story-text .milestone:nth-of-type(3)",
+      "es": "2014 / ENSENADA — Nace Mutant Beans",
+      "en": "2014 / ENSENADA — Mutant Beans begins"
+    },
+    {
+      "id": "story-press",
+      "label": "Historia · nota de prensa",
+      "type": "anchor",
+      "selector": ".story-text p:last-child a",
+      "value": "https://revistaespejo.com/2026/08/09/mutant-beans-pone-a-sinaloa-en-el-escenario-principal-del-vans-warped-tour-2026-en-california/",
+      "es": "Leer la nota completa en Revista Espejo ↗",
+      "en": "Read the full story at Revista Espejo ↗"
+    },
+    {
+      "id": "music-heading",
+      "label": "Música · título",
+      "type": "text",
+      "selector": "#musica .section-head h2",
+      "es": "Ruido para compartir",
+      "en": "Noise to share"
+    },
+    {
+      "id": "music-description",
+      "label": "Música · descripción",
+      "type": "text",
+      "selector": "#musica .section-head p",
+      "es": "Álbumes y sencillos disponibles en los canales oficiales de la banda.",
+      "en": "Albums and singles available on the band’s official channels."
+    },
+    {
+      "id": "album-eyebrow",
+      "label": "Álbum · categoría y año",
+      "type": "text",
+      "selector": ".feature .eyebrow",
+      "es": "Álbum · 2021",
+      "en": "Album · 2021"
+    },
+    {
+      "id": "album-title",
+      "label": "Álbum · título",
+      "type": "text",
+      "selector": ".feature h3",
+      "es": "Feel\nMutant!",
+      "en": "Feel\nMutant!"
+    },
+    {
+      "id": "album-description",
+      "label": "Álbum · descripción",
+      "type": "text",
+      "selector": ".feature > div:first-child p",
+      "es": "Álbum de larga duración de la banda.",
+      "en": "The band’s full-length album."
+    },
+    {
+      "id": "album-spotify",
+      "label": "Álbum · botón Spotify",
+      "type": "anchor",
+      "selector": ".feature-actions a:nth-child(1)",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "album-bandcamp",
+      "label": "Álbum · botón Bandcamp",
+      "type": "anchor",
+      "selector": ".feature-actions a:nth-child(2)",
+      "value": "https://mutantbeans.bandcamp.com/",
+      "es": "Bandcamp ↗",
+      "en": "Bandcamp ↗"
+    },
+    {
+      "id": "music-mascot",
+      "label": "Mascota de música",
+      "type": "image",
+      "selector": ".music-mascot",
+      "value": "images/mascota-musica.png"
+    },
+    {
+      "id": "release-heading",
+      "label": "Sencillos · título",
+      "type": "text",
+      "selector": ".release-panel-head h3",
+      "es": "Sencillos",
+      "en": "Singles"
+    },
+    {
+      "id": "release-description",
+      "label": "Sencillos · descripción",
+      "type": "text",
+      "selector": ".release-panel-head p",
+      "es": "Lanzamientos publicados como sencillos en Spotify.",
+      "en": "Singles released on Spotify."
+    },
+    {
+      "id": "release-1-title",
+      "label": "Sencillo 1 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(1) h3",
+      "es": "Montreal Groove",
+      "en": "Montreal Groove"
+    },
+    {
+      "id": "release-1-meta",
+      "label": "Sencillo 1 · año",
+      "type": "text",
+      "selector": ".release:nth-child(1) small",
+      "es": "Último sencillo · 2026",
+      "en": "Latest single · 2026"
+    },
+    {
+      "id": "release-1-link",
+      "label": "Sencillo 1 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(1) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-2-title",
+      "label": "Sencillo 2 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(2) h3",
+      "es": "Funk The System",
+      "en": "Funk The System"
+    },
+    {
+      "id": "release-2-meta",
+      "label": "Sencillo 2 · año",
+      "type": "text",
+      "selector": ".release:nth-child(2) small",
+      "es": "Sencillo · 2026",
+      "en": "Single · 2026"
+    },
+    {
+      "id": "release-2-link",
+      "label": "Sencillo 2 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(2) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-3-title",
+      "label": "Sencillo 3 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(3) h3",
+      "es": "Don Veneno",
+      "en": "Don Veneno"
+    },
+    {
+      "id": "release-3-meta",
+      "label": "Sencillo 3 · año",
+      "type": "text",
+      "selector": ".release:nth-child(3) small",
+      "es": "Sencillo · 2026",
+      "en": "Single · 2026"
+    },
+    {
+      "id": "release-3-link",
+      "label": "Sencillo 3 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(3) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-4-title",
+      "label": "Sencillo 4 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(4) h3",
+      "es": "Chaquetas In My Head",
+      "en": "Chaquetas In My Head"
+    },
+    {
+      "id": "release-4-meta",
+      "label": "Sencillo 4 · año",
+      "type": "text",
+      "selector": ".release:nth-child(4) small",
+      "es": "Sencillo · 2021",
+      "en": "Single · 2021"
+    },
+    {
+      "id": "release-4-link",
+      "label": "Sencillo 4 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(4) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-5-title",
+      "label": "Sencillo 5 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(5) h3",
+      "es": "¿Parezco Loco?",
+      "en": "¿Parezco Loco?"
+    },
+    {
+      "id": "release-5-meta",
+      "label": "Sencillo 5 · año",
+      "type": "text",
+      "selector": ".release:nth-child(5) small",
+      "es": "Sencillo · 2021",
+      "en": "Single · 2021"
+    },
+    {
+      "id": "release-5-link",
+      "label": "Sencillo 5 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(5) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-6-title",
+      "label": "Sencillo 6 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(6) h3",
+      "es": "Disco Revuelta",
+      "en": "Disco Revuelta"
+    },
+    {
+      "id": "release-6-meta",
+      "label": "Sencillo 6 · año",
+      "type": "text",
+      "selector": ".release:nth-child(6) small",
+      "es": "Sencillo · 2018",
+      "en": "Single · 2018"
+    },
+    {
+      "id": "release-6-link",
+      "label": "Sencillo 6 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(6) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-7-title",
+      "label": "Sencillo 7 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(7) h3",
+      "es": "Detonador Mental",
+      "en": "Detonador Mental"
+    },
+    {
+      "id": "release-7-meta",
+      "label": "Sencillo 7 · año",
+      "type": "text",
+      "selector": ".release:nth-child(7) small",
+      "es": "Sencillo · 2017",
+      "en": "Single · 2017"
+    },
+    {
+      "id": "release-7-link",
+      "label": "Sencillo 7 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(7) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "release-8-title",
+      "label": "Sencillo 8 · nombre",
+      "type": "text",
+      "selector": ".release:nth-child(8) h3",
+      "es": "Feel Mutant!",
+      "en": "Feel Mutant!"
+    },
+    {
+      "id": "release-8-meta",
+      "label": "Sencillo 8 · año",
+      "type": "text",
+      "selector": ".release:nth-child(8) small",
+      "es": "Sencillo · 2016",
+      "en": "Single · 2016"
+    },
+    {
+      "id": "release-8-link",
+      "label": "Sencillo 8 · enlace",
+      "type": "anchor",
+      "selector": ".release:nth-child(8) a",
+      "value": "https://open.spotify.com/intl-es/artist/62jxpq4TRdM6mdZiyhWK3N",
+      "es": "Spotify ↗",
+      "en": "Spotify ↗"
+    },
+    {
+      "id": "gallery-title",
+      "label": "Galería · título",
+      "type": "text",
+      "selector": "#archivo .section-head h2",
+      "es": "Archivo visual",
+      "en": "Visual archive"
+    },
+    {
+      "id": "gallery-description",
+      "label": "Galería · descripción",
+      "type": "text",
+      "selector": "#archivo .section-head p",
+      "es": "Momentos en vivo, escenas de ruta y la energía que rodea a Mutant Beans.",
+      "en": "Live moments, scenes from the road, and the energy around Mutant Beans."
+    },
+    {
+      "id": "gallery-instructions",
+      "label": "Galería · instrucciones",
+      "type": "text",
+      "selector": ".gallery-foot",
+      "es": "Desliza o usa las flechas para recorrer las fotos. Toca una imagen para verla en grande.",
+      "en": "Swipe or use the arrows to browse. Tap a photo to view it larger."
+    },
+    {
+      "id": "gallery-mascot",
+      "label": "Mascota de la galería",
+      "type": "image",
+      "selector": ".gallery-mascot",
+      "value": "images/mascota-archivo.png"
+    },
+    {
+      "id": "gallery-1-destination",
+      "label": "Galería 1 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(1)",
+      "value": "images/rear-stage-mascot.jpg"
+    },
+    {
+      "id": "gallery-2-destination",
+      "label": "Galería 2 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(2)",
+      "value": "images/group-mascot-updated.png"
+    },
+    {
+      "id": "gallery-3-destination",
+      "label": "Galería 3 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(3)",
+      "value": "images/live.jpg"
+    },
+    {
+      "id": "gallery-4-destination",
+      "label": "Galería 4 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(4)",
+      "value": "images/vans-skatepark.jpg"
+    },
+    {
+      "id": "gallery-5-destination",
+      "label": "Galería 5 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(5)",
+      "value": "images/banda-y-publico.jpg"
+    },
+    {
+      "id": "gallery-6-destination",
+      "label": "Galería 6 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(6)",
+      "value": "images/crowd-mascot.jpg"
+    },
+    {
+      "id": "gallery-7-destination",
+      "label": "Galería 7 · destino del clic",
+      "type": "link",
+      "selector": ".gallery-tile:nth-child(7)",
+      "value": "images/beach-stage-mascot-v2.png"
+    },
+    {
+      "id": "final-cta-title",
+      "label": "Cierre · título",
+      "type": "text",
+      "selector": ".last h2",
+      "es": "Stay weird.\nFeel mutant.",
+      "en": "Stay weird.\nFeel mutant."
+    },
+    {
+      "id": "final-cta-copy",
+      "label": "Cierre · descripción",
+      "type": "text",
+      "selector": ".last > div > p",
+      "es": "Sigue las publicaciones, fechas y comunicados directamente en las redes de la banda.",
+      "en": "Follow the band’s posts, dates, and announcements on its social media."
+    },
+    {
+      "id": "footer-copyright",
+      "label": "Pie · copyright",
+      "type": "text",
+      "selector": ".foot-row span",
+      "es": "© 2026 · MUTANT BEANS OFFICIAL PAGE",
+      "en": "© 2026 · MUTANT BEANS OFFICIAL PAGE"
+    },
+    {
+      "id": "footer-disclaimer",
+      "label": "Pie · aviso legal",
+      "type": "text",
+      "selector": ".disclaimer",
+      "es": "Nombres, logotipo y fotografías pertenecen a sus respectivos titulares. Información y alineación sujetas a cambios.",
+      "en": "Names, logo, and photos belong to their respective owners. Information and lineup may change."
+    },
+    {
+      "id": "footer-credit",
+      "label": "Pie · crédito",
+      "type": "text",
+      "selector": ".creator-credit",
+      "es": "Creada por el fan mutante Rolando Victorio.",
+      "en": "Created by mutant fan Rolando Victorio."
+    },
+    {
+      "id": "career-stamp",
+      "label": "Warped Tour · insignia",
+      "type": "text",
+      "selector": ".career-stamp",
+      "es": "WT\n26",
+      "en": "WT\n26"
+    },
+    {
+      "id": "tour-contact-label",
+      "label": "Fechas · botón de contacto",
+      "type": "anchor",
+      "selector": ".tour-date .tour-contact-link",
+      "es": "Contactar ↗",
+      "en": "Contact ↗",
+      "value": "https://www.instagram.com/mutantbeans/"
+    },
+    {
+      "id": "tour-map-label",
+      "label": "Fechas · botón de mapa",
+      "type": "text",
+      "selector": ".tour-date .tour-map",
+      "es": "Mapa ↗",
+      "en": "Open map ↗"
+    },
+    {
+      "id": "release-1-number",
+      "label": "Sencillo 1 · número",
+      "type": "text",
+      "selector": ".release:nth-child(1) .release-num",
+      "es": "01",
+      "en": "01"
+    },
+    {
+      "id": "release-2-number",
+      "label": "Sencillo 2 · número",
+      "type": "text",
+      "selector": ".release:nth-child(2) .release-num",
+      "es": "03",
+      "en": "03"
+    },
+    {
+      "id": "release-3-number",
+      "label": "Sencillo 3 · número",
+      "type": "text",
+      "selector": ".release:nth-child(3) .release-num",
+      "es": "04",
+      "en": "04"
+    },
+    {
+      "id": "release-4-number",
+      "label": "Sencillo 4 · número",
+      "type": "text",
+      "selector": ".release:nth-child(4) .release-num",
+      "es": "05",
+      "en": "05"
+    },
+    {
+      "id": "release-5-number",
+      "label": "Sencillo 5 · número",
+      "type": "text",
+      "selector": ".release:nth-child(5) .release-num",
+      "es": "06",
+      "en": "06"
+    },
+    {
+      "id": "release-6-number",
+      "label": "Sencillo 6 · número",
+      "type": "text",
+      "selector": ".release:nth-child(6) .release-num",
+      "es": "07",
+      "en": "07"
+    },
+    {
+      "id": "release-7-number",
+      "label": "Sencillo 7 · número",
+      "type": "text",
+      "selector": ".release:nth-child(7) .release-num",
+      "es": "08",
+      "en": "08"
+    },
+    {
+      "id": "release-8-number",
+      "label": "Sencillo 8 · número",
+      "type": "text",
+      "selector": ".release:nth-child(8) .release-num",
+      "es": "09",
+      "en": "09"
     }
   ],
   "shows": [
