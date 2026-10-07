@@ -2,9 +2,12 @@ const encoder = new TextEncoder();
 const cookieName = '__Host-mutant-admin';
 const flowName = '__Host-mutant-oauth';
 const headers = {
-  'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
-  'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'DENY',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://mutantbeans.com https://raw.githubusercontent.com blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+  'Cache-Control': 'no-store',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'no-referrer',
+  'X-Frame-Options': 'DENY',
+  'Permissions-Policy': 'camera=(), geolocation=(), microphone=()',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://mutantbeans.com https://raw.githubusercontent.com blob:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
 };
 const b64 = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
