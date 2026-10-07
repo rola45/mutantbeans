@@ -421,26 +421,26 @@
     {
       "id": "member-1-photo",
       "type": "image",
-      "value": "images/silver.jpg",
-      "enabled": false
+      "value": "images/uploads/5c5468f8-7ae5-4395-bf99-cad37e43cbeb.jpg",
+      "enabled": true
     },
     {
       "id": "member-1-frame-1",
       "type": "image",
-      "value": "images/silver-arms-start-haram.png",
-      "enabled": false
+      "value": "images/uploads/d92b9737-2bdc-46ca-96be-c15732a67b85.jpg",
+      "enabled": true
     },
     {
       "id": "member-1-frame-2",
       "type": "image",
-      "value": "images/silver-arms-mid-haram.png",
-      "enabled": false
+      "value": "images/uploads/7bc7aa36-c7a0-4016-a555-01b9986ac23a.jpg",
+      "enabled": true
     },
     {
       "id": "member-1-frame-3",
       "type": "image",
-      "value": "images/silver-arms-haram.png",
-      "enabled": false
+      "value": "images/uploads/041f480e-b27b-4b26-958a-0ac5cb896d94.jpg",
+      "enabled": true
     },
     {
       "id": "member-2-name",
@@ -465,20 +465,20 @@
     {
       "id": "member-2-photo",
       "type": "image",
-      "value": "images/irving.jpg",
-      "enabled": false
+      "value": "images/uploads/e4a6eda9-b91c-4e7a-8ee8-ad58a593f613.jpg",
+      "enabled": true
     },
     {
       "id": "member-2-frame-1",
       "type": "image",
-      "value": "images/irving-vocal-mic.png",
-      "enabled": false
+      "value": "images/uploads/8e15b39b-2043-4f26-9247-d0e69e5964c0.jpg",
+      "enabled": true
     },
     {
       "id": "member-2-frame-2",
       "type": "image",
-      "value": "images/irving-vocal-2-mic.png",
-      "enabled": false
+      "value": "images/uploads/c36eba79-f94f-43ba-abf0-019ea27f34c4.jpg",
+      "enabled": true
     },
     {
       "id": "member-3-name",
@@ -503,20 +503,20 @@
     {
       "id": "member-3-photo",
       "type": "image",
-      "value": "images/sater.jpg",
-      "enabled": false
+      "value": "images/uploads/1b7028ae-0b1c-416c-aa93-4d232a80415c.jpg",
+      "enabled": true
     },
     {
       "id": "member-3-frame-1",
       "type": "image",
-      "value": "images/sater-guitar.png",
-      "enabled": false
+      "value": "images/uploads/21615567-06c9-4aa6-af32-e17a1e67e364.jpg",
+      "enabled": true
     },
     {
       "id": "member-3-frame-2",
       "type": "image",
-      "value": "images/sater-guitar-2.png",
-      "enabled": false
+      "value": "images/uploads/ad833a01-3728-4f0f-9db9-617729d8cc96.jpg",
+      "enabled": true
     },
     {
       "id": "member-4-name",
@@ -541,20 +541,20 @@
     {
       "id": "member-4-photo",
       "type": "image",
-      "value": "images/kbeto.jpg",
-      "enabled": false
+      "value": "images/uploads/f71410f3-602e-415b-82b0-4ab61e44ca74.jpg",
+      "enabled": true
     },
     {
       "id": "member-4-frame-1",
       "type": "image",
-      "value": "images/kbto-bass.png",
-      "enabled": false
+      "value": "images/uploads/acf1487a-6f61-442f-889d-3a8fcdd71ed9.jpg",
+      "enabled": true
     },
     {
       "id": "member-4-frame-2",
       "type": "image",
-      "value": "images/kbto-bass-2.png",
-      "enabled": false
+      "value": "images/uploads/2ce3f204-97d2-4cef-a3e4-473ad2193fda.jpg",
+      "enabled": true
     },
     {
       "id": "lineup-mascot",
