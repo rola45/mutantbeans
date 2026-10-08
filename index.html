@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#11100e">
-  <meta name="description" content="Unofficial fan page for Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and photos.">
+  <meta name="description" content="Official website of Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and news.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="Mutant Beans Fan Page">
+  <meta name="author" content="Rolando Victorio">
   <title>Mutant Beans | Funk Rock from Ensenada, Mexico</title>
   <link rel="canonical" href="https://mutantbeans.com/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Mutant Beans Fan Page">
+  <meta property="og:site_name" content="Mutant Beans">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es_MX">
   <meta property="og:url" content="https://mutantbeans.com/">
   <meta property="og:title" content="Mutant Beans | Funk Rock from Ensenada">
-  <meta property="og:description" content="Funk rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Meet the band, discover their music and follow upcoming shows.">
+  <meta property="og:description" content="Official website of Mutant Beans: funk-rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Discover their music, members and upcoming shows.">
   <meta property="og:image" content="https://mutantbeans.com/og.png">
   <meta property="og:image:secure_url" content="https://mutantbeans.com/og.png">
   <meta property="og:image:type" content="image/png">
@@ -24,7 +24,7 @@
   <meta property="og:image:alt" content="Black line-art Mutant Beans mascot on a white background">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mutant Beans | Funk Rock from Ensenada">
-  <meta name="twitter:description" content="Funk rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Meet the band, discover their music and follow upcoming shows.">
+  <meta name="twitter:description" content="Official website of Mutant Beans: funk-rock, hip-hop, thrash, punk and hardcore from Ensenada, Baja California. Discover their music, members and upcoming shows.">
   <meta name="twitter:image" content="https://mutantbeans.com/og.png">
   <meta name="twitter:image:alt" content="Black line-art Mutant Beans mascot on a white background">
 
@@ -36,7 +36,7 @@
           "@type": "WebSite",
           "@id": "https://mutantbeans.com/#website",
           "url": "https://mutantbeans.com/",
-          "name": "Mutant Beans Fan Page",
+          "name": "Mutant Beans",
           "inLanguage": ["en", "es-MX"],
           "about": {"@id": "https://mutantbeans.com/#band"}
         },
@@ -343,8 +343,8 @@
         document.documentElement.lang = language;
         document.title = language === 'en' ? 'Mutant Beans | Funk Rock from Ensenada, Mexico' : 'Mutant Beans — banda de funk rock de Ensenada';
         document.querySelector('meta[name="description"]').content = language === 'en'
-          ? 'Unofficial fan page for Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and photos.'
-          : 'Página fanmade de Mutant Beans, banda independiente de Ensenada, Baja California. Explora su música, integrantes, fechas y archivo visual.';
+          ? 'Official website of Mutant Beans, an independent band from Ensenada, Baja California, blending funk-rock, hip-hop, thrash, punk and hardcore. Music, members, shows and news.'
+          : 'Sitio oficial de Mutant Beans, banda independiente de Ensenada, Baja California. Funk-rock, hip-hop, thrash, punk y hardcore. Música, integrantes, fechas y noticias.';
         originalTextNodes.forEach(([node, original]) => { node.nodeValue = translateValue(original, language, node); });
         originalAttributes.forEach(([element, name, original]) => { element.setAttribute(name, translateValue(original, language)); });
         const previewCaption = document.querySelector('#photo-preview-caption');
