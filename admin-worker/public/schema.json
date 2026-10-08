@@ -171,7 +171,7 @@
       "label": "Icono de la pestaña (favicon)",
       "type": "image",
       "selector": "#site-favicon",
-      "value": "images/site-favicon.svg"
+      "value": "images/site-favicon.png"
     },
     {
       "id": "topline-location",
