@@ -4,31 +4,31 @@
     {
       "id": "logo",
       "type": "image",
-      "value": "images/mutant-beans-logo-white.png",
+      "value": "images/optimized/mutant-beans-logo-white.webp",
       "enabled": false
     },
     {
       "id": "principal",
       "type": "image",
-      "value": "images/drive-assets/mutant-skate-121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg.png",
+      "value": "images/optimized/mutant-skate-121yioxKbPYCwDVUWlEyyuF_Q4qM66fDg.webp",
       "enabled": true
     },
     {
       "id": "story-mascot",
       "type": "image",
-      "value": "images/drive-assets/mutant-warped-1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5.png",
+      "value": "images/optimized/mutant-warped-1d_x4R5sAOnMwSFpy9sTilJ9DdeCYTYf5.webp",
       "enabled": true
     },
     {
       "id": "flyer",
       "type": "image",
-      "value": "images/uploads/91b219a5-a36f-458d-88ee-920db9637a11.png",
+      "value": "images/optimized/91b219a5-a36f-458d-88ee-920db9637a11.webp",
       "enabled": true
     },
     {
       "id": "gallery-1",
       "type": "image",
-      "value": "images/rear-stage-mascot.jpg",
+      "value": "images/optimized/rear-stage-mascot.webp",
       "enabled": false
     },
     {
@@ -41,7 +41,7 @@
     {
       "id": "gallery-2",
       "type": "image",
-      "value": "images/group-mascot-updated.png",
+      "value": "images/optimized/group-mascot-updated.webp",
       "enabled": false
     },
     {
@@ -54,7 +54,7 @@
     {
       "id": "gallery-3",
       "type": "image",
-      "value": "images/live.jpg",
+      "value": "images/optimized/live.webp",
       "enabled": false
     },
     {
@@ -67,7 +67,7 @@
     {
       "id": "gallery-4",
       "type": "image",
-      "value": "images/vans-skatepark.jpg",
+      "value": "images/optimized/vans-skatepark.webp",
       "enabled": false
     },
     {
@@ -80,7 +80,7 @@
     {
       "id": "gallery-5",
       "type": "image",
-      "value": "images/banda-y-publico.jpg",
+      "value": "images/optimized/banda-y-publico.webp",
       "enabled": false
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": "gallery-6",
       "type": "image",
-      "value": "images/crowd-mascot.jpg",
+      "value": "images/optimized/crowd-mascot.webp",
       "enabled": false
     },
     {
@@ -106,7 +106,7 @@
     {
       "id": "gallery-7",
       "type": "image",
-      "value": "images/beach-stage-mascot-v2.png",
+      "value": "images/optimized/beach-stage-mascot-v2.webp",
       "enabled": false
     },
     {
@@ -421,25 +421,25 @@
     {
       "id": "member-1-photo",
       "type": "image",
-      "value": "images/uploads/5c5468f8-7ae5-4395-bf99-cad37e43cbeb.jpg",
+      "value": "images/optimized/5c5468f8-7ae5-4395-bf99-cad37e43cbeb.webp",
       "enabled": true
     },
     {
       "id": "member-1-frame-1",
       "type": "image",
-      "value": "images/uploads/d92b9737-2bdc-46ca-96be-c15732a67b85.jpg",
+      "value": "images/optimized/d92b9737-2bdc-46ca-96be-c15732a67b85.webp",
       "enabled": true
     },
     {
       "id": "member-1-frame-2",
       "type": "image",
-      "value": "images/uploads/7bc7aa36-c7a0-4016-a555-01b9986ac23a.jpg",
+      "value": "images/optimized/7bc7aa36-c7a0-4016-a555-01b9986ac23a.webp",
       "enabled": true
     },
     {
       "id": "member-1-frame-3",
       "type": "image",
-      "value": "images/uploads/041f480e-b27b-4b26-958a-0ac5cb896d94.jpg",
+      "value": "images/optimized/041f480e-b27b-4b26-958a-0ac5cb896d94.webp",
       "enabled": true
     },
     {
@@ -465,19 +465,19 @@
     {
       "id": "member-2-photo",
       "type": "image",
-      "value": "images/uploads/e4a6eda9-b91c-4e7a-8ee8-ad58a593f613.jpg",
+      "value": "images/optimized/e4a6eda9-b91c-4e7a-8ee8-ad58a593f613.webp",
       "enabled": true
     },
     {
       "id": "member-2-frame-1",
       "type": "image",
-      "value": "images/uploads/8e15b39b-2043-4f26-9247-d0e69e5964c0.jpg",
+      "value": "images/optimized/8e15b39b-2043-4f26-9247-d0e69e5964c0.webp",
       "enabled": true
     },
     {
       "id": "member-2-frame-2",
       "type": "image",
-      "value": "images/uploads/c36eba79-f94f-43ba-abf0-019ea27f34c4.jpg",
+      "value": "images/optimized/c36eba79-f94f-43ba-abf0-019ea27f34c4.webp",
       "enabled": true
     },
     {
@@ -503,19 +503,19 @@
     {
       "id": "member-3-photo",
       "type": "image",
-      "value": "images/uploads/1b7028ae-0b1c-416c-aa93-4d232a80415c.jpg",
+      "value": "images/optimized/1b7028ae-0b1c-416c-aa93-4d232a80415c.webp",
       "enabled": true
     },
     {
       "id": "member-3-frame-1",
       "type": "image",
-      "value": "images/uploads/21615567-06c9-4aa6-af32-e17a1e67e364.jpg",
+      "value": "images/optimized/21615567-06c9-4aa6-af32-e17a1e67e364.webp",
       "enabled": true
     },
     {
       "id": "member-3-frame-2",
       "type": "image",
-      "value": "images/uploads/ad833a01-3728-4f0f-9db9-617729d8cc96.jpg",
+      "value": "images/optimized/ad833a01-3728-4f0f-9db9-617729d8cc96.webp",
       "enabled": true
     },
     {
@@ -541,31 +541,31 @@
     {
       "id": "member-4-photo",
       "type": "image",
-      "value": "images/uploads/f71410f3-602e-415b-82b0-4ab61e44ca74.jpg",
+      "value": "images/optimized/f71410f3-602e-415b-82b0-4ab61e44ca74.webp",
       "enabled": true
     },
     {
       "id": "member-4-frame-1",
       "type": "image",
-      "value": "images/uploads/acf1487a-6f61-442f-889d-3a8fcdd71ed9.jpg",
+      "value": "images/optimized/acf1487a-6f61-442f-889d-3a8fcdd71ed9.webp",
       "enabled": true
     },
     {
       "id": "member-4-frame-2",
       "type": "image",
-      "value": "images/uploads/2ce3f204-97d2-4cef-a3e4-473ad2193fda.jpg",
+      "value": "images/optimized/2ce3f204-97d2-4cef-a3e4-473ad2193fda.webp",
       "enabled": true
     },
     {
       "id": "lineup-mascot",
       "type": "image",
-      "value": "images/mascota-lineup.png",
+      "value": "images/optimized/mascota-lineup.webp",
       "enabled": false
     },
     {
       "id": "tour-mascot",
       "type": "image",
-      "value": "images/mascota-fechas.png",
+      "value": "images/optimized/mascota-fechas.webp",
       "enabled": false
     },
     {
@@ -671,7 +671,7 @@
     {
       "id": "music-mascot",
       "type": "image",
-      "value": "images/mascota-musica.png",
+      "value": "images/optimized/mascota-musica.webp",
       "enabled": false
     },
     {
@@ -888,49 +888,49 @@
     {
       "id": "gallery-mascot",
       "type": "image",
-      "value": "images/mascota-archivo.png",
+      "value": "images/optimized/mascota-archivo.webp",
       "enabled": false
     },
     {
       "id": "gallery-1-destination",
       "type": "link",
-      "value": "images/rear-stage-mascot.jpg",
+      "value": "images/optimized/rear-stage-mascot.webp",
       "enabled": false
     },
     {
       "id": "gallery-2-destination",
       "type": "link",
-      "value": "images/group-mascot-updated.png",
+      "value": "images/optimized/group-mascot-updated.webp",
       "enabled": false
     },
     {
       "id": "gallery-3-destination",
       "type": "link",
-      "value": "images/live.jpg",
+      "value": "images/optimized/live.webp",
       "enabled": false
     },
     {
       "id": "gallery-4-destination",
       "type": "link",
-      "value": "images/vans-skatepark.jpg",
+      "value": "images/optimized/vans-skatepark.webp",
       "enabled": false
     },
     {
       "id": "gallery-5-destination",
       "type": "link",
-      "value": "images/banda-y-publico.jpg",
+      "value": "images/optimized/banda-y-publico.webp",
       "enabled": false
     },
     {
       "id": "gallery-6-destination",
       "type": "link",
-      "value": "images/crowd-mascot.jpg",
+      "value": "images/optimized/crowd-mascot.webp",
       "enabled": false
     },
     {
       "id": "gallery-7-destination",
       "type": "link",
-      "value": "images/beach-stage-mascot-v2.png",
+      "value": "images/optimized/beach-stage-mascot-v2.webp",
       "enabled": false
     },
     {

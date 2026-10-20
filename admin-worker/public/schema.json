@@ -6,35 +6,35 @@
       "label": "Logo principal",
       "type": "image",
       "selector": ".hero-wordmark",
-      "value": "images/mutant-beans-logo-white.png"
+      "value": "images/optimized/mutant-beans-logo-white.webp"
     },
     {
       "id": "principal",
       "label": "Imagen de inicio",
       "type": "image",
       "selector": ".hero-art",
-      "value": "images/principal.png"
+      "value": "images/optimized/principal.webp"
     },
     {
       "id": "story-mascot",
       "label": "Mascota de historia",
       "type": "image",
       "selector": ".story-mark .module-mascot",
-      "value": "images/poutine-freddy.png"
+      "value": "images/optimized/poutine-freddy.webp"
     },
     {
       "id": "flyer",
       "label": "Flyer de fechas",
       "type": "image",
       "selector": ".tour-poster img",
-      "value": "images/october-tour.jpg"
+      "value": "images/optimized/october-tour.webp"
     },
     {
       "id": "gallery-1",
       "label": "Galería · foto 1",
       "type": "image",
       "selector": ".gallery-tile:nth-child(1) img",
-      "value": "images/rear-stage-mascot.jpg"
+      "value": "images/optimized/rear-stage-mascot.webp"
     },
     {
       "id": "gallery-caption-1",
@@ -49,7 +49,7 @@
       "label": "Galería · foto 2",
       "type": "image",
       "selector": ".gallery-tile:nth-child(2) img",
-      "value": "images/group-mascot-updated.png"
+      "value": "images/optimized/group-mascot-updated.webp"
     },
     {
       "id": "gallery-caption-2",
@@ -64,7 +64,7 @@
       "label": "Galería · foto 3",
       "type": "image",
       "selector": ".gallery-tile:nth-child(3) img",
-      "value": "images/live.jpg"
+      "value": "images/optimized/live.webp"
     },
     {
       "id": "gallery-caption-3",
@@ -79,7 +79,7 @@
       "label": "Galería · foto 4",
       "type": "image",
       "selector": ".gallery-tile:nth-child(4) img",
-      "value": "images/vans-skatepark.jpg"
+      "value": "images/optimized/vans-skatepark.webp"
     },
     {
       "id": "gallery-caption-4",
@@ -94,7 +94,7 @@
       "label": "Galería · foto 5",
       "type": "image",
       "selector": ".gallery-tile:nth-child(5) img",
-      "value": "images/banda-y-publico.jpg"
+      "value": "images/optimized/banda-y-publico.webp"
     },
     {
       "id": "gallery-caption-5",
@@ -109,7 +109,7 @@
       "label": "Galería · foto 6",
       "type": "image",
       "selector": ".gallery-tile:nth-child(6) img",
-      "value": "images/crowd-mascot.jpg"
+      "value": "images/optimized/crowd-mascot.webp"
     },
     {
       "id": "gallery-caption-6",
@@ -124,7 +124,7 @@
       "label": "Galería · foto 7",
       "type": "image",
       "selector": ".gallery-tile:nth-child(7) img",
-      "value": "images/beach-stage-mascot-v2.png"
+      "value": "images/optimized/beach-stage-mascot-v2.webp"
     },
     {
       "id": "gallery-caption-7",
@@ -485,28 +485,28 @@
       "label": "Silver · foto principal",
       "type": "image",
       "selector": ".member:nth-child(1) .member-photo-rest",
-      "value": "images/silver.jpg"
+      "value": "images/optimized/silver.webp"
     },
     {
       "id": "member-1-frame-1",
       "label": "Silver · imagen animada 1",
       "type": "image",
       "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(2)",
-      "value": "images/silver-arms-start-haram.png"
+      "value": "images/optimized/silver-arms-start-haram.webp"
     },
     {
       "id": "member-1-frame-2",
       "label": "Silver · imagen animada 2",
       "type": "image",
       "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(3)",
-      "value": "images/silver-arms-mid-haram.png"
+      "value": "images/optimized/silver-arms-mid-haram.webp"
     },
     {
       "id": "member-1-frame-3",
       "label": "Silver · imagen animada 3",
       "type": "image",
       "selector": ".member:nth-child(1) .member-photo-action:nth-of-type(4)",
-      "value": "images/silver-arms-haram.png"
+      "value": "images/optimized/silver-arms-haram.webp"
     },
     {
       "id": "member-2-name",
@@ -536,21 +536,21 @@
       "label": "Irving · foto principal",
       "type": "image",
       "selector": ".member:nth-child(2) .member-photo-rest",
-      "value": "images/irving.jpg"
+      "value": "images/optimized/irving.webp"
     },
     {
       "id": "member-2-frame-1",
       "label": "Irving · imagen animada 1",
       "type": "image",
       "selector": ".member:nth-child(2) .member-photo-action:nth-of-type(2)",
-      "value": "images/irving-vocal-mic.png"
+      "value": "images/optimized/irving-vocal-mic.webp"
     },
     {
       "id": "member-2-frame-2",
       "label": "Irving · imagen animada 2",
       "type": "image",
       "selector": ".member:nth-child(2) .member-photo-action:nth-of-type(3)",
-      "value": "images/irving-vocal-2-mic.png"
+      "value": "images/optimized/irving-vocal-2-mic.webp"
     },
     {
       "id": "member-3-name",
@@ -580,21 +580,21 @@
       "label": "Sater · foto principal",
       "type": "image",
       "selector": ".member:nth-child(3) .member-photo-rest",
-      "value": "images/sater.jpg"
+      "value": "images/optimized/sater.webp"
     },
     {
       "id": "member-3-frame-1",
       "label": "Sater · imagen animada 1",
       "type": "image",
       "selector": ".member:nth-child(3) .member-photo-action:nth-of-type(2)",
-      "value": "images/sater-guitar.png"
+      "value": "images/optimized/sater-guitar.webp"
     },
     {
       "id": "member-3-frame-2",
       "label": "Sater · imagen animada 2",
       "type": "image",
       "selector": ".member:nth-child(3) .member-photo-action:nth-of-type(3)",
-      "value": "images/sater-guitar-2.png"
+      "value": "images/optimized/sater-guitar-2.webp"
     },
     {
       "id": "member-4-name",
@@ -624,35 +624,35 @@
       "label": "KBTO · foto principal",
       "type": "image",
       "selector": ".member:nth-child(4) .member-photo-rest",
-      "value": "images/kbeto.jpg"
+      "value": "images/optimized/kbeto.webp"
     },
     {
       "id": "member-4-frame-1",
       "label": "KBTO · imagen animada 1",
       "type": "image",
       "selector": ".member:nth-child(4) .member-photo-action:nth-of-type(2)",
-      "value": "images/kbto-bass.png"
+      "value": "images/optimized/kbto-bass.webp"
     },
     {
       "id": "member-4-frame-2",
       "label": "KBTO · imagen animada 2",
       "type": "image",
       "selector": ".member:nth-child(4) .member-photo-action:nth-of-type(3)",
-      "value": "images/kbto-bass-2.png"
+      "value": "images/optimized/kbto-bass-2.webp"
     },
     {
       "id": "lineup-mascot",
       "label": "Mascota de la alineación",
       "type": "image",
       "selector": ".lineup-mascot",
-      "value": "images/mascota-lineup.png"
+      "value": "images/optimized/mascota-lineup.webp"
     },
     {
       "id": "tour-mascot",
       "label": "Mascota de la gira",
       "type": "image",
       "selector": ".tour-mascot",
-      "value": "images/mascota-fechas.png"
+      "value": "images/optimized/mascota-fechas.webp"
     },
     {
       "id": "tour-poster-link",
@@ -773,7 +773,7 @@
       "label": "Mascota de música",
       "type": "image",
       "selector": ".music-mascot",
-      "value": "images/mascota-musica.png"
+      "value": "images/optimized/mascota-musica.webp"
     },
     {
       "id": "release-heading",
@@ -1020,56 +1020,56 @@
       "label": "Mascota de la galería",
       "type": "image",
       "selector": ".gallery-mascot",
-      "value": "images/mascota-archivo.png"
+      "value": "images/optimized/mascota-archivo.webp"
     },
     {
       "id": "gallery-1-destination",
       "label": "Galería 1 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(1)",
-      "value": "images/rear-stage-mascot.jpg"
+      "value": "images/optimized/rear-stage-mascot.webp"
     },
     {
       "id": "gallery-2-destination",
       "label": "Galería 2 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(2)",
-      "value": "images/group-mascot-updated.png"
+      "value": "images/optimized/group-mascot-updated.webp"
     },
     {
       "id": "gallery-3-destination",
       "label": "Galería 3 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(3)",
-      "value": "images/live.jpg"
+      "value": "images/optimized/live.webp"
     },
     {
       "id": "gallery-4-destination",
       "label": "Galería 4 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(4)",
-      "value": "images/vans-skatepark.jpg"
+      "value": "images/optimized/vans-skatepark.webp"
     },
     {
       "id": "gallery-5-destination",
       "label": "Galería 5 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(5)",
-      "value": "images/banda-y-publico.jpg"
+      "value": "images/optimized/banda-y-publico.webp"
     },
     {
       "id": "gallery-6-destination",
       "label": "Galería 6 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(6)",
-      "value": "images/crowd-mascot.jpg"
+      "value": "images/optimized/crowd-mascot.webp"
     },
     {
       "id": "gallery-7-destination",
       "label": "Galería 7 · destino del clic",
       "type": "link",
       "selector": ".gallery-tile:nth-child(7)",
-      "value": "images/beach-stage-mascot-v2.png"
+      "value": "images/optimized/beach-stage-mascot-v2.webp"
     },
     {
       "id": "final-cta-title",

@@ -272,6 +272,33 @@ async function api(path, options = {}) {
   if (!response.ok) throw new Error(data.error || 'No se pudo guardar.');
   return data;
 }
+async function optimizeImageUpload(file) {
+  const maxOriginalBytes = 20 * 1024 * 1024;
+  const maxUploadBytes = 6 * 1024 * 1024;
+  if (file.size > maxOriginalBytes) throw new Error('La imagen original debe pesar menos de 20 MB.');
+  if (typeof createImageBitmap !== 'function') {
+    if (file.size <= maxUploadBytes) return file;
+    throw new Error('Este navegador no puede optimizar la imagen. Prueba con una foto menor a 6 MB.');
+  }
+
+  let bitmap;
+  try { bitmap = await createImageBitmap(file); }
+  catch { throw new Error('No se pudo leer la imagen. Usa PNG, JPG o WebP.'); }
+  try {
+    for (const [maxSide, quality] of [[1800, 0.84], [1400, 0.78], [1000, 0.72]]) {
+      const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      const context = canvas.getContext('2d', { alpha: true });
+      if (!context) throw new Error('No se pudo preparar la imagen para optimizarla.');
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      const optimized = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
+      if (optimized && optimized.size <= maxUploadBytes) return optimized;
+    }
+  } finally { bitmap.close?.(); }
+  throw new Error('La imagen sigue siendo demasiado pesada después de optimizarla. Prueba con otra imagen.');
+}
 function label(text, input) { const element = document.createElement('label'); element.append(text, input); return element; }
 function input(type, value = '') { const element = document.createElement('input'); element.type = type; element.value = value; return element; }
 function showRow(show = { date: '', venue: '', city: '' }) {
@@ -336,17 +363,20 @@ function renderField(spec, container, compact = false) {
     upload.onchange = async () => {
       const file = upload.files[0]; if (!file) return;
       if (busy) { report('Espera a que termine la operación actual.'); upload.value = ''; return; }
-      if (file.size > 6 * 1024 * 1024) { report('La imagen debe pesar menos de 6 MB.', true); return; }
+      if (file.size > 20 * 1024 * 1024) { report('La imagen original debe pesar menos de 20 MB.', true); return; }
       busy = true; document.querySelector('#save').disabled = true; upload.disabled = true;
       try {
-        report('Subiendo imagen…');
-        const data = await api('upload', { method:'POST', headers:{'Content-Type':file.type}, body:file });
+        report('Optimizando imagen…');
+        const optimized = await optimizeImageUpload(file);
+        report('Subiendo imagen optimizada…');
+        const data = await api('upload', { method:'POST', headers:{'Content-Type':optimized.type || file.type}, body:optimized });
         field.value = path.value = data.path; field.enabled = enabled.checked = true;
-        const objectURL = URL.createObjectURL(file);
+        const objectURL = URL.createObjectURL(optimized);
         draftImageURLs.set(data.path, objectURL);
         refreshPreviewDraft();
         preview.src = objectURL;
-        report('Imagen subida. Pulsa Guardar y publicar para colocarla en la página.');
+        const reduction = file.size > optimized.size ? ` Reducción: ${Math.round((1 - optimized.size / file.size) * 100)}%.` : '';
+        report('Imagen optimizada y subida.' + reduction + ' Pulsa Guardar y publicar para colocarla en la página.');
       } catch (error) { report(error.message, true); }
       finally { busy = false; document.querySelector('#save').disabled = false; upload.disabled = false; }
     };
@@ -357,7 +387,7 @@ function renderField(spec, container, compact = false) {
       refreshPreviewDraft();
       report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
     });
-    body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · máximo 6 MB', upload));
+    body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · se optimiza automáticamente (máx. 20 MB)', upload));
   } else if (spec.type === 'link') {
     const url = input('text', field.value); url.autocomplete = 'url'; url.spellcheck = false;
     url.oninput = () => { field.value = url.value; field.enabled = enabled.checked = true; refreshPreviewDraft(); };

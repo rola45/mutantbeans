@@ -48,7 +48,11 @@ window.mutantContentReady = (async () => {
           continue;
         }
         if (image instanceof HTMLImageElement) {
-          image.src = field.value;
+          image.loading = image.matches('.hero-wordmark, .hero-art') ? 'eager' : 'lazy';
+          image.decoding = 'async';
+          const currentSource = new URL(image.getAttribute('src') || '', document.baseURI).href;
+          const nextSource = new URL(field.value, document.baseURI).href;
+          if (currentSource !== nextSource) image.src = field.value;
           const tile = image.closest('.gallery-tile');
           if (tile) { tile.href = field.value; tile.removeAttribute('target'); }
         }
