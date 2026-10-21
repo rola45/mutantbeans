@@ -32,10 +32,14 @@ function setEditableText(element, value) {
   element.textContent = value;
 }
 
+function siteAssetUrl(value) {
+  return /^(?:images|imagenes|assets|data|output)\//i.test(value) ? `/${value}` : value;
+}
+
 window.mutantContentReady = (async () => {
   if (new URLSearchParams(window.location.search).has('admin-preview')) return;
   try {
-    const response = await fetch('data/site-content.json', { cache: 'no-cache', signal: AbortSignal.timeout(3500) });
+    const response = await fetch('/data/site-content.json', { cache: 'no-cache', signal: AbortSignal.timeout(3500) });
     if (!response.ok) return;
     const content = await response.json();
     if (content.version !== 1 || !Array.isArray(content.fields)) return;
@@ -44,15 +48,15 @@ window.mutantContentReady = (async () => {
       if (!/^(images|imagenes)\//.test(field.value) || field.value.includes('..')) continue;
       for (const image of document.querySelectorAll(mutantContentSelectors[field.id])) {
         if (image.tagName === 'LINK' && image.id === 'site-favicon') {
-          image.href = field.value; image.type = field.value.toLowerCase().endsWith('.svg') ? 'image/svg+xml' : field.value.toLowerCase().endsWith('.webp') ? 'image/webp' : field.value.toLowerCase().endsWith('.jpg') || field.value.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
+          image.href = siteAssetUrl(field.value); image.type = field.value.toLowerCase().endsWith('.svg') ? 'image/svg+xml' : field.value.toLowerCase().endsWith('.webp') ? 'image/webp' : field.value.toLowerCase().endsWith('.jpg') || field.value.toLowerCase().endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
           continue;
         }
         if (image instanceof HTMLImageElement) {
           image.loading = image.matches('.hero-wordmark, .hero-art') ? 'eager' : 'lazy';
           image.decoding = 'async';
           const currentSource = new URL(image.getAttribute('src') || '', document.baseURI).href;
-          const nextSource = new URL(field.value, document.baseURI).href;
-          if (currentSource !== nextSource) image.src = field.value;
+          const nextSource = new URL(siteAssetUrl(field.value), `${location.origin}/`).href;
+          if (currentSource !== nextSource) image.src = nextSource;
           const tile = image.closest('.gallery-tile');
           if (tile) { tile.href = field.value; tile.removeAttribute('target'); }
         }
@@ -91,7 +95,7 @@ window.mutantContentReady = (async () => {
       if (!/^(https:\/\/[^\s]+|#[\w-]+|(?:images|imagenes)\/[\w .()\/-]+\.(?:png|jpg|jpeg|webp|svg))$/i.test(value) || value.includes('..')) continue;
       for (const element of document.querySelectorAll(mutantContentSelectors[field.id])) {
         const link = element.matches('a[href]') ? element : element.querySelector('a[href]');
-        if (link) link.setAttribute('href', value);
+        if (link) link.setAttribute('href', siteAssetUrl(value));
       }
     }
     window.applyMutantContentLanguage = language => {
