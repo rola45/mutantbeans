@@ -241,8 +241,17 @@
       const previous = carousel.querySelector('[data-gallery-prev]');
       const next = carousel.querySelector('[data-gallery-next]');
       const updateCarousel = () => {
-        const trackLeft = track.getBoundingClientRect().left;
-        const current = Math.max(0, slides.findIndex((slide) => slide.getBoundingClientRect().right > trackLeft + 8));
+        const trackRect = track.getBoundingClientRect();
+        let current = 0;
+        let greatestVisibleWidth = 0;
+        slides.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect();
+          const visibleWidth = Math.max(0, Math.min(rect.right, trackRect.right) - Math.max(rect.left, trackRect.left));
+          if (visibleWidth > greatestVisibleWidth) {
+            current = index;
+            greatestVisibleWidth = visibleWidth;
+          }
+        });
         status.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
         previous.disabled = track.scrollLeft <= 2;
         next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
