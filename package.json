@@ -1,0 +1,16 @@
+{
+  "name": "mutantbeans-motion-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build-time bundling for the Mutant Beans homepage motion effects",
+  "scripts": {
+    "build": "esbuild src/motion-effects.js --bundle --minify --format=iife --target=es2020 --outfile=assets/motion-effects.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "motion": "^14.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
