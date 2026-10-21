@@ -15,9 +15,10 @@ if (!reduceMotion.matches) {
         element,
         { opacity: [0, 1], transform: ["translateY(18px)", "translateY(0px)"] },
         {
-          duration: 0.52,
+          duration: 0.78,
           delay: delay * index,
           ease: [0.22, 1, 0.36, 1],
+          onComplete: () => element.style.removeProperty("transform"),
         },
       );
     };
@@ -39,14 +40,30 @@ if (!reduceMotion.matches) {
     elements.forEach((element) => observer.observe(element));
   };
 
+  const intro = (element, transform, delay = 0) => {
+    if (!element) return;
+    animate(element, {
+      opacity: [0, 1],
+      transform: [transform, "none"],
+    }, {
+      duration: 1.05,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+      onComplete: () => element.style.removeProperty("transform"),
+    });
+  };
+
+  intro(document.querySelector(".hero > div:first-child"), "translateX(-42px)");
+  intro(document.querySelector(".hero-image"), "translate(42px, 28px) scale(0.9)", 0.12);
+
   document.querySelectorAll("main > .section").forEach((section) => {
     reveal(section.querySelectorAll(":scope > .wrap > .section-head"));
   });
 
-  reveal(".members > .member", { delay: 0.075 });
-  reveal(".tour-list > .tour-date", { delay: 0.055 });
-  reveal(".release-list > .release", { delay: 0.045 });
-  reveal(".gallery-grid > .gallery-tile", { delay: 0.06 });
+  reveal(".members > .member", { delay: 0.12 });
+  reveal(".tour-list > .tour-date", { delay: 0.09 });
+  reveal(".release-list > .release", { delay: 0.075 });
+  reveal(".gallery-grid > .gallery-tile", { delay: 0.1 });
   reveal([document.querySelector(".story-mark"), document.querySelector(".story-text")].filter(Boolean));
   reveal([document.querySelector(".feature"), document.querySelector(".release-panel")].filter(Boolean));
 }
