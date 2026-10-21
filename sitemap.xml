@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mutantbeans.com/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/es/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/press/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/press/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/prensa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/press/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/es/prensa/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/press/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/prensa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/press/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/story/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/story/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/historia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/story/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/es/historia/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/story/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/historia/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/story/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/shows/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/shows/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/fechas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/shows/" />
+  </url>
+  <url>
+    <loc>https://mutantbeans.com/es/fechas/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mutantbeans.com/shows/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://mutantbeans.com/es/fechas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutantbeans.com/shows/" />
   </url>
 </urlset>
