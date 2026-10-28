@@ -32,6 +32,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/assets/visibility-pages.css">
+  <style>
+    .mb-press-actions .mb-button{min-width:0;max-width:100%}
+    .mb-booking-email{text-transform:none;font-size:12px;letter-spacing:0;overflow-wrap:anywhere}
+    .mb-booking-alt{margin:14px 0 0;color:var(--mb-muted);font-size:13px}
+    .mb-booking-alt a{color:var(--mb-paper);text-underline-offset:4px}
+    .mb-booking-alt a:hover{color:var(--mb-acid)}
+    @media(max-width:520px){.mb-actions{flex-direction:column}.mb-actions .mb-button{flex:auto;width:100%}.mb-booking-email{white-space:nowrap}}
+  </style>
   <link rel="icon" href="/images/favicon.png" type="image/png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Mutant Beans Press Kit and Booking","url":"https://mutantbeans.com/press/","inLanguage":"en","about":{"@id":"https://mutantbeans.com/#band"}}</script>
 </head>
@@ -49,10 +57,11 @@
         <p class="mb-eyebrow">Official press kit · booking</p>
         <h1>Mutant <span>Beans</span></h1>
         <p class="mb-lede">Funk-rock, hip-hop, thrash, punk, and hardcore from Ensenada, Baja California, Mexico.</p>
-        <div class="mb-actions">
+        <div class="mb-actions mb-press-actions">
           <a class="mb-button" href="/output/pdf/Mutant-Beans-Press-Kit-2026.pdf" download>Download press kit ↗</a>
-          <a class="mb-button mb-button--outline" href="https://www.instagram.com/mutantbeans/" target="_blank" rel="noopener noreferrer">Booking & press contact ↗</a>
+          <a class="mb-button mb-button--outline mb-booking-email" href="mailto:losmutantbeans@gmail.com" aria-label="Email Mutant Beans for booking and press">losmutantbeans@gmail.com</a>
         </div>
+        <p class="mb-booking-alt">Booking & press inquiries · <a href="https://www.instagram.com/mutantbeans/" target="_blank" rel="noopener noreferrer">You can also message us on Instagram ↗</a></p>
         <div class="mb-facts" aria-label="Band facts">
           <div class="mb-fact"><strong>2014</strong><span>Formed</span></div>
           <div class="mb-fact"><strong>Ensenada</strong><span>Origin</span></div>

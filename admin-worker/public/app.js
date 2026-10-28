@@ -227,6 +227,8 @@ async function refreshPreviewDraft() {
         }
       }
     }
+    previewFrame.contentWindow.mutantSiteContent = { showsEnabled: document.querySelector('#shows-enabled').checked, shows: getDraftShows() };
+    previewFrame.contentWindow.dispatchEvent(new previewFrame.contentWindow.Event('mutant:contentupdated'));
     installVisualEditTargets();
     highlightPreviewTarget();
   } catch { previewTarget.textContent = 'No se pudieron aplicar los cambios del borrador a la vista previa.'; }
@@ -303,15 +305,18 @@ function label(text, input) { const element = document.createElement('label'); e
 function input(type, value = '') { const element = document.createElement('input'); element.type = type; element.value = value; return element; }
 function showRow(show = { date: '', venue: '', city: '' }) {
   const row = document.createElement('div'); row.className = 'show-row';
-  for (const [name, title, type] of [['date','Fecha','date'],['venue','Lugar','text'],['city','Ciudad','text']]) {
-    const field = input(type, show[name]); field.dataset.showField = name; field.required = true;
+  for (const [name, title, type] of [['date','Fecha','date'],['venue','Lugar','text'],['city','Ciudad','text'],['ticketUrl','Boletos · enlace oficial (opcional)','url']]) {
+    const field = input(type, show[name]); field.dataset.showField = name; field.required = name !== 'ticketUrl';
+    if (name === 'ticketUrl') { field.placeholder = 'https://…'; field.maxLength = 2048; field.pattern = 'https://.+'; }
     field.addEventListener('input', () => {
       const useShows = document.querySelector('#shows-enabled');
       useShows.checked = true;
       content.showsEnabled = true;
       refreshPreviewDraft();
     });
-    row.append(label(title, field));
+    const wrapper = label(title, field);
+    if (name === 'ticketUrl') wrapper.classList.add('show-ticket-field');
+    row.append(wrapper);
   }
   const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => {
     row.remove();

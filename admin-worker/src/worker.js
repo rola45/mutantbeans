@@ -73,6 +73,11 @@ function validateContent(data, schema) {
   for (const show of data.shows) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(show.date) || new Date(show.date + 'T12:00:00Z').toISOString().slice(0, 10) !== show.date) throw new Error('Fecha inválida.');
     for (const name of ['venue', 'city']) if (typeof show[name] !== 'string' || !show[name].trim() || show[name].length > 150) throw new Error('Completa lugar y ciudad.');
+    if (show.ticketUrl !== undefined && show.ticketUrl !== '') {
+      let ticket;
+      try { ticket = new URL(show.ticketUrl); } catch { throw new Error('El enlace de boletos debe ser una URL HTTPS válida.'); }
+      if (typeof show.ticketUrl !== 'string' || show.ticketUrl.length > 2048 || ticket.protocol !== 'https:' || ticket.username || ticket.password || /^(localhost|127\.|\[::1\])/.test(ticket.hostname)) throw new Error('El enlace de boletos debe ser público y usar HTTPS.');
+    }
   }
   return { version: 1, fields: data.fields.map(field => ['image', 'link'].includes(field.type)
     ? { id: field.id, type: field.type, value: field.value, enabled: field.enabled === true }

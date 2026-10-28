@@ -43,6 +43,7 @@ window.mutantContentReady = (async () => {
     if (!response.ok) return;
     const content = await response.json();
     if (content.version !== 1 || !Array.isArray(content.fields)) return;
+    window.mutantSiteContent = content;
     const active = content.fields.filter(field => field.enabled && mutantContentSelectors[field.id]);
     for (const field of active.filter(field => field.type === 'image')) {
       if (!/^(images|imagenes)\//.test(field.value) || field.value.includes('..')) continue;

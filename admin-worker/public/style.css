@@ -21,3 +21,5 @@ main{padding-bottom:110px}.editor-section{padding:0;margin:12px 0;overflow:hidde
 .visual-inspector input:not([type=checkbox]),.visual-inspector textarea{width:100%;min-width:0;max-width:100%}
 @media(max-width:1100px){.visual-workspace{grid-template-columns:minmax(0,1fr)}.visual-inspector{position:static;max-height:none;overflow:visible}.visual-inspector #shows{max-height:none;overflow:visible}}
 @media(max-width:650px){.visual-inspector{padding:16px}.visual-inspector .show-row{grid-template-columns:minmax(0,1fr)}.visual-inspector .show-row label:first-child{grid-column:auto}.visual-inspector .show-row button{width:100%}.visual-inspector .row{grid-template-columns:minmax(0,1fr)}}
+
+.show-row .show-ticket-field{grid-column:1/-1}
