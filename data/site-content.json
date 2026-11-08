@@ -22,7 +22,7 @@
     {
       "id": "flyer",
       "type": "image",
-      "value": "images/optimized/91b219a5-a36f-458d-88ee-920db9637a11.webp",
+      "value": "images/optimized/november-tour-2026.webp",
       "enabled": true
     },
     {
@@ -126,9 +126,9 @@
     {
       "id": "tour-title",
       "type": "text",
-      "es": "Octubre en ruta",
-      "en": "Octubre en ruta",
-      "enabled": false
+      "es": "Noviembre radioactivo",
+      "en": "November on tour",
+      "enabled": true
     },
     {
       "id": "story-copy",
@@ -1050,64 +1050,39 @@
   "showsEnabled": true,
   "shows": [
     {
-      "date": "2026-10-02",
-      "venue": "Abel's Bar",
-      "city": "Ensenada, BC"
-    },
-    {
-      "date": "2026-10-05",
+      "date": "2026-11-05",
       "venue": "Casa Verde",
       "city": "Ensenada, BC"
     },
     {
-      "date": "2026-10-10",
-      "venue": "Offbeat Bar",
-      "city": "Los Angeles, CA"
+      "date": "2026-11-13",
+      "venue": "La Santa",
+      "city": "Santa Ana, CA"
     },
     {
-      "date": "2026-10-15",
-      "venue": "Barrio Chino",
-      "city": "Mexicali, BC"
+      "date": "2026-11-14",
+      "venue": "Brick by Bricks",
+      "city": "Maywood, CA"
     },
     {
-      "date": "2026-10-16",
-      "venue": "Hot Rods Bar",
-      "city": "Holtville, CA"
+      "date": "2026-11-15",
+      "venue": "Festival Rock Sinaloa",
+      "city": "Culiacán"
     },
     {
-      "date": "2026-10-17",
-      "venue": "Rolls & Bowls",
-      "city": "San Luis, AZ"
-    },
-    {
-      "date": "2026-10-18",
-      "venue": "Bandcamp Baja",
-      "city": "Rosarito, BC"
-    },
-    {
-      "date": "2026-10-23",
+      "date": "2026-11-20",
       "venue": "Abel's Bar",
       "city": "Ensenada, BC"
     },
     {
-      "date": "2026-10-24",
-      "venue": "Peyo Rock House",
-      "city": "Tijuana, BC"
+      "date": "2026-11-21",
+      "venue": "Mandala",
+      "city": "Mexicali, BC"
     },
     {
-      "date": "2026-10-25",
-      "venue": "Black Dog Bar",
+      "date": "2026-11-28",
+      "venue": "Fecha sorpresa",
       "city": "Ensenada, BC"
-    },
-    {
-      "date": "2026-10-30",
-      "venue": "Origen Seattle",
-      "city": "Seattle, WA"
-    },
-    {
-      "date": "2026-10-31",
-      "venue": "Stage 722",
-      "city": "Portland, OR"
     }
   ]
 }
