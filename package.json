@@ -4,7 +4,7 @@
   "private": true,
   "description": "Build-time bundling for the Mutant Beans homepage motion effects",
   "scripts": {
-    "build": "esbuild src/motion-effects.js --bundle --minify --format=iife --target=es2020 --outfile=assets/motion-effects.js"
+    "build": "node scripts/build-homepage.mjs && esbuild src/motion-effects.js --bundle --minify --format=iife --target=es2020 --outfile=assets/motion-effects.js"
   },
   "type": "module",
   "dependencies": {

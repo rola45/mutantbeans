@@ -57,7 +57,11 @@ window.mutantContentReady = (async () => {
           image.decoding = 'async';
           const currentSource = new URL(image.getAttribute('src') || '', document.baseURI).href;
           const nextSource = new URL(siteAssetUrl(field.value), `${location.origin}/`).href;
-          if (currentSource !== nextSource) image.src = nextSource;
+          if (currentSource !== nextSource) {
+            image.removeAttribute('srcset');
+            image.removeAttribute('sizes');
+            image.src = nextSource;
+          }
           const tile = image.closest('.gallery-tile');
           if (tile) { tile.href = field.value; tile.removeAttribute('target'); }
         }

@@ -1,0 +1,14 @@
+#fechas,
+#musica {
+  background: linear-gradient(165deg, rgba(105, 245, 64, .055), transparent 65%);
+}
+
+#archivo {
+  background: linear-gradient(15deg, rgba(105, 245, 64, .045), transparent 55%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main * {
+    translate: none !important;
+  }
+}
