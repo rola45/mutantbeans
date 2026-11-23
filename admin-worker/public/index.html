@@ -24,6 +24,10 @@
         <div class="visual-workspace">
           <section class="visual-canvas" aria-label="Vista interactiva de la página">
             <div class="visual-canvas-toolbar"><div><h2>Vista de mutantbeans.com</h2><p id="preview-target" aria-live="polite">Haz clic en un elemento editable para empezar.</p></div><button id="preview-open" class="preview-button" type="button">Ampliar página</button></div>
+            <div class="preview-options">
+              <label>Idioma <select id="preview-language"><option value="en">English</option><option value="es">Español</option></select></label>
+              <label>Tamaño <select id="preview-size"><option value="desktop">Escritorio</option><option value="mobile">Móvil</option></select></label>
+            </div>
             <iframe id="site-preview" src="/?admin-preview=1" title="Vista interactiva de Mutant Beans"></iframe>
           </section>
           <aside class="visual-inspector" aria-label="Editor del elemento seleccionado">
@@ -40,15 +44,24 @@
             <div class="editor-section-body">
               <p class="shows-help">Editar, agregar o quitar una fecha activa esta lista para el sitio. Usa «Guardar y publicar» para aplicar los cambios.</p>
               <label><input id="shows-enabled" type="checkbox"> Usar estas fechas en la página</label>
+              <div id="tour-fields"></div>
+              <button id="calibrate-flyer" type="button">Ajustar líneas en la vista previa</button>
+              <p id="calibration-status" role="status"></p>
+              <p id="tour-summary" aria-live="polite"></p>
               <div id="shows"></div>
               <button id="add-show" type="button">Agregar fecha</button>
             </div>
           </details>
         </details>
       </form>
+      <details class="card editor-section" id="history">
+        <summary>Historial de cambios</summary>
+        <div id="history-controls" class="editor-section-body"></div>
+      </details>
       <div class="savebar">
         <button id="save" form="form" type="submit">Guardar y publicar</button>
-        <span>Se guarda en GitHub y luego GitHub Pages actualiza la página pública.</span>
+        <span id="publication-state" role="status">Sin cambios pendientes.</span>
+        <a id="publication-link" href="/" target="_blank" rel="noopener">Abrir sitio público ↗</a>
       </div>
     </section>
     <p id="status" role="status" aria-live="polite"></p>

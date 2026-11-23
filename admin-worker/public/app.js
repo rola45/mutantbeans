@@ -21,7 +21,7 @@ function restoreActiveEditor() {
 }
 function editorNodeFor(id) {
   if (activeEditorPlacement?.id === id) return activeEditorPlacement.node;
-  if (id === 'shows') return document.querySelector('#shows-section');
+  if (['shows', 'flyer', 'tour-title'].includes(id)) return document.querySelector('#shows-section');
   const field = document.querySelector(`#fields [data-preview-id="${id}"]`);
   if (/^member-\d+-(?:photo|frame-\d+)$/.test(id)) return field?.closest('.member-visual-editor-card') || field;
   return field?.closest('.gallery-editor-card') || field;
@@ -86,6 +86,7 @@ function installVisualEditTargets() {
   doc.addEventListener('click', event => {
     const target = event.target?.nodeType === 1 ? event.target : event.target?.parentElement;
     if (!target) return;
+    if (calibrationController && !calibrationController.signal.aborted && target.matches('.tour-poster img')) return;
     if (target.closest('[data-language-toggle]')) {
       queueMicrotask(() => refreshPreviewDraft());
       return;
@@ -200,6 +201,9 @@ async function refreshPreviewDraft() {
         else if (link && original.value.href) link.setAttribute('href', original.value.href);
       }
     }
+    const flyer = content.fields.find(field => field.id === 'flyer');
+    win.mutantPreviewFlyer = flyer?.enabled ? flyer.value : '';
+    win.mutantPreviewFlyerCalibration = content.flyerCalibration;
     const showsList = doc.querySelector('.tour-list');
     if (showsList) {
       const original = rememberPreviewOriginal(showsList, () => showsList.innerHTML, value => { showsList.innerHTML = value; });
@@ -267,6 +271,14 @@ document.querySelector('#preview-open').onclick = async () => {
 document.addEventListener('fullscreenchange', () => {
   document.querySelector('#preview-open').textContent = document.fullscreenElement ? 'Salir de pantalla completa' : 'Ampliar página';
 });
+document.querySelector('#preview-size').addEventListener('change', event => {
+  previewFrame.classList.toggle('preview-mobile', event.target.value === 'mobile');
+});
+document.querySelector('#preview-language').addEventListener('change', event => {
+  calibrationController?.abort();
+  const path = event.target.value === 'es' ? '/es/' : '/';
+  previewFrame.src = path + '?admin-preview=1';
+});
 previewFrame.addEventListener('load', () => refreshPreviewDraft().then(installVisualEditTargets).then(highlightPreviewTarget));
 async function api(path, options = {}) {
   const response = await fetch('/admin/api/' + path, { ...options, headers: { 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
@@ -320,6 +332,8 @@ function showRow(show = { date: '', venue: '', city: '' }) {
   }
   const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Quitar'; remove.onclick = () => {
     row.remove();
+    markDraft();
+    updateTourSummary();
     const useShows = document.querySelector('#shows-enabled');
     useShows.checked = true;
     content.showsEnabled = true;
@@ -354,7 +368,15 @@ function renderField(spec, container, compact = false) {
         area.oninput = () => { field[lang] = area.value; field.enabled = enabled.checked = true; refreshPreviewDraft(); };
       row.append(label(title, area));
     }
-    body.append(row);
+    const warning = document.createElement('p');
+    const warn = () => {
+      const missing = [['es', 'español'], ['en', 'inglés']].filter(([lang]) => !field[lang]?.trim());
+      warning.textContent = field.enabled && missing.length ? 'Falta texto en ' + missing.map(([, name]) => name).join(' e ') + '.' : '';
+    };
+    row.addEventListener('input', warn);
+    enabled.addEventListener('change', warn);
+    warn();
+    body.append(row, warning);
     if (spec.type === 'anchor') {
       const url = input('text', field.value); url.autocomplete = 'url'; url.spellcheck = false;
       url.oninput = () => { field.value = url.value; field.enabled = enabled.checked = true; refreshPreviewDraft(); };
@@ -364,6 +386,7 @@ function renderField(spec, container, compact = false) {
     const preview = document.createElement('img'); preview.alt = spec.label; preview.src = previewImageURL(field.value);
     preview.loading = 'lazy'; preview.decoding = 'async';
     const path = input('text', field.value); path.readOnly = true;
+    const weight = document.createElement('p');
     const upload = input('file'); upload.accept = 'image/png,image/jpeg,image/webp';
     upload.onchange = async () => {
       const file = upload.files[0]; if (!file) return;
@@ -373,8 +396,10 @@ function renderField(spec, container, compact = false) {
       try {
         report('Optimizando imagen…');
         const optimized = await optimizeImageUpload(file);
+        weight.textContent = `Peso optimizado: ${Math.ceil(optimized.size / 1024)} KB`;
         report('Subiendo imagen optimizada…');
         const data = await api('upload', { method:'POST', headers:{'Content-Type':optimized.type || file.type}, body:optimized });
+        markDraft();
         field.value = path.value = data.path; field.enabled = enabled.checked = true;
         const objectURL = URL.createObjectURL(optimized);
         draftImageURLs.set(data.path, objectURL);
@@ -387,12 +412,19 @@ function renderField(spec, container, compact = false) {
     };
     const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
     choose.onclick = () => openAssetPicker(asset => {
+      markDraft();
       field.value = path.value = asset.path; field.enabled = enabled.checked = true;
       preview.src = previewImageURL(asset.path);
+      weight.textContent = '';
+      const selectedPath = asset.path;
+      fetch(preview.src, { method: 'HEAD' }).then(response => {
+        const bytes = Number(response.headers.get('content-length'));
+        if (response.ok && bytes > 0 && field.value === selectedPath) weight.textContent = `Peso: ${Math.ceil(bytes / 1024)} KB`;
+      }).catch(() => {});
       refreshPreviewDraft();
       report('Imagen seleccionada. Pulsa Guardar y publicar para colocarla en la página.');
     });
-    body.append(preview, choose, label('Archivo actual', path), label('O subir una imagen · se optimiza automáticamente (máx. 20 MB)', upload));
+    body.append(preview, weight, choose, label('Archivo actual', path), label('O subir una imagen · se optimiza automáticamente (máx. 20 MB)', upload));
   } else if (spec.type === 'link') {
     const url = input('text', field.value); url.autocomplete = 'url'; url.spellcheck = false;
     url.oninput = () => { field.value = url.value; field.enabled = enabled.checked = true; refreshPreviewDraft(); };
@@ -435,6 +467,10 @@ function renderMemberAssets(container) {
 }
 function render() {
   const container = document.querySelector('#fields');
+  const tourFields = document.querySelector('#tour-fields');
+  container.replaceChildren();
+  tourFields.replaceChildren();
+  document.querySelector('#shows').replaceChildren();
   let galleryRendered = false;
   let memberAssetsRendered = false;
   for (const spec of schema.fields) {
@@ -446,26 +482,189 @@ function render() {
       if (!galleryRendered) { renderGallery(container); galleryRendered = true; }
       continue;
     }
-    renderField(spec, container);
+    renderField(spec, ['flyer', 'tour-title'].includes(spec.id) ? tourFields : container);
   }
   document.querySelector('#shows-enabled').checked = content.showsEnabled === true;
   content.shows.forEach(showRow);
+  updateTourSummary();
   const showsSection = document.querySelector('#shows-section');
-  showsSection.addEventListener('toggle', () => { if (showsSection.open) selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'); });
-  showsSection.addEventListener('focusin', () => selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'));
+  showsSection.ontoggle = () => { if (showsSection.open) selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows'); };
+  showsSection.onfocusin = () => selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows');
   refreshPreviewDraft();
 }
-document.querySelector('#add-show').onclick = () => { showRow(); document.querySelector('#shows-enabled').checked = true; };
+let calibrationFirst;
+document.querySelector('#calibrate-flyer').onclick = () => {
+  const poster = previewFrame.contentDocument?.querySelector('.tour-poster img');
+  const status = document.querySelector('#calibration-status');
+  if (!poster) { status.textContent = 'Abre la vista previa del flyer primero.'; return; }
+  calibrationController?.abort();
+  calibrationFirst = null;
+  status.textContent = 'Pulsa el centro de la primera fila de fechas en el flyer.';
+  poster.scrollIntoView({ block: 'center' });
+  const doc = poster.ownerDocument;
+  const capture = event => {
+    if (event.target !== poster) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const frame = poster.getBoundingClientRect();
+    const point = Math.round(1600 * (event.clientY - frame.top) / frame.height);
+    if (calibrationFirst === null) {
+      calibrationFirst = point;
+      status.textContent = 'Ahora pulsa el centro de la última fila de fechas.';
+      return;
+    }
+    if (point < calibrationFirst) {
+      status.textContent = 'La última fila debe estar debajo de la primera.';
+      return;
+    }
+    calibrationController.abort();
+    const flyer = content.fields.find(field => field.id === 'flyer');
+    content.flyerCalibration = { image: flyer.value, first: calibrationFirst, last: point };
+    status.textContent = 'Líneas ajustadas en el borrador.';
+    markDraft();
+    refreshPreviewDraft();
+  };
+  doc.addEventListener('click', capture, { capture: true, signal: (calibrationController = new AbortController()).signal });
+};
+let calibrationController;
+function updateTourSummary() {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Tijuana', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts();
+  const part = name => parts.find(item => item.type === name).value;
+  const today = `${part('year')}-${part('month')}-${part('day')}`;
+  const shows = getDraftShows().filter(show => show.date).sort((a, b) => a.date.localeCompare(b.date));
+  const next = shows.find(show => show.date >= today);
+  const past = shows.filter(show => show.date < today).map(show => show.date);
+  document.querySelector('#tour-summary').textContent = document.querySelector('#shows-enabled').checked
+    ? `Próximo show: ${next ? next.date + ' · ' + next.venue : 'sin fechas próximas'}. Fechas pasadas: ${past.join(', ') || 'ninguna'}.`
+    : 'La lista de fechas del borrador está desactivada.';
+}
+document.querySelector('#shows-section').addEventListener('input', updateTourSummary);
+const history = document.querySelector('#history');
+history.ontoggle = async () => {
+  if (!history.open || !schema) return;
+  const controls = document.querySelector('#history-controls');
+  controls.textContent = 'Cargando versiones…';
+  try {
+    const entries = await api('history');
+    const versions = document.createElement('select');
+    for (const item of entries) versions.add(new Option(
+      `${new Date(item.date).toLocaleString()} · ${item.author} · ${item.message.split('\n')[0]}`, item.sha,
+    ));
+    const fields = document.createElement('select');
+    for (const spec of schema.fields) fields.add(new Option(spec.label, spec.id));
+    fields.add(new Option('Gira · lista de fechas', 'shows'));
+    const compare = document.createElement('p');
+    const restore = document.createElement('button');
+    restore.type = 'button';
+    restore.textContent = 'Traer al borrador';
+    restore.disabled = true;
+    let snapshot;
+    const describe = field => field ? (field.value || [field.es, field.en].filter(Boolean).join(' / ')) : 'No disponible';
+    const update = () => {
+      const previous = snapshot?.fields.find(field => field.id === fields.value);
+      const current = content.fields.find(field => field.id === fields.value);
+      const shows = fields.value === 'shows';
+      compare.textContent = shows
+        ? `Versión elegida: ${snapshot?.shows?.length ?? 0} fechas. Borrador: ${getDraftShows().length} fechas.`
+        : `Versión elegida: ${describe(previous)}. Borrador: ${describe(current)}.`;
+      restore.disabled = shows ? !Array.isArray(snapshot?.shows) : !previous;
+    };
+    const load = async () => {
+      const ref = versions.value;
+      snapshot = undefined;
+      restore.disabled = true;
+      compare.textContent = 'Leyendo versión…';
+      try {
+        const data = await api('history/content?ref=' + encodeURIComponent(ref));
+        if (versions.value !== ref) return;
+        snapshot = data;
+        update();
+      } catch (error) { compare.textContent = error.message; }
+    };
+    versions.onchange = load;
+    fields.onchange = update;
+    restore.onclick = () => {
+      if (!snapshot || busy) return;
+      restoreActiveEditor();
+      content.shows = getDraftShows();
+      content.showsEnabled = document.querySelector('#shows-enabled').checked;
+      if (fields.value === 'shows') {
+        content.shows = snapshot.shows;
+        content.showsEnabled = snapshot.showsEnabled;
+      } else {
+        const field = content.fields.find(item => item.id === fields.value);
+        Object.assign(field, snapshot.fields.find(item => item.id === fields.value));
+        if (fields.value === 'flyer') content.flyerCalibration = snapshot.flyerCalibration;
+      }
+      render();
+      if (previewSelection?.id) selectFromVisualPage(previewSelection.id);
+      markDraft();
+      update();
+    };
+    controls.replaceChildren(label('Versión', versions), label('Elemento a restaurar', fields), compare, restore);
+    if (entries.length) await load();
+    else compare.textContent = 'No hay versiones disponibles.';
+  } catch (error) { controls.textContent = error.message; }
+};
+document.querySelector('#add-show').onclick = () => { showRow(); document.querySelector('#shows-enabled').checked = true; markDraft(); updateTourSummary(); refreshPreviewDraft(); };
 document.querySelector('#logout').onclick = async () => { try { await api('logout', {method:'POST'}); location.reload(); } catch(error) { report(error.message,true); } };
+const publicationState = document.querySelector('#publication-state');
+let pendingPublication;
+let draftRevision = 0;
+async function checkPublication(expectedSha) {
+  const controller = new AbortController();
+  pendingPublication?.abort();
+  pendingPublication = controller;
+  publicationState.textContent = 'Publicando en GitHub Pages…';
+  for (let attempt = 0; attempt < 24; attempt++) {
+    if (controller.signal.aborted) return;
+    try {
+      const response = await fetch('/data/site-content.json?publication=' + Date.now(), {
+        cache: 'no-store', signal: AbortSignal.any([controller.signal, AbortSignal.timeout(8000)]),
+      });
+      if (response.ok) {
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        const header = new TextEncoder().encode('blob ' + bytes.length + '\0');
+        const blob = new Uint8Array(header.length + bytes.length);
+        blob.set(header);
+        blob.set(bytes, header.length);
+        const digest = new Uint8Array(await crypto.subtle.digest('SHA-1', blob));
+        const liveSha = Array.from(digest, byte => byte.toString(16).padStart(2, '0')).join('');
+        if (controller.signal.aborted) return;
+        if (liveSha === expectedSha) {
+          publicationState.textContent = 'En vivo · Versión confirmada.';
+          return;
+        }
+      }
+    } catch {
+      if (controller.signal.aborted) return;
+    }
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }
+  if (!controller.signal.aborted) {
+    publicationState.textContent = 'Guardado en GitHub. Esta versión aún no se ha confirmado en el sitio público.';
+  }
+}
+function markDraft() {
+  draftRevision++;
+  pendingPublication?.abort();
+  publicationState.textContent = 'Borrador · Cambios sin guardar.';
+}
+document.querySelector('#form').addEventListener('input', markDraft);
 document.querySelector('#form').onsubmit = async event => {
   event.preventDefault(); if (busy) return;
   busy = true; const button = document.querySelector('#save'); button.disabled = true;
   try {
     content.showsEnabled = document.querySelector('#shows-enabled').checked;
-    content.shows = [...document.querySelectorAll('.show-row')].map(row => Object.fromEntries([...row.querySelectorAll('input')].map(field => [field.dataset.showField,field.value.trim()])));
+    content.shows = getDraftShows();
+    if (content.flyerCalibration?.image !== content.fields.find(field => field.id === 'flyer')?.value) delete content.flyerCalibration;
+    const savedRevision = draftRevision;
     report('Guardando en GitHub…');
     const result = await api('content', {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({content,sha})}); sha = result.sha;
-    report('Guardado en GitHub. La publicación en mutantbeans.com puede tardar unos minutos.');
+    report('Guardado en GitHub.');
+    if (savedRevision === draftRevision) void checkPublication(result.sha);
   } catch(error) { report(error.message,true); }
   finally { busy = false; button.disabled = false; }
 };

@@ -136,6 +136,23 @@ async function handler(request, env) {
     const contentPath = `/repos/${env.GITHUB_REPO}/contents/data/site-content.json`;
     if (url.pathname === '/api/session' && request.method === 'GET') return json({ login: session.login, csrf: session.csrf });
     if (url.pathname === '/api/logout' && request.method === 'POST') return new Response('{}', { headers: { ...headers, 'Set-Cookie': cookie(cookieName, '', 0) } });
+    if (url.pathname === '/api/history' && request.method === 'GET') {
+      const query = new URLSearchParams({ sha: env.GITHUB_BRANCH, path: 'data/site-content.json', per_page: '10' });
+      const commits = await github(`/repos/${env.GITHUB_REPO}/commits?${query}`, session.token);
+      return json((commits ?? []).map(item => ({
+        sha: item.sha, author: item.author?.login || item.commit.author.name,
+        date: item.commit.author.date, message: item.commit.message,
+      })));
+    }
+    if (url.pathname === '/api/history/content' && request.method === 'GET') {
+      const ref = url.searchParams.get('ref') || '';
+      if (!/^[a-f0-9]{40}$/.test(ref)) return json({ error: 'Versión inválida.' }, 400);
+      const file = await github(`${contentPath}?ref=${ref}`, session.token);
+      if (!file) return json({ error: 'Versión no disponible.' }, 404);
+      return json(JSON.parse(new TextDecoder().decode(Uint8Array.from(
+        atob(file.content.replace(/\s/g, '')), char => char.charCodeAt(0),
+      ))));
+    }
     if (url.pathname === '/api/content' && request.method === 'GET') {
       const file = await github(`${contentPath}?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`, session.token);
       if (!file) return json({ error: 'No se encontró data/site-content.json en GitHub.' }, 404);
@@ -149,6 +166,26 @@ async function handler(request, env) {
       const schema = await (await env.ASSETS.fetch(new Request(`${origin}/schema.json`))).json();
       const content = validateContent(body.content, schema);
       if (typeof body.sha !== 'string') return json({ error: 'Recarga antes de guardar.' }, 400);
+      const calibration = body.content.flyerCalibration;
+      if (calibration !== undefined) {
+        const flyer = content.fields.find(field => field.id === 'flyer');
+        if (calibration?.image !== flyer?.value || !Number.isFinite(calibration?.first) ||
+            !Number.isFinite(calibration?.last) || calibration.first < 0 ||
+            calibration.last > 1600 || calibration.first > calibration.last) {
+          return json({ error: 'Ajuste de líneas del flyer inválido.' }, 400);
+        }
+        content.flyerCalibration = { image: calibration.image, first: calibration.first, last: calibration.last };
+      } else {
+        const current = await github(`${contentPath}?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`, session.token);
+        if (current?.sha === body.sha) {
+          const stored = JSON.parse(new TextDecoder().decode(Uint8Array.from(
+            atob(current.content.replace(/\s/g, '')), char => char.charCodeAt(0),
+          )));
+          if (stored.flyerCalibration?.image === content.fields.find(field => field.id === 'flyer')?.value) {
+            content.flyerCalibration = stored.flyerCalibration;
+          }
+        }
+      }
       const bytes = encoder.encode(JSON.stringify(content, null, 2) + '\n');
       const result = await github(contentPath, session.token, { method: 'PUT', body: JSON.stringify({ message: `Update site content by ${session.login}`, branch: env.GITHUB_BRANCH, sha: body.sha, content: btoa(Array.from(bytes, c => String.fromCharCode(c)).join('')) }) });
       return json({ sha: result.content.sha, commit: result.commit.html_url });

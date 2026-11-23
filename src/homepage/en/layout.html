@@ -312,8 +312,13 @@
         if (!shows.length) return;
         const posterDates = [...new Set(shows.map((time) => time.dateTime))];
         const rowByDate = new Map(posterDates.map((date, index) => [date, index]));
-        const firstRowY = Number(posterStrikeLines.parentElement.dataset.firstRowY || 0);
-        const lastRowY = Number(posterStrikeLines.parentElement.dataset.lastRowY || 0);
+        const custom = window.mutantPreviewFlyerCalibration ?? window.mutantSiteContent?.flyerCalibration;
+        const flyer = window.mutantPreviewFlyer || window.mutantSiteContent?.fields?.find(field => field.id === 'flyer' && field.enabled)?.value;
+        const fallback = posterImage.getAttribute('src')?.includes('november-tour-2026.webp');
+        const useCustom = custom && custom.image === flyer;
+        if (!useCustom && !fallback) return;
+        const firstRowY = useCustom ? custom.first : Number(posterStrikeLines.parentElement.dataset.firstRowY || 0);
+        const lastRowY = useCustom ? custom.last : Number(posterStrikeLines.parentElement.dataset.lastRowY || 0);
         const x1 = Number(posterStrikeLines.parentElement.dataset.lineX1 || 0);
         const x2 = Number(posterStrikeLines.parentElement.dataset.lineX2 || 1200);
         const rowGap = posterDates.length > 1 ? (lastRowY - firstRowY) / (posterDates.length - 1) : 0;

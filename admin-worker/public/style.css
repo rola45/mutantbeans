@@ -23,3 +23,17 @@ main{padding-bottom:110px}.editor-section{padding:0;margin:12px 0;overflow:hidde
 @media(max-width:650px){.visual-inspector{padding:16px}.visual-inspector .show-row{grid-template-columns:minmax(0,1fr)}.visual-inspector .show-row label:first-child{grid-column:auto}.visual-inspector .show-row button{width:100%}.visual-inspector .row{grid-template-columns:minmax(0,1fr)}}
 
 .show-row .show-ticket-field{grid-column:1/-1}
+
+.preview-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 12px;
+}
+#site-preview.preview-mobile {
+  width: min(390px, 100%);
+  margin-inline: auto;
+}
+#publication-link {
+  color: #67f542;
+}
