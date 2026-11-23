@@ -7,6 +7,9 @@
     "binding": "ASSETS",
     "run_worker_first": true
   },
+  "secrets": {
+    "required": ["GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET", "SESSION_SECRET"]
+  },
   "vars": {
     "ADMIN_ORIGIN": "https://mutantbeans.com",
     "GITHUB_REPO": "rola45/mutantbeans",
