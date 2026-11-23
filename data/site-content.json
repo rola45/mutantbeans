@@ -1052,37 +1052,44 @@
     {
       "date": "2026-11-05",
       "venue": "Casa Verde",
-      "city": "Ensenada, BC"
+      "city": "Ensenada, BC",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-13",
       "venue": "La Santa",
-      "city": "Santa Ana, CA"
+      "city": "Santa Ana, CA",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-14",
       "venue": "Brick by Bricks",
-      "city": "Maywood, CA"
+      "city": "Maywood, CA",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-15",
       "venue": "Festival Rock Sinaloa",
-      "city": "Culiacán"
+      "city": "Culiacán",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-20",
       "venue": "Abel's Bar",
-      "city": "Ensenada, BC"
+      "city": "Ensenada, BC",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-21",
       "venue": "Mandala",
-      "city": "Mexicali, BC"
+      "city": "Mexicali, BC",
+      "ticketUrl": ""
     },
     {
       "date": "2026-11-28",
-      "venue": "Fecha sorpresa",
-      "city": "Ensenada, BC"
+      "venue": "Abel's Bar",
+      "city": "Ensenada, BC",
+      "ticketUrl": ""
     }
   ]
 }
