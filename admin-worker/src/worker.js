@@ -175,6 +175,16 @@ async function handler(request, env) {
           return json({ error: 'Ajuste de líneas del flyer inválido.' }, 400);
         }
         content.flyerCalibration = { image: calibration.image, first: calibration.first, last: calibration.last };
+        if (calibration.dates !== undefined) {
+          const dates = calibration.dates;
+          if (!Array.isArray(dates) || !dates.length || dates.length > 100 ||
+              dates.some((date, index) => typeof date !== 'string' ||
+                !/^\d{4}-\d{2}-\d{2}$/.test(date) || (index > 0 && date <= dates[index - 1])) ||
+              (dates.length > 1 && calibration.first === calibration.last)) {
+            return json({ error: 'Las fechas vinculadas al flyer no son válidas.' }, 400);
+          }
+          content.flyerCalibration.dates = dates;
+        }
       } else {
         const current = await github(`${contentPath}?ref=${encodeURIComponent(env.GITHUB_BRANCH)}`, session.token);
         if (current?.sha === body.sha) {

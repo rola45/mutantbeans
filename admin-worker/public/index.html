@@ -46,7 +46,21 @@
               <label><input id="shows-enabled" type="checkbox"> Usar estas fechas en la página</label>
               <div id="tour-fields"></div>
               <button id="calibrate-flyer" type="button">Ajustar líneas en la vista previa</button>
+              <fieldset id="flyer-guides" hidden>
+                <legend>Posición de las guías</legend>
+                <figure id="flyer-guide-preview">
+                  <img id="flyer-guide-image" alt="Flyer del borrador">
+                  <span id="flyer-guide-first-marker" class="flyer-guide-marker" aria-hidden="true">Primera fila</span>
+                  <span id="flyer-guide-last-marker" class="flyer-guide-marker" aria-hidden="true">Última fila</span>
+                </figure>
+                <label>Primera fila <input id="flyer-first" type="range" min="0" max="1600" step="1"></label>
+                <label>Última fila <input id="flyer-last" type="range" min="0" max="1600" step="1"></label>
+                <p>Usa las flechas para mover cada guía o pulsa sobre el flyer para colocar la primera y la última fila.</p>
+                <button id="confirm-flyer-rows" type="button">Vincular las fechas actuales a las guías</button>
+                <button id="close-flyer-guides" type="button">Ocultar guías</button>
+              </fieldset>
               <p id="calibration-status" role="status"></p>
+              <p id="calibration-warning" role="status"></p>
               <p id="tour-summary" aria-live="polite"></p>
               <div id="shows"></div>
               <button id="add-show" type="button">Agregar fecha</button>

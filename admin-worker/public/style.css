@@ -37,3 +37,22 @@ main{padding-bottom:110px}.editor-section{padding:0;margin:12px 0;overflow:hidde
 #publication-link {
   color: #67f542;
 }
+
+#flyer-guides { margin-block: 12px; min-width: 0; border: 1px solid #3a533e; }
+#flyer-guides input[type="range"] { width: 100%; accent-color: #67f542; }
+#flyer-guides input:focus-visible { outline: 2px solid #b6ff53; outline-offset: 3px; }
+#calibration-warning:not(:empty) { color: #ffe28b; }
+
+#flyer-guide-preview { position: relative; width: min(100%, 350px); margin: 8px auto 16px; overflow: hidden; }
+#flyer-guide-image { display: block; width: 100%; height: auto; }
+.flyer-guide-marker {
+  position: absolute;
+  inset-inline: 0;
+  border-top: 3px dashed currentColor;
+  background: linear-gradient(to right, #101610, transparent);
+  color: #b6ff53;
+  font: 700 12px/1.5 system-ui, sans-serif;
+  padding-inline: 6px;
+  pointer-events: none;
+}
+#flyer-guide-last-marker { color: #7edfff; transform: translateY(-100%); border-top: 0; border-bottom: 3px dashed currentColor; }

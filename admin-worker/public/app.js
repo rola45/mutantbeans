@@ -204,6 +204,7 @@ async function refreshPreviewDraft() {
     const flyer = content.fields.find(field => field.id === 'flyer');
     win.mutantPreviewFlyer = flyer?.enabled ? flyer.value : '';
     win.mutantPreviewFlyerCalibration = content.flyerCalibration;
+    renderFlyerGuides(doc);
     const showsList = doc.querySelector('.tour-list');
     if (showsList) {
       const original = rememberPreviewOriginal(showsList, () => showsList.innerHTML, value => { showsList.innerHTML = value; });
@@ -400,6 +401,7 @@ function renderField(spec, container, compact = false) {
         report('Subiendo imagen optimizada…');
         const data = await api('upload', { method:'POST', headers:{'Content-Type':optimized.type || file.type}, body:optimized });
         markDraft();
+        if (spec.id === 'flyer') document.querySelector('#close-flyer-guides').click();
         field.value = path.value = data.path; field.enabled = enabled.checked = true;
         const objectURL = URL.createObjectURL(optimized);
         draftImageURLs.set(data.path, objectURL);
@@ -413,6 +415,7 @@ function renderField(spec, container, compact = false) {
     const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = 'Elegir de la biblioteca de Drive';
     choose.onclick = () => openAssetPicker(asset => {
       markDraft();
+      if (spec.id === 'flyer') document.querySelector('#close-flyer-guides').click();
       field.value = path.value = asset.path; field.enabled = enabled.checked = true;
       preview.src = previewImageURL(asset.path);
       weight.textContent = '';
@@ -492,42 +495,175 @@ function render() {
   showsSection.onfocusin = () => selectPreviewTarget(showsSection.dataset.previewSelector, showsSection.dataset.previewLabel, 'shows');
   refreshPreviewDraft();
 }
-let calibrationFirst;
-document.querySelector('#calibrate-flyer').onclick = () => {
-  const poster = previewFrame.contentDocument?.querySelector('.tour-poster img');
-  const status = document.querySelector('#calibration-status');
-  if (!poster) { status.textContent = 'Abre la vista previa del flyer primero.'; return; }
+const guideControls = document.querySelector('#flyer-guides');
+const firstGuide = document.querySelector('#flyer-first');
+const lastGuide = document.querySelector('#flyer-last');
+const guideStatus = document.querySelector('#calibration-status');
+let calibrationController;
+
+function activeFlyerCalibration() {
+  const flyer = content?.fields.find(field => field.id === 'flyer' && field.enabled);
+  return flyer && content.flyerCalibration?.image === flyer.value ? content.flyerCalibration : null;
+}
+
+function flyerDraftDates() {
+  if (!document.querySelector('#shows-enabled').checked) return [];
+  return [...new Set(getDraftShows().filter(show => show.date && show.venue && show.city)
+    .map(show => show.date))].sort();
+}
+
+function updateCalibrationWarning() {
+  const dates = document.querySelector('#shows-enabled').checked
+    ? [...new Set(getDraftShows().map(show => show.date).filter(Boolean))].sort() : [];
+  const calibration = activeFlyerCalibration();
+  const outside = calibration?.dates ? dates.filter(date => !calibration.dates.includes(date)) : [];
+  const warning = document.querySelector('#calibration-warning');
+  if (outside.length) {
+    warning.textContent = 'Sin fila asignada en el flyer: ' + outside.join(', ') + '. Revisa el arte antes de vincular las fechas.';
+  } else if (dates.length && !calibration?.dates && !guideControls.hidden) {
+    warning.textContent = 'Las fechas aún no están vinculadas. Comprueba que el flyer las incluya en orden.';
+  } else {
+    warning.textContent = '';
+  }
+}
+
+function renderFlyerGuides(doc) {
+  const artwork = document.querySelector('#flyer-guide-image');
+  const flyer = content?.fields.find(field => field.id === 'flyer' && field.enabled);
+  if (!guideControls.hidden && flyer) {
+    const url = previewImageURL(flyer.value);
+    if (artwork.getAttribute('src') !== url) artwork.src = url;
+    document.querySelector('#flyer-guide-first-marker').style.top = Number(firstGuide.value) / 16 + '%';
+    document.querySelector('#flyer-guide-last-marker').style.top = Number(lastGuide.value) / 16 + '%';
+  }
+  const svg = doc.querySelector('.tour-poster-strikes');
+  svg?.querySelector('[data-admin-flyer-guides]')?.remove();
+  if (!svg) return;
+  if (guideControls.hidden) {
+    svg.style.removeProperty('z-index');
+    return;
+  }
+  // The editor highlights selected images at z-index 20.
+  svg.style.zIndex = '21';
+  const group = doc.createElementNS(svg.namespaceURI, 'g');
+  group.setAttribute('data-admin-flyer-guides', '');
+  for (const [control, color, caption, offset] of [
+    [firstGuide, '#b6ff53', 'Primera fila', -12],
+    [lastGuide, '#7edfff', 'Última fila', 32],
+  ]) {
+    const y = Number(control.value);
+    const line = doc.createElementNS(svg.namespaceURI, 'line');
+    line.setAttribute('x1', '16'); line.setAttribute('x2', '1184');
+    line.setAttribute('y1', y); line.setAttribute('y2', y);
+    line.style.setProperty('stroke', color);
+    line.style.setProperty('stroke-dasharray', '20 10');
+    const label = doc.createElementNS(svg.namespaceURI, 'text');
+    label.setAttribute('x', '24');
+    label.setAttribute('y', Math.max(28, Math.min(1570, y + offset)));
+    label.setAttribute('fill', color);
+    label.setAttribute('font-size', '36');
+    label.style.paintOrder = 'stroke';
+    label.style.stroke = '#101610';
+    label.style.strokeWidth = '8px';
+    label.textContent = caption;
+    group.append(line, label);
+  }
+  svg.append(group);
+}
+
+function saveGuidePositions(dates = activeFlyerCalibration()?.dates) {
+  const flyer = content.fields.find(field => field.id === 'flyer' && field.enabled);
+  if (!flyer) return;
+  content.flyerCalibration = { image: flyer.value, first: Number(firstGuide.value), last: Number(lastGuide.value) };
+  if (dates) content.flyerCalibration.dates = dates;
+  markDraft();
+  updateCalibrationWarning();
+  refreshPreviewDraft();
+}
+
+function watchFlyerClicks(doc) {
   calibrationController?.abort();
-  calibrationFirst = null;
-  status.textContent = 'Pulsa el centro de la primera fila de fechas en el flyer.';
-  poster.scrollIntoView({ block: 'center' });
-  const doc = poster.ownerDocument;
-  const capture = event => {
+  const controller = new AbortController();
+  calibrationController = controller;
+  let firstClick;
+  doc.addEventListener('click', event => {
+    const poster = doc.querySelector('.tour-poster img');
     if (event.target !== poster) return;
     event.preventDefault();
     event.stopImmediatePropagation();
     const frame = poster.getBoundingClientRect();
-    const point = Math.round(1600 * (event.clientY - frame.top) / frame.height);
-    if (calibrationFirst === null) {
-      calibrationFirst = point;
-      status.textContent = 'Ahora pulsa el centro de la última fila de fechas.';
+    const point = Math.max(0, Math.min(1600, Math.round(1600 * (event.clientY - frame.top) / frame.height)));
+    if (firstClick === undefined) {
+      firstClick = point;
+      firstGuide.value = point;
+      lastGuide.value = Math.max(point, Number(lastGuide.value));
+      guideStatus.textContent = 'Ahora pulsa el centro de la última fila.';
+      renderFlyerGuides(doc);
       return;
-    }
-    if (point < calibrationFirst) {
-      status.textContent = 'La última fila debe estar debajo de la primera.';
+    } else if (point < firstClick || (point === firstClick && activeFlyerCalibration()?.dates?.length > 1)) {
+      guideStatus.textContent = 'La última fila debe estar a la altura de la primera o debajo.';
       return;
+    } else {
+      lastGuide.value = point;
+      firstClick = undefined;
+      guideStatus.textContent = 'Guías ajustadas. Verifica las fechas del flyer y vincúlalas.';
     }
-    calibrationController.abort();
-    const flyer = content.fields.find(field => field.id === 'flyer');
-    content.flyerCalibration = { image: flyer.value, first: calibrationFirst, last: point };
-    status.textContent = 'Líneas ajustadas en el borrador.';
-    markDraft();
-    refreshPreviewDraft();
-  };
-  doc.addEventListener('click', capture, { capture: true, signal: (calibrationController = new AbortController()).signal });
+    saveGuidePositions();
+  }, { capture: true, signal: controller.signal });
+}
+
+document.querySelector('#calibrate-flyer').onclick = () => {
+  const doc = previewFrame.contentDocument;
+  const poster = doc?.querySelector('.tour-poster img');
+  if (!poster || !content.fields.some(field => field.id === 'flyer' && field.enabled)) {
+    guideStatus.textContent = 'Activa el flyer del borrador y abre su vista previa.';
+    return;
+  }
+  const saved = activeFlyerCalibration();
+  firstGuide.value = saved?.first ?? 1040;
+  lastGuide.value = saved?.last ?? 1440;
+  guideControls.hidden = false;
+  guideStatus.textContent = 'Ajusta las guías con las flechas o pulsa el centro de la primera fila.';
+  updateCalibrationWarning();
+  renderFlyerGuides(doc);
+  watchFlyerClicks(doc);
+  if (!previewFrame.contentWindow.matchMedia('(max-width: 650px)').matches) {
+    poster.scrollIntoView({ block: 'center', inline: 'nearest' });
+  }
 };
-let calibrationController;
+
+firstGuide.oninput = () => {
+  const gap = activeFlyerCalibration()?.dates?.length > 1 ? 1 : 0;
+  firstGuide.value = Math.min(Number(firstGuide.value), Number(lastGuide.value) - gap);
+  saveGuidePositions();
+};
+lastGuide.oninput = () => {
+  const gap = activeFlyerCalibration()?.dates?.length > 1 ? 1 : 0;
+  lastGuide.value = Math.max(Number(lastGuide.value), Number(firstGuide.value) + gap);
+  saveGuidePositions();
+};
+document.querySelector('#confirm-flyer-rows').onclick = () => {
+  const dates = flyerDraftDates();
+  if (!dates.length || (dates.length > 1 && firstGuide.value === lastGuide.value)) {
+    guideStatus.textContent = 'Necesitas fechas completas y una guía en cada extremo de la lista.';
+    return;
+  }
+  saveGuidePositions(dates);
+  guideStatus.textContent = `${dates.length} fechas vinculadas en el borrador.`;
+};
+document.querySelector('#close-flyer-guides').onclick = () => {
+  guideControls.hidden = true;
+  calibrationController?.abort();
+  const doc = previewFrame.contentDocument;
+  if (doc) renderFlyerGuides(doc);
+  updateCalibrationWarning();
+  document.querySelector('#calibrate-flyer').focus();
+};
+previewFrame.addEventListener('load', () => {
+  if (!guideControls.hidden && previewFrame.contentDocument) watchFlyerClicks(previewFrame.contentDocument);
+});
 function updateTourSummary() {
+  updateCalibrationWarning();
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'America/Tijuana', year: 'numeric', month: '2-digit', day: '2-digit',
   }).formatToParts();
